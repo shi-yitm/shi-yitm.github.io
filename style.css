@@ -394,13 +394,19 @@ img {
 
 .article-content pre {
     background: #1e293b;
-    color: #e2e8f0;
     padding: 20px;
     border-radius: 8px;
     overflow-x: auto;
     margin: 20px 0;
     font-size: 0.9rem;
     line-height: 1.6;
+}
+
+.article-content pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    color: #e2e8f0;
 }
 
 .article-content table {
@@ -425,7 +431,7 @@ img {
 }
 
 .article-content td {
-    color: var(--text-light);
+    color: var(--text);
 }
 
 .article-content tr:nth-child(even) td {
