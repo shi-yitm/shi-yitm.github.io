@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 搭建指南 · 十一</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单">☰</button>
+        </div>
+    </nav>
+
+    <article class="post-article section">
+        <div class="container">
+            <header class="article-header">
+                <div class="post-tag tag-dev">开发</div>
+                <h1 class="article-title">GitHub Pages 搭建指南</h1>
+                <div class="article-meta">
+                    <span>📅 2026-06-04</span>
+                    <span>📂 <a href="blog.html">博客</a></span>
+                </div>
+            </header>
+            <div class="article-content">
+
+                <p>最简单、最免费的建站方式，只需要一个 GitHub 账号就能搞定。</p>
+                <p>GitHub Pages 是 GitHub 提供的一项免费静态托管服务。你只要把 HTML/CSS/JS 文件推送到仓库里，GitHub 会自动帮你部署，生成一个可访问的网址。整个过程不需要买服务器、不需要配置 Nginx、不需要备案。</p>
+
+                <h2>两种 Pages 类型</h2>
+                <p>GitHub Pages 分两种：</p>
+                <ul>
+                    <li><strong>用户/组织站点</strong> — 一个账号只能有一个，仓库名必须是 <code>用户名.github.io</code>。这是你的个人官网。</li>
+                    <li><strong>项目站点</strong> — 每个仓库都可以开启，访问地址是 <code>用户名.github.io/仓库名</code>。适合给每个项目单独建站。</li>
+                </ul>
+                <p>我个人建站用的是用户站点，也就是你现在正在看的这个网站。</p>
+
+                <h2>建站步骤</h2>
+
+                <h3>第一步：创建仓库</h3>
+                <p>登录 GitHub，点右上角的 <code>+</code> → <strong>New repository</strong>。</p>
+                <p>仓库名填 <code>你的用户名.github.io</code>。比如你的用户名是 <code>shi-yitm</code>，那仓库名就是 <code>shi-yitm.github.io</code>。这个名字必须完全匹配，否则不会生效。</p>
+                <p>设为 <strong>Public</strong>（公开仓库），然后点 <strong>Create repository</strong>。</p>
+
+                <h3>第二步：上传文件</h3>
+                <p>你有两种方式把文件放上去：</p>
+                <ul>
+                    <li><strong>网页上传</strong> — 打开仓库页面，点 <strong>Add file</strong> → <strong>Upload files</strong>，把本地的 <code>index.html</code> 等文件拖进去，Commit 即可。</li>
+                    <li><strong>Git 命令行</strong> — 先 <code>git clone</code> 仓库到本地，然后把文件放进去，<code>git add</code>、<code>git commit</code>、<code>git push</code>。</li>
+                </ul>
+
+                <h3>第三步：访问你的网站</h3>
+                <p>上传完成后等 1-2 分钟，打开浏览器访问：</p>
+                <pre><code>https://你的用户名.github.io</code></pre>
+                <p>如果看到了你的页面，恭喜你！你的第一个网站上线了 🎉</p>
+
+                <h2>目录结构规范</h2>
+                <p>文件都放在仓库根目录，GitHub Pages 会自动识别 <code>index.html</code> 作为首页：</p>
+                <pre><code>你的用户名.github.io/
+├── index.html       ← 首页（必须）
+├── blog.html        ← 其他页面
+├── post.html        ← 文章页
+├── about.html
+├── style.css
+└── script.js</code></pre>
+
+                <h2>绑定自定义域名</h2>
+                <p>如果你想用 <code>shiyi.me</code> 这样的域名而不是 <code>用户名.github.io</code>，可以买一个域名然后绑定：</p>
+                <ol>
+                    <li>在域名服务商那里（比如阿里云）买个域名，大概几十块一年</li>
+                    <li>在 DNS 设置里添加一条 CNAME 记录，指向 <code>你的用户名.github.io</code></li>
+                    <li>在仓库的 Settings → Pages → Custom domain 里填上你的域名</li>
+                </ol>
+                <p>绑定成功后，访问你的域名就能看到网站了。</p>
+
+                <h2>日常更新流程</h2>
+                <p>以后每次想更新内容，三步走：</p>
+                <pre><code>git add .
+git commit -m "写清楚改了什么"
+git push</code></pre>
+                <p>推送后等一两分钟，网站自动更新，不需要手动部署任何东西。</p>
+
+                <h2>优缺点总结</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>优点</th>
+                            <th>缺点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>完全免费，没有隐藏费用</td>
+                            <td>只支持静态文件（HTML/JS/CSS）</td>
+                        </tr>
+                        <tr>
+                            <td>自动 HTTPS，不用配证书</td>
+                            <td>不能跑后端代码（Java/PHP/Python）</td>
+                        </tr>
+                        <tr>
+                            <td>和 Git 无缝集成，部署超简单</td>
+                            <td>国内访问速度有时不太稳定</td>
+                        </tr>
+                        <tr>
+                            <td>不需要管服务器运维</td>
+                            <td>存储空间限制 1GB</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>总的来说，对于个人博客、产品展示页、项目文档来说，GitHub Pages 是最简单、最经济的方案。等以后网站做大了、需要数据库了，再迁移到服务器也不迟。</p>
+
+            </div>
+            <div class="article-footer">
+                <p>—— 十一 · 2026 年夏</p>
+                <p class="back-link"><a href="blog.html">← 返回博客列表</a></p>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
