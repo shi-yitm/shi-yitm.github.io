@@ -10,6 +10,13 @@
       background: url('images/bg-waves.jpg') no-repeat center center fixed;
       background-size: cover;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.2);
+      z-index: -1;
+    }
     .navbar {
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(12px);
@@ -44,9 +51,9 @@
     .section {
       background: rgba(0,0,0,0.45);
       backdrop-filter: blur(10px);
-      border-radius: 16px;
-      margin: 0 24px;
-      padding: 48px;
+      border-radius: 0;
+      margin: 0;
+      padding: 48px 24px;
     }
     .section-title {
       color: white;
