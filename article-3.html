@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学习笔记：JavaScript 基础 - 十一的博客</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习笔记：JavaScript 基础 · 十一</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <header class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo">📝 十一的博客</a>
-      <nav>
-        <a href="index.html" >首页</a>
-        <a href="blog.html" >全部文章</a>
-        <a href="about.html" >关于</a>
-      </nav>
-    </div>
-  </header>
-  <main class="article-detail">
-    <a href="index.html" class="back-link">← 返回首页</a>
-    <div class="header">
-      <h1>学习笔记：JavaScript 基础</h1>
-      <div class="meta">
-        <span>📁 技术</span>
-        <span>📅 2026/6/5</span>
-        <span>👁 1 次阅读</span>
-      </div>
-      <div class="tags" style="margin-top:0.8rem"><span class="tag">#JavaScript</span><span class="tag">#学习笔记</span></div>
-    </div>
-    <div class="content"><p><h1>JavaScript 基础知识</h1></p><p><h2>变量声明</h2></p><p><pre><code>const name = "十一";  // 常量<br>let age = 20;          // 可变变量<br></code></pre></p><p><h2>函数</h2></p><p><pre><code>// 箭头函数<br>const greet = (name) => {<br>  return <code>你好，${name}！</code>;<br>};</p><p>console.log(greet("十一"));<br></code></pre></p><p><h2>数组方法</h2></p><p><pre><code>const nums = [1, 2, 3, 4, 5];</p><p>// map - 映射<br>const doubled = nums.map(n => n * 2);</p><p>// filter - 过滤<br>const evens = nums.filter(n => n % 2 === 0);</p><p>// reduce - 归纳<br>const sum = nums.reduce((acc, n) => acc + n, 0);<br></code></pre></p><p><h2>异步编程</h2></p><p><pre><code>const fetchData = async () => {<br>  const res = await fetch("/api/data");<br>  const data = await res.json();<br>  return data;<br>};<br></code></pre></p><p><blockquote>JavaScript 是一门灵活的语言，学好基础很重要！</blockquote></p></div>
-  </main>
-  
-  <footer class="footer">
-    <p>&copy; 2026 十一的博客 · Powered by Node.js + SQLite</p>
-  </footer>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单">☰</button>
+        </div>
+    </nav>
+
+    <section class="section post-article">
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            <header class="article-header">
+                <div class="post-tag tag-dev">技术</div>
+                <h1 class="article-title">学习笔记：JavaScript 基础</h1>
+                <div class="article-meta">
+                    <span>📅 2026-06-05</span>
+                    <span>👁 1 次阅读</span>
+                    <span>#JavaScript</span> <span>#学习笔记</span>
+                </div>
+            </header>
+            <div class="article-content">
+                <p><h1>JavaScript 基础知识</h1></p><p><h2>变量声明</h2></p><p><pre><code>const name = "十一";  // 常量<br>let age = 20;          // 可变变量<br></code></pre></p><p><h2>函数</h2></p><p><pre><code>// 箭头函数<br>const greet = (name) => {<br>  return <code>你好，${name}！</code>;<br>};</p><p>console.log(greet("十一"));<br></code></pre></p><p><h2>数组方法</h2></p><p><pre><code>const nums = [1, 2, 3, 4, 5];</p><p>// map - 映射<br>const doubled = nums.map(n => n * 2);</p><p>// filter - 过滤<br>const evens = nums.filter(n => n % 2 === 0);</p><p>// reduce - 归纳<br>const sum = nums.reduce((acc, n) => acc + n, 0);<br></code></pre></p><p><h2>异步编程</h2></p><p><pre><code>const fetchData = async () => {<br>  const res = await fetch("/api/data");<br>  const data = await res.json();<br>  return data;<br>};<br></code></pre></p><p><blockquote>JavaScript 是一门灵活的语言，学好基础很重要！</blockquote></p>
+            </div>
+            <div class="article-footer">
+                <p>感谢阅读，欢迎留言交流！</p>
+                <a href="blog.html" class="back-link">← 返回文章列表</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

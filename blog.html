@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>全部文章 - 十一的博客</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 · 十一</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <header class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo">📝 十一的博客</a>
-      <nav>
-        <a href="index.html" >首页</a>
-        <a href="blog.html" class="active">全部文章</a>
-        <a href="about.html" >关于</a>
-      </nav>
-    </div>
-  </header>
-  <main class="main-content">
-    <h1 style="margin-bottom: 1.5rem;">全部文章</h1>
-    <div class="article-list">
-      
-    <a href="article-2.html" style="text-decoration:none; color:inherit;">
-      <div class="article-card">
-        <div class="meta">
-          <span class="category">教程</span>
-          <span>2026/6/5</span>
-          <span>👁 2</span>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html" class="active">博客</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单">☰</button>
         </div>
-        <h2>Markdown 写作指南</h2>
-        <p class="summary">Markdown 语法速查表，适合新手快速上手。</p>
-        <div class="tags"><span class="tag">#Markdown</span><span class="tag">#写作</span></div>
-      </div>
-    </a>
+    </nav>
 
-    <a href="article-3.html" style="text-decoration:none; color:inherit;">
-      <div class="article-card">
-        <div class="meta">
-          <span class="category">技术</span>
-          <span>2026/6/5</span>
-          <span>👁 1</span>
+    <section class="section">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="section-title">全部文章</h1>
+                <p class="page-desc">共 3 篇文章</p>
+            </div>
+            <div class="post-list">
+                <article class="post-card">
+                    <div class="post-tag tag-dev">教程</div>
+                    <h3 class="post-title"><a href="article-2.html" style="color:inherit">Markdown 写作指南</a></h3>
+                    <p class="post-excerpt">Markdown 语法速查表，适合新手快速上手。</p>
+                    <div class="post-meta">
+                        <span class="post-date">2026-06-05</span>
+                        <a href="article-2.html" class="post-readmore">阅读全文 →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-tag tag-dev">技术</div>
+                    <h3 class="post-title"><a href="article-3.html" style="color:inherit">学习笔记：JavaScript 基础</a></h3>
+                    <p class="post-excerpt">JavaScript 核心基础知识整理，包括变量、函数、数组方法和异步编程。</p>
+                    <div class="post-meta">
+                        <span class="post-date">2026-06-05</span>
+                        <a href="article-3.html" class="post-readmore">阅读全文 →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-tag tag-dev">技术</div>
+                    <h3 class="post-title"><a href="article-1.html" style="color:inherit">Hello World！我的第一篇博客</a></h3>
+                    <p class="post-excerpt">用 Node.js + Express + SQLite 搭建的个人博客系统，支持 Markdown 写作和后台管理。</p>
+                    <div class="post-meta">
+                        <span class="post-date">2026-06-05</span>
+                        <a href="article-1.html" class="post-readmore">阅读全文 →</a>
+                    </div>
+                </article>
+            </div>
         </div>
-        <h2>学习笔记：JavaScript 基础</h2>
-        <p class="summary">JavaScript 核心基础知识整理，包括变量、函数、数组方法和异步编程。</p>
-        <div class="tags"><span class="tag">#JavaScript</span><span class="tag">#学习笔记</span></div>
-      </div>
-    </a>
+    </section>
 
-    <a href="article-1.html" style="text-decoration:none; color:inherit;">
-      <div class="article-card">
-        <div class="meta">
-          <span class="category">技术</span>
-          <span>2026/6/5</span>
-          <span>👁 0</span>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
         </div>
-        <h2>Hello World！我的第一篇博客</h2>
-        <p class="summary">用 Node.js + Express + SQLite 搭建的个人博客系统，支持 Markdown 写作和后台管理。</p>
-        <div class="tags"><span class="tag">#Node.js</span><span class="tag">#Express</span><span class="tag">#SQLite</span></div>
-      </div>
-    </a>
-    </div>
-  </main>
-  
-  <footer class="footer">
-    <p>&copy; 2026 十一的博客 · Powered by Node.js + SQLite</p>
-  </footer>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

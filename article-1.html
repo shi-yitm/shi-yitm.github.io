@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World！我的第一篇博客 - 十一的博客</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World！我的第一篇博客 · 十一</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <header class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo">📝 十一的博客</a>
-      <nav>
-        <a href="index.html" >首页</a>
-        <a href="blog.html" >全部文章</a>
-        <a href="about.html" >关于</a>
-      </nav>
-    </div>
-  </header>
-  <main class="article-detail">
-    <a href="index.html" class="back-link">← 返回首页</a>
-    <div class="header">
-      <h1>Hello World！我的第一篇博客</h1>
-      <div class="meta">
-        <span>📁 技术</span>
-        <span>📅 2026/6/5</span>
-        <span>👁 0 次阅读</span>
-      </div>
-      <div class="tags" style="margin-top:0.8rem"><span class="tag">#Node.js</span><span class="tag">#Express</span><span class="tag">#SQLite</span></div>
-    </div>
-    <div class="content"><p><h1>欢迎来到我的博客</h1></p><p>这是用 <strong>Node.js + Express + SQLite</strong> 搭建的个人博客系统。</p><p><h2>功能</h2></p><p><ul><li>✅ 后台管理面板</li><br><li>✅ Markdown 编辑器 + 实时预览</li><br><li>✅ 文章分类和标签</li><br><li>✅ 分页浏览</li><br><li>✅ 阅读量统计</li></ul></p><p><pre><code>console.log("Hello Blog!");<br></code></pre></p><p><blockquote>这是一个学习项目，前后端分离架构。</blockquote></p></div>
-  </main>
-  
-  <footer class="footer">
-    <p>&copy; 2026 十一的博客 · Powered by Node.js + SQLite</p>
-  </footer>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单">☰</button>
+        </div>
+    </nav>
+
+    <section class="section post-article">
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            <header class="article-header">
+                <div class="post-tag tag-dev">技术</div>
+                <h1 class="article-title">Hello World！我的第一篇博客</h1>
+                <div class="article-meta">
+                    <span>📅 2026-06-05</span>
+                    <span>👁 0 次阅读</span>
+                    <span>#Node.js</span> <span>#Express</span> <span>#SQLite</span>
+                </div>
+            </header>
+            <div class="article-content">
+                <p><h1>欢迎来到我的博客</h1></p><p>这是用 <strong>Node.js + Express + SQLite</strong> 搭建的个人博客系统。</p><p><h2>功能</h2></p><p><ul><li>✅ 后台管理面板</li></ul><br><ul><li>✅ Markdown 编辑器 + 实时预览</li></ul><br><ul><li>✅ 文章分类和标签</li></ul><br><ul><li>✅ 分页浏览</li></ul><br><ul><li>✅ 阅读量统计</li></ul></p><p><pre><code>console.log("Hello Blog!");<br></code></pre></p><p><blockquote>这是一个学习项目，前后端分离架构。</blockquote></p>
+            </div>
+            <div class="article-footer">
+                <p>感谢阅读，欢迎留言交流！</p>
+                <a href="blog.html" class="back-link">← 返回文章列表</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
