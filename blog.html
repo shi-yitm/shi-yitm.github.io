@@ -11,29 +11,126 @@
       background-size: cover;
     }
     .navbar {
-      background: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.6);
       backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .navbar .logo {
+      -webkit-text-fill-color: white;
+      background: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8) !important;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: white !important;
+    }
+    .nav-links a::after {
+      background: white;
     }
     .hero {
-      background: transparent;
-      padding: 60px 0;
+      background: rgba(0,0,0,0.35);
     }
     .hero h1, .hero .highlight, .hero-subtitle, .hero-desc {
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      color: white;
+      -webkit-text-fill-color: white;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .hero .highlight {
+      background: none;
+      -webkit-text-fill-color: #fbbf24;
     }
     .section {
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
       border-radius: 16px;
       margin: 0 24px;
       padding: 48px;
     }
-    .post-card, .about-card {
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(6px);
+    .section-title {
+      color: white;
+    }
+    .section-title::after {
+      background: #fbbf24;
+    }
+    .page-desc {
+      color: rgba(255,255,255,0.7);
+    }
+    .post-card {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .post-card:hover {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .post-title a, .post-title {
+      color: white !important;
+    }
+    .post-excerpt {
+      color: rgba(255,255,255,0.75);
+    }
+    .post-date {
+      color: rgba(255,255,255,0.6);
+    }
+    .post-readmore {
+      color: #60a5fa !important;
+    }
+    .article-title {
+      color: white;
+    }
+    .article-meta {
+      color: rgba(255,255,255,0.7);
+    }
+    .article-content {
+      color: rgba(255,255,255,0.9);
+    }
+    .article-content h2, .article-content h3 {
+      color: white;
+    }
+    .article-content blockquote {
+      background: rgba(255,255,255,0.1);
+      border-left-color: #fbbf24;
+      color: rgba(255,255,255,0.8);
+    }
+    .article-content code {
+      background: rgba(255,255,255,0.15);
+      color: #fbbf24;
+    }
+    .article-content pre {
+      background: rgba(0,0,0,0.5);
+    }
+    .article-content th {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    .article-content td {
+      color: rgba(255,255,255,0.85);
+    }
+    .article-content tr:nth-child(even) td {
+      background: rgba(255,255,255,0.05);
+    }
+    .article-footer {
+      border-top-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+    }
+    .back-link {
+      color: #60a5fa !important;
     }
     .footer {
-      background: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+    }
+    .tag-dev {
+      background: rgba(37,99,235,0.3);
+      color: #93c5fd;
+    }
+    .tag-life {
+      background: rgba(245,158,11,0.3);
+      color: #fcd34d;
     }</style>
 </head>
 <body>
