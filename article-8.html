@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南 · 十一</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    body {
+      background: url('images/bg-waves.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.2);
+      z-index: -1;
+    }
+    .navbar {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .navbar .logo {
+      -webkit-text-fill-color: white;
+      background: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8) !important;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: white !important;
+    }
+    .nav-links a::after {
+      background: white;
+    }
+    .hero {
+      background: rgba(0,0,0,0.35);
+    }
+    .hero h1, .hero .highlight, .hero-subtitle, .hero-desc {
+      color: white;
+      -webkit-text-fill-color: white;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .hero .highlight {
+      background: none;
+      -webkit-text-fill-color: #fbbf24;
+    }
+    .section {
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      border-radius: 0;
+      margin: 0;
+      padding: 48px 24px;
+    }
+    .section-title {
+      color: white;
+    }
+    .section-title::after {
+      background: #fbbf24;
+    }
+    .page-desc {
+      color: rgba(255,255,255,0.7);
+    }
+    .post-card {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .post-card:hover {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .post-title a, .post-title {
+      color: white !important;
+    }
+    .post-excerpt {
+      color: rgba(255,255,255,0.75);
+    }
+    .post-date {
+      color: rgba(255,255,255,0.6);
+    }
+    .post-readmore {
+      color: #60a5fa !important;
+    }
+    .article-title {
+      color: white;
+    }
+    .article-meta {
+      color: rgba(255,255,255,0.7);
+    }
+    .article-content {
+      color: rgba(255,255,255,0.9);
+    }
+    .article-content h2, .article-content h3 {
+      color: white;
+    }
+    .article-content blockquote {
+      background: rgba(255,255,255,0.1);
+      border-left-color: #fbbf24;
+      color: rgba(255,255,255,0.8);
+    }
+    .article-content code {
+      background: rgba(255,255,255,0.15);
+      color: #fbbf24;
+    }
+    .article-content pre {
+      background: rgba(0,0,0,0.5);
+    }
+    .article-content th {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    .article-content td {
+      color: rgba(255,255,255,0.85);
+    }
+    .article-content tr:nth-child(even) td {
+      background: rgba(255,255,255,0.05);
+    }
+    .article-footer {
+      border-top-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+    }
+    .back-link {
+      color: #60a5fa !important;
+    }
+    .footer {
+      background: rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+    }
+    .tag-dev {
+      background: rgba(37,99,235,0.3);
+      color: #93c5fd;
+    }
+    .tag-life {
+      background: rgba(245,158,11,0.3);
+      color: #fcd34d;
+    }</style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单">☰</button>
+        </div>
+    </nav>
+
+    <section class="section post-article">
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            <header class="article-header">
+                <div class="post-tag tag-dev">技术</div>
+                <h1 class="article-title">用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南</h1>
+                <div class="article-meta">
+                    <span>📅 2026-06-07</span>
+                    <span>👁 0 次阅读</span>
+                    <span>#Codex CLI</span> <span>#DeepSeek</span> <span>#CC-Switch</span> <span>#AI编程</span> <span>#Windows</span>
+                </div>
+            </header>
+            <div class="article-content">
+                <h2>为什么不能直接改 base_url</h2>
+<p>很多人第一反应肯定是：DeepSeek 不是兼容 OpenAI 的 API 吗，那把 Codex 的 base_url 改成 <code>https://api.deepseek.com</code> 不就行了？</p>
+<p><strong>真不行。至少现在还不行。</strong></p>
+<p>Codex CLI 用的是 OpenAI 较新的 <strong>Responses API</strong> 协议——这是 OpenAI 为 agent 类应用专门设计的接口，支持多轮会话、工具调用、流式 SSE 这些高级能力。而 DeepSeek 官方 API 是基于 <strong>Chat Completions</strong> 协议，这是更早的对话补全接口。两者虽然看起来都是&quot;OpenAI 风格&quot;，但底层请求结构、参数名、SSE 事件格式都不一样。</p>
+<p>直接改 base_url 会踩的坑：</p>
+<ul>
+<li>请求路径返回 404</li>
+<li>多轮对话时上下文串不起来</li>
+<li>工具调用（tool calls）解析出错</li>
+<li>SSE 流式事件格式对不上</li>
+<li>单轮问答能通，一跑实际任务就挂</li>
+</ul>
+<p>所以必须有一个协议翻译层在中间做转换。</p>
+<h2>方案对比：CC-Switch vs OpenRouter</h2>
+<h3>CC-Switch（本地代理）</h3>
+<p>开源项目 <code>ccswitch-deepseek</code>，一个轻量的 Node.js HTTP 代理。在本地跑一个 <code>index.js</code>，监听 11437 端口，负责把 Codex 发来的 Responses API 请求翻译成 Chat Completions 格式再发给 DeepSeek，回来的时候再转回去。</p>
+<p><strong>优点</strong>：全本地运行，零数据泄露，延迟低
+<strong>缺点</strong>：需要自己启动和维护代理进程</p>
+<h3>OpenRouter BYOK</h3>
+<p>OpenRouter 是个第三方 API 路由服务，BYOK（Bring Your Own Key）模式能绑定你自己的 DeepSeek API Key 由它做协议转换。</p>
+<p><strong>优点</strong>：不用跑本地服务
+<strong>缺点</strong>：多一层网络延迟，API Key 和数据需要经过第三方</p>
+<h2>Windows 下的完整部署</h2>
+<h3>前置条件</h3>
+<ol>
+<li><strong>Node.js</strong>——装 LTS 版本</li>
+<li><strong>DeepSeek API Key</strong>——在 platform.deepseek.com 注册获取</li>
+<li><strong>Codex CLI</strong>——全局安装：<code>npm i -g @openai/codex</code></li>
+</ol>
+<h3>第一步：装 CC-Switch</h3>
+<pre><code class="language-bash">git clone https://github.com/liuzhengming/ccswitch-deepseek.git D:\ccswitch-deepseek
+cd D:\ccswitch-deepseek
+npm install
+</code></pre>
+<h3>第二步：配置 API Key</h3>
+<p>在 <code>D:\ccswitch-deepseek\</code> 下创建 <code>.env</code>：</p>
+<pre><code>api_key=sk-your-key
+DEEPSEEK_API_KEY=sk-your-key
+model=deepseek-v4-pro
+port=11437
+</code></pre>
+<p>改 <code>index.js</code> 让 <code>.env</code> 加载路径变成绝对路径：</p>
+<pre><code class="language-js">dotenv.config({ path: &quot;D:/ccswitch-deepseek/.env&quot; });
+</code></pre>
+<h3>第三步：配置 Codex Profile</h3>
+<p>在 <code>C:\Users\你的用户名\.codex\</code> 下创建 <code>deepseek-local.config.toml</code>：</p>
+<pre><code class="language-toml">model = &quot;deepseek-v4-pro&quot;
+model_provider = &quot;ccx-bridge&quot;
+
+[model_providers.ccx-bridge]
+name = &quot;CCX Bridge (DeepSeek)&quot;
+base_url = &quot;http://127.0.0.1:11437/v1&quot;
+env_key = &quot;DEEPSEEK_API_KEY&quot;
+</code></pre>
+<h3>第四步：启动</h3>
+<p>一个窗口跑代理：</p>
+<pre><code class="language-bash">D:\nodejs\node.exe D:\ccswitch-deepseek\index.js
+</code></pre>
+<p>另一个窗口跑 Codex：</p>
+<pre><code class="language-bash">set DEEPSEEK_API_KEY=sk-your-key
+codex --profile deepseek-local
+</code></pre>
+<h3>第五步：一键启动脚本</h3>
+<p>每次开两个窗口还是有点烦，写一个 <code>run-codex.bat</code>：</p>
+<pre><code class="language-bat">@echo off
+set &quot;DEEPSEEK_API_KEY=sk-your-key&quot;
+taskkill /f /im node.exe &gt;nul 2&gt;&amp;1
+start &quot;Proxy&quot; /min D:\nodejs\node.exe D:\ccswitch-deepseek\index.js
+ping -n 4 127.0.0.1 &gt;nul
+codex --profile deepseek-local
+taskkill /f /im node.exe &gt;nul 2&gt;&amp;1
+</code></pre>
+<p>保存后放到桌面快捷方式，双击即可一键启动。</p>
+<h2>踩坑记录</h2>
+<h3>&quot;UNC 路径&quot;错误</h3>
+<p>从 WSL/PowerShell 启动 Codex 时，工作目录继承了 <code>\\wsl.localhost\...</code> 这种路径，Windows CMD 不支持。解决：<code>codex.cmd ... -C D:\</code> 或 bat 里先 <code>pushd D:\</code>。</p>
+<h3>端口被占用</h3>
+<p>重复启动代理会报 <code>EADDRINUSE</code>。脚本里的 <code>taskkill /f /im node.exe</code> 自动清理残留。</p>
+<h3>环境变量传不过去</h3>
+<p><code>set DEEPSEEK_API_KEY=...</code> 必须放在启动 Codex 的同一个 CMD 进程里。</p>
+<h2>验证</h2>
+<p>在 Codex 里问一句&quot;你是谁&quot;，如果回答&quot;我是 DeepSeek&quot;就说明一切正常。我从实际运行中验证过，V4 Pro 和 V4 Flash 都能正常工作。</p>
+
+            </div>
+            <div class="article-footer">
+                <p>感谢阅读，欢迎留言交流！</p>
+                <a href="blog.html" class="back-link">← 返回文章列表</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
