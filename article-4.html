@@ -1,202 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一个个人网站 · 十一</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-      background: url('images/bg-waves.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.2);
-      z-index: -1;
-    }
-    .navbar {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .navbar .logo {
-      -webkit-text-fill-color: white;
-      background: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.8) !important;
-    }
-    .nav-links a.active,
-    .nav-links a:hover {
-      color: white !important;
-    }
-    .nav-links a::after {
-      background: white;
-    }
-    .hero {
-      background: rgba(0,0,0,0.35);
-    }
-    .hero h1, .hero .highlight, .hero-subtitle, .hero-desc {
-      color: white;
-      -webkit-text-fill-color: white;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-    }
-    .hero .highlight {
-      background: none;
-      -webkit-text-fill-color: #fbbf24;
-    }
-    .section {
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      border-radius: 0;
-      margin: 0;
-      padding: 48px 24px;
-    }
-    .section-title {
-      color: white;
-    }
-    .section-title::after {
-      background: #fbbf24;
-    }
-    .page-desc {
-      color: rgba(255,255,255,0.7);
-    }
-    .post-card {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .post-card:hover {
-      background: rgba(0,0,0,0.6);
-      border-color: rgba(255,255,255,0.2);
-    }
-    .post-title a, .post-title {
-      color: white !important;
-    }
-    .post-excerpt {
-      color: rgba(255,255,255,0.75);
-    }
-    .post-date {
-      color: rgba(255,255,255,0.6);
-    }
-    .post-readmore {
-      color: #60a5fa !important;
-    }
-    .article-title {
-      color: white;
-    }
-    .article-meta {
-      color: rgba(255,255,255,0.7);
-    }
-    .article-content {
-      color: rgba(255,255,255,0.9);
-    }
-    .article-content h2, .article-content h3 {
-      color: white;
-    }
-    .article-content blockquote {
-      background: rgba(255,255,255,0.1);
-      border-left-color: #fbbf24;
-      color: rgba(255,255,255,0.8);
-    }
-    .article-content code {
-      background: rgba(255,255,255,0.15);
-      color: #fbbf24;
-    }
-    .article-content pre {
-      background: rgba(0,0,0,0.5);
-    }
-    .article-content th {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-    .article-content td {
-      color: rgba(255,255,255,0.85);
-    }
-    .article-content tr:nth-child(even) td {
-      background: rgba(255,255,255,0.05);
-    }
-    .article-footer {
-      border-top-color: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.6);
-    }
-    .back-link {
-      color: #60a5fa !important;
-    }
-    .footer {
-      background: rgba(0,0,0,0.5);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.5);
-    }
-    .tag-dev {
-      background: rgba(37,99,235,0.3);
-      color: #93c5fd;
-    }
-    .tag-life {
-      background: rgba(245,158,11,0.3);
-      color: #fcd34d;
-    }</style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="logo">十一</a>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="菜单">☰</button>
-        </div>
-    </nav>
-
-    <section class="section post-article">
-        <div class="container">
-            <a href="index.html" class="back-link">← 返回首页</a>
-            <header class="article-header">
-                <div class="post-tag tag-dev">技术</div>
-                <h1 class="article-title">我的第一个个人网站</h1>
-                <div class="article-meta">
-                    <span>📅 2026-06-04</span>
-                    <span>👁 0 次阅读</span>
-                    <span>#博客</span> <span>#GitHub Pages</span>
-                </div>
-            </header>
-            <div class="article-content">
-                <p>终于，我有了自己的个人网站。</p>
-<p>说来也挺有意思的——一直在学习 Web 开发，给别人做项目，却从来没给自己搭一个站点。这次决定从零开始，用自己的技术栈做一个真正属于自己的地方。</p>
-<h2>为什么选择 GitHub Pages？</h2>
-<p>免费的、稳定的、和 Git 无缝集成的托管方案。对于个人博客来说，简直是最佳起点。不需要买服务器、不需要配 Nginx、不需要管备案——把 HTML 文件往仓库里一推，世界就能看到了。</p>
-<h2>这个网站打算放什么</h2>
-<ul>
-<li><strong>技术笔记</strong> — 学习过程中的踩坑与收获</li>
-<li><strong>项目总结</strong> — 做过的项目回顾</li>
-<li><strong>随笔</strong> — 偶尔写点生活感悟</li>
-</ul>
-<h2>下一步计划</h2>
-<p>目前是纯静态页面。以后逐步添加：分类标签、搜索、评论功能……一点点让它丰富起来。</p>
-<p>过程比结果重要。慢慢来，比较快。</p>
-<blockquote>
-<p>种一棵树最好的时间是十年前，其次是现在。</p>
-</blockquote>
-
-            </div>
-            <div class="article-footer">
-                <p>感谢阅读，欢迎留言交流！</p>
-                <a href="blog.html" class="back-link">← 返回文章列表</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GitHub Pages 搭建指南 · 十一</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script></head>
+<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul><button class="menu-toggle" aria-label="菜单">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">GitHub Pages 搭建指南</h1><div class="article-meta"><span>📅 2026-06-07</span><span>👁 0 次阅读</span> <span>#GitHub</span> <span>#教程</span> <span>#部署</span></div></header><div class="article-content"><h2>什么是 GitHub Pages</h2>
+<p>GitHub Pages 是 GitHub 提供的免费静态网站托管服务。你只需要把 HTML 文件推送到仓库，它就会自动生成一个网站。</p>
+<h2>创建仓库</h2>
+<ol>
+<li>在 GitHub 上创建一个名为 <code>你的用户名.github.io</code> 的仓库</li>
+<li>把仓库 clone 到本地</li>
+<li>在仓库根目录放一个 <code>index.html</code></li>
+</ol>
+<h2>部署</h2>
+<pre><code class="language-bash">git add .
+git commit -m &quot;初始化网站&quot;
+git push origin main
+</code></pre>
+<p>推送完成后，等待几秒钟，访问 <code>https://你的用户名.github.io</code> 就能看到你的网站了！</p>
+<h2>自定义域名</h2>
+<p>如果不想用 github.io 结尾的域名，可以买一个自己的域名，在 GitHub Pages 的 Settings 里配置 Custom domain 即可。</p>
+<h2>小结</h2>
+<p>GitHub Pages 是入门个人网站搭建的最佳选择——免费、简单、稳定。唯一的限制是只能托管静态内容，如果需要后端功能，就得考虑云服务器了。</p>
+</div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
+<footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
+<script src="script.js"></script></body></html>

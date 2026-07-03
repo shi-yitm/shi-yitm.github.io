@@ -1,262 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages 搭建指南 · 十一</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-      background: url('images/bg-waves.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.2);
-      z-index: -1;
-    }
-    .navbar {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .navbar .logo {
-      -webkit-text-fill-color: white;
-      background: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.8) !important;
-    }
-    .nav-links a.active,
-    .nav-links a:hover {
-      color: white !important;
-    }
-    .nav-links a::after {
-      background: white;
-    }
-    .hero {
-      background: rgba(0,0,0,0.35);
-    }
-    .hero h1, .hero .highlight, .hero-subtitle, .hero-desc {
-      color: white;
-      -webkit-text-fill-color: white;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-    }
-    .hero .highlight {
-      background: none;
-      -webkit-text-fill-color: #fbbf24;
-    }
-    .section {
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      border-radius: 0;
-      margin: 0;
-      padding: 48px 24px;
-    }
-    .section-title {
-      color: white;
-    }
-    .section-title::after {
-      background: #fbbf24;
-    }
-    .page-desc {
-      color: rgba(255,255,255,0.7);
-    }
-    .post-card {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .post-card:hover {
-      background: rgba(0,0,0,0.6);
-      border-color: rgba(255,255,255,0.2);
-    }
-    .post-title a, .post-title {
-      color: white !important;
-    }
-    .post-excerpt {
-      color: rgba(255,255,255,0.75);
-    }
-    .post-date {
-      color: rgba(255,255,255,0.6);
-    }
-    .post-readmore {
-      color: #60a5fa !important;
-    }
-    .article-title {
-      color: white;
-    }
-    .article-meta {
-      color: rgba(255,255,255,0.7);
-    }
-    .article-content {
-      color: rgba(255,255,255,0.9);
-    }
-    .article-content h2, .article-content h3 {
-      color: white;
-    }
-    .article-content blockquote {
-      background: rgba(255,255,255,0.1);
-      border-left-color: #fbbf24;
-      color: rgba(255,255,255,0.8);
-    }
-    .article-content code {
-      background: rgba(255,255,255,0.15);
-      color: #fbbf24;
-    }
-    .article-content pre {
-      background: rgba(0,0,0,0.5);
-    }
-    .article-content th {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-    .article-content td {
-      color: rgba(255,255,255,0.85);
-    }
-    .article-content tr:nth-child(even) td {
-      background: rgba(255,255,255,0.05);
-    }
-    .article-footer {
-      border-top-color: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.6);
-    }
-    .back-link {
-      color: #60a5fa !important;
-    }
-    .footer {
-      background: rgba(0,0,0,0.5);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.5);
-    }
-    .tag-dev {
-      background: rgba(37,99,235,0.3);
-      color: #93c5fd;
-    }
-    .tag-life {
-      background: rgba(245,158,11,0.3);
-      color: #fcd34d;
-    }</style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="logo">十一</a>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="菜单">☰</button>
-        </div>
-    </nav>
-
-    <section class="section post-article">
-        <div class="container">
-            <a href="index.html" class="back-link">← 返回首页</a>
-            <header class="article-header">
-                <div class="post-tag tag-dev">技术</div>
-                <h1 class="article-title">GitHub Pages 搭建指南</h1>
-                <div class="article-meta">
-                    <span>📅 2026-06-04</span>
-                    <span>👁 0 次阅读</span>
-                    <span>#GitHub Pages</span> <span>#建站</span> <span>#教程</span>
-                </div>
-            </header>
-            <div class="article-content">
-                <p>最简单、最免费的建站方式，只需要一个 GitHub 账号就能搞定。</p>
-<p>GitHub Pages 是 GitHub 提供的一项免费静态托管服务。你只要把 HTML/CSS/JS 文件推送到仓库里，GitHub 会自动帮你部署，生成一个可访问的网址。整个过程不需要买服务器、不需要配置 Nginx、不需要备案。</p>
-<h2>两种 Pages 类型</h2>
-<p>GitHub Pages 分两种：</p>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南 · 十一</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script></head>
+<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul><button class="menu-toggle" aria-label="菜单">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南</h1><div class="article-meta"><span>📅 2026-06-07</span><span>👁 1 次阅读</span> <span>#DeepSeek</span> <span>#Codex</span> <span>#AI</span> <span>#教程</span></div></header><div class="article-content"><h2>前言</h2>
+<p>OpenAI 的 Codex CLI 是一个强大的 AI 编程助手，但需要 OpenAI API Key，价格不菲。而 DeepSeek 提供了免费额度的 API。通过 CC-Switch 协议转换工具，可以让 Codex CLI 走 DeepSeek 的 API。</p>
+<h2>什么是 CC-Switch</h2>
+<p>CC-Switch 是一个 API 协议转换工具，它能将 OpenAI 格式的 API 请求转换成其他 LLM 提供商的格式。</p>
+<h2>部署步骤</h2>
+<h3>1. 安装 CC-Switch</h3>
+<pre><code class="language-bash">git clone https://github.com/deepseek-community/ccswitch.git
+cd ccswitch
+npm install
+</code></pre>
+<h3>2. 配置 DeepSeek API</h3>
+<p>在配置文件中填入你的 DeepSeek API Key 和端点地址。</p>
+<h3>3. 启动服务</h3>
+<pre><code class="language-bash">npm start
+</code></pre>
+<p>CC-Switch 会在本地启动一个服务，Codex CLI 连接到这个本地服务，CC-Switch 再将请求转发到 DeepSeek API。</p>
+<h2>使用 Codex CLI</h2>
+<p>配置 Codex CLI 使用本地代理端点后，就可以正常使用了。体验和用 OpenAI 官方 API 几乎一样！</p>
+<h2>注意事项</h2>
 <ul>
-<li><strong>用户/组织站点</strong> — 一个账号只能有一个，仓库名必须是 <code>用户名.github.io</code>。这是你的个人官网。</li>
-<li><strong>项目站点</strong> — 每个仓库都可以开启，访问地址是 <code>用户名.github.io/仓库名</code>。适合给每个项目单独建站。</li>
+<li>DeepSeek 免费额度有限，合理使用</li>
+<li>复杂任务的响应质量可能会有差异</li>
+<li>建议配合本地模型一起使用</li>
 </ul>
-<p>我个人建站用的是用户站点，也就是你现在正在看的这个网站。</p>
-<h2>建站步骤</h2>
-<h3>第一步：创建仓库</h3>
-<p>登录 GitHub，点右上角的 <code>+</code> → <strong>New repository</strong>。</p>
-<p>仓库名填 <code>你的用户名.github.io</code>。比如你的用户名是 <code>shi-yitm</code>，那仓库名就是 <code>shi-yitm.github.io</code>。这个名字必须完全匹配，否则不会生效。</p>
-<p>设为 <strong>Public</strong>（公开仓库），然后点 <strong>Create repository</strong>。</p>
-<h3>第二步：上传文件</h3>
-<p>你有两种方式把文件放上去：</p>
-<ul>
-<li><strong>网页上传</strong> — 打开仓库页面，点 <strong>Add file</strong> → <strong>Upload files</strong>，把本地的 <code>index.html</code> 等文件拖进去，Commit 即可。</li>
-<li><strong>Git 命令行</strong> — 先 <code>git clone</code> 仓库到本地，然后把文件放进去，<code>git add</code>、<code>git commit</code>、<code>git push</code>。</li>
-</ul>
-<h3>第三步：访问你的网站</h3>
-<p>上传完成后等 1-2 分钟，打开浏览器访问：</p>
-<pre><code>https://你的用户名.github.io
-</code></pre>
-<p>如果看到了你的页面，恭喜你！你的第一个网站上线了 🎉</p>
-<h2>目录结构规范</h2>
-<p>文件都放在仓库根目录，GitHub Pages 会自动识别 <code>index.html</code> 作为首页：</p>
-<pre><code>你的用户名.github.io/
-├── index.html       ← 首页（必须）
-├── blog.html        ← 其他页面
-├── post.html        ← 文章页
-├── about.html
-├── style.css
-└── script.js
-</code></pre>
-<h2>绑定自定义域名</h2>
-<p>如果你想用 <code>shiyi.me</code> 这样的域名而不是 <code>用户名.github.io</code>，可以买一个域名然后绑定：</p>
-<ol>
-<li>在域名服务商那里（比如阿里云）买个域名，大概几十块一年</li>
-<li>在 DNS 设置里添加一条 CNAME 记录，指向 <code>你的用户名.github.io</code></li>
-<li>在仓库的 Settings → Pages → Custom domain 里填上你的域名</li>
-</ol>
-<p>绑定成功后，访问你的域名就能看到网站了。</p>
-<h2>日常更新流程</h2>
-<p>以后每次想更新内容，三步走：</p>
-<pre><code>git add .
-git commit -m &quot;写清楚改了什么&quot;
-git push
-</code></pre>
-<p>推送后等一两分钟，网站自动更新，不需要手动部署任何东西。</p>
-<h2>优缺点总结</h2>
-<table>
-<thead>
-<tr>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>完全免费，没有隐藏费用</td>
-<td>只支持静态文件（HTML/JS/CSS）</td>
-</tr>
-<tr>
-<td>自动 HTTPS，不用配证书</td>
-<td>不能跑后端代码（Java/PHP/Python）</td>
-</tr>
-<tr>
-<td>和 Git 无缝集成，部署超简单</td>
-<td>国内访问速度有时不太稳定</td>
-</tr>
-<tr>
-<td>不需要管服务器运维</td>
-<td>存储空间限制 1GB</td>
-</tr>
-</tbody></table>
-<p>总的来说，对于个人博客、产品展示页、项目文档来说，GitHub Pages 是最简单、最经济的方案。等以后网站做大了、需要数据库了，再迁移到服务器也不迟。</p>
-
-            </div>
-            <div class="article-footer">
-                <p>感谢阅读，欢迎留言交流！</p>
-                <a href="blog.html" class="back-link">← 返回文章列表</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<h2>总结</h2>
+<p>通过 CC-Switch，可以零成本体验 Codex CLI 的核心功能。对于学生和个人开发者来说，这是一个很好的方案。</p>
+</div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
+<footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
+<script src="script.js"></script></body></html>

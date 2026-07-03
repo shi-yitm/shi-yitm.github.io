@@ -1,52 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World！我的第一篇博客 · 十一</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="logo">十一</a>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="菜单">☰</button>
-        </div>
-    </nav>
-
-    <section class="section post-article">
-        <div class="container">
-            <a href="index.html" class="back-link">← 返回首页</a>
-            <header class="article-header">
-                <div class="post-tag tag-dev">技术</div>
-                <h1 class="article-title">Hello World！我的第一篇博客</h1>
-                <div class="article-meta">
-                    <span>📅 2026-06-05</span>
-                    <span>👁 0 次阅读</span>
-                    <span>#Node.js</span> <span>#Express</span> <span>#SQLite</span>
-                </div>
-            </header>
-            <div class="article-content">
-                <p><h1>欢迎来到我的博客</h1></p><p>这是用 <strong>Node.js + Express + SQLite</strong> 搭建的个人博客系统。</p><p><h2>功能</h2></p><p><ul><li>✅ 后台管理面板</li></ul><br><ul><li>✅ Markdown 编辑器 + 实时预览</li></ul><br><ul><li>✅ 文章分类和标签</li></ul><br><ul><li>✅ 分页浏览</li></ul><br><ul><li>✅ 阅读量统计</li></ul></p><p><pre><code>console.log("Hello Blog!");<br></code></pre></p><p><blockquote>这是一个学习项目，前后端分离架构。</blockquote></p>
-            </div>
-            <div class="article-footer">
-                <p>感谢阅读，欢迎留言交流！</p>
-                <a href="blog.html" class="back-link">← 返回文章列表</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从零到上线：腾讯云轻量服务器部署个人博客全记录 · 十一</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script></head>
+<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul><button class="menu-toggle" aria-label="菜单">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">从零到上线：腾讯云轻量服务器部署个人博客全记录</h1><div class="article-meta"><span>📅 2026-06-07</span><span>👁 0 次阅读</span> <span>#部署</span> <span>#腾讯云</span> <span>#博客</span> <span>#Nginx</span> <span>#Node.js</span></div></header><div class="article-content"><h2>缘起</h2>
+<p>一直想把之前用 GitHub Pages 托管的个人博客搬到自己的云服务器上，刚好看到腾讯云有轻量应用服务器试用活动，2核2G3M的配置跑个人博客绰绰有余。于是凌晨蹲点抢到了一台。</p>
+<h2>第一步：申请服务器</h2>
+<p>腾讯云轻量应用服务器试用活动每天限量，第一天没抢到，第二天凌晨十二点准时抢到了。初始选了 Windows 系统，但考虑到 Node.js 在 Linux 上更高效，果断重装成 Ubuntu 22.04 LTS。</p>
+<h2>第二步：SSH 连接与密钥配置</h2>
+<p>重装后遇到几个坑：防火墙没开 22 端口、默认用户是 ubuntu 而非 root、SSH 密钥权限问题。最终采用 SSH 密钥对方式登录，在本地生成 RSA 4096 位密钥，公钥写入服务器 authorized_keys。</p>
+<h2>第三步：安装运行环境</h2>
+<p>连上服务器后，装了 Node.js v20、Nginx 1.18、PM2 进程守护。一切顺利。</p>
+<h2>第四步：部署博客前端</h2>
+<p>把博客静态文件从 GitHub 拉到服务器，放到 Nginx 托管目录。踩了权限坑——Nginx 以 www-data 运行，读不了 /root 下的文件，移到了 /var/www/blog/ 解决。</p>
+<h2>第五步：本地 CMS + 自动部署</h2>
+<p>后台 CMS 只在本机运行（localhost:3000），写完文章自动触发生成静态 HTML + scp 上传服务器。deploy.js 只传 HTML，不动 CSS/JS。用 sql.js 替代 better-sqlite3 避免原生模块编译问题。</p>
+<h2>踩坑总结</h2>
+<ol>
+<li>腾讯云防火墙记得开 22 和 80 端口</li>
+<li>/root 目录权限 Nginx 读不到</li>
+<li>SQLite 原生模块兼容性用 sql.js 解决</li>
+<li>deploy 只碰 HTML 不动样式文件</li>
+<li>试用到正式买服务器时先建镜像快照</li>
+</ol>
+</div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
+<footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
+<script src="script.js"></script></body></html>

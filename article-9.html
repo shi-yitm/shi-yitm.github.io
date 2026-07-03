@@ -1,1899 +1,1096 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>校园购物商城（CampusMall）项目说明书 · 十一</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 16px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px 12px;
-            text-align: left;
-            white-space: nowrap;
-        }
-        th {
-            background: #f5f5f5;
-            font-weight: 600;
-        }
-        tr:nth-child(even) {
-            background: #fafafa;
-        }
-        .list-item {
-            margin: 4px 0;
-            line-height: 1.6;
-        }
-        pre {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 16px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        code {
-            background: #f0f0f0;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #eee;
-            margin: 24px 0;
-        }
-        h1 { font-size: 1.8em; margin-top: 32px; }
-        h2 { font-size: 1.5em; margin-top: 28px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-        h3 { font-size: 1.25em; margin-top: 24px; }
-        h4 { font-size: 1.1em; margin-top: 20px; }
-        .article-content p {
-            margin: 8px 0;
-            line-height: 1.8;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="logo">十一</a>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="菜单">☰</button>
-        </div>
-    </nav>
-
-    <section class="section post-article">
-        <div class="container">
-            <a href="blog.html" class="back-link">← 返回博客</a>
-            <header class="article-header">
-                <div class="post-tag tag-dev">课程设计</div>
-                <h1 class="article-title">校园购物商城（CampusMall）项目说明书</h1>
-                <div class="article-meta">
-                    <span>📅 2026-06-25</span>
-                    <span>📚 数据库课程设计</span>
-                </div>
-            </header>
-            <div class="article-content">
-<h1>校园购物商城（CampusMall）— 项目说明书</h1>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>《电子技术（电工学Ⅱ）》习题解答 · 十一</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script></head>
+<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul><button class="menu-toggle" aria-label="菜单">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">《电子技术（电工学Ⅱ）》习题解答</h1><div class="article-meta"><span>📅 2026-06-21</span><span>👁 0 次阅读</span> <span>#电子技术</span> <span>#电工学</span> <span>#复习资料</span> <span>#习题解答</span></div></header><div class="article-content"><h1>《电子技术（电工学Ⅱ）》习题解答</h1>
+<blockquote>
+<p>主编：孙立功 | 第3版 | 高等教育出版社
+整理时间：2026-06-21</p>
+</blockquote>
 <hr>
-<h2>一、项目概述</h2>
-<h3>1.1 项目背景</h3>
-<p>本项目是<strong>数据库课程设计</strong>的实践项目，旨在设计并实现一个完整的校园购物商城系统。通过该项目，综合运用数据库设计（ER图、关系模式、范式分析）、SQL编程（存储过程、触发器、视图）、后端开发（Spring Boot + MyBatis）和前端开发（原生 HTML/CSS/JS）等技术，构建一个功能完善的电商平台原型。</p>
-<h3>1.2 项目目标</h3>
-<p class="list-item">• 实现商品浏览、搜索、购物车、下单、支付、评价等核心电商功能</p>
-<p class="list-item">• 设计并实现包含 13 张核心表的规范化数据库</p>
-<p class="list-item">• 编写存储过程、触发器、视图等数据库高级对象</p>
-<p class="list-item">• 前后端分离架构，RESTful API 设计</p>
-<p class="list-item">• 模拟完整的购物流程闭环</p>
-<h3>1.3 项目结构总览</h3>
-<pre><code class="language-text">购物商城-数据库课设/
-├── 01-需求分析/          # 需求分析文档
-├── 02-概念设计/          # ER图说明
-├── 03-逻辑设计/          # 表结构设计
-├── 04-物理设计/          # 索引与优化
-├── 05-SQL脚本/           # 建表、测试数据、存储过程、触发器、视图
-├── 06-报告素材/          # 核心SQL说明
-├── database/             # 数据库脚本（另一份副本）
-├── backend/              # Spring Boot 后端
-│   ├── pom.xml
-│   └── src/main/
-│       ├── java/com/shop/
-│       │   ├── ShopApplication.java
-│       │   ├── config/       # 配置类
-│       │   ├── entity/       # 实体类（13个）
-│       │   ├── mapper/       # Mapper接口（13个）
-│       │   ├── service/      # Service类（10个）
-│       │   ├── controller/   # Controller类（12个）
-│       │   └── util/         # 工具类
-│       └── resources/
-│           ├── application.yml
-│           └── mapper/       # MyBatis XML映射文件（13个）
-└── frontend/             # 前端静态页面
-    ├── *.html             # 12个HTML页面
-    ├── js/                # JavaScript模块
-    │   ├── api.js         # API请求封装
-    │   ├── app.js         # 公共逻辑
-    │   └── product-images.js  # 商品图片映射
-    └── css/
-        └── style.css      # 全局样式</code></pre>
+<h2>目录</h2>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%99%A8%E4%BB%B6">第一章 半导体器件</a><ul>
+<li><a href="#%E9%A2%98-1-3">题1-3</a></li>
+<li><a href="#%E9%A2%98-1-6">题1-6</a></li>
+<li><a href="#%E9%A2%98-1-7">题1-7</a></li>
+<li><a href="#%E9%A2%98-1-11">题1-11</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF">第二章 基本放大电路</a><ul>
+<li><a href="#%E9%A2%98-2-3">题2-3</a></li>
+<li><a href="#%E9%A2%98-2-8">题2-8</a></li>
+<li><a href="#%E9%A2%98-2-9">题2-9</a></li>
+<li><a href="#%E9%A2%98-2-10">题2-10</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8">第三章 集成运算放大器</a><ul>
+<li><a href="#%E9%A2%98-3-10">题3-10</a></li>
+<li><a href="#%E9%A2%98-3-11">题3-11</a></li>
+<li><a href="#%E9%A2%98-3-12">题3-12</a></li>
+<li><a href="#%E9%A2%98-3-14">题3-14</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF">第五章 组合逻辑电路</a><ul>
+<li><a href="#%E9%A2%98-5-4">题5-4</a></li>
+<li><a href="#%E9%A2%98-5-8">题5-8</a></li>
+<li><a href="#%E9%A2%98-5-10">题5-10</a></li>
+<li><a href="#%E9%A2%98-5-11">题5-11</a></li>
+<li><a href="#%E9%A2%98-5-12">题5-12</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF">第六章 时序逻辑电路</a><ul>
+<li><a href="#%E9%A2%98-6-3">题6-3</a></li>
+<li><a href="#%E9%A2%98-6-6">题6-6</a></li>
+<li><a href="#%E9%A2%98-6-7">题6-7</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-da%E4%B8%8Ead%E8%BD%AC%E6%8D%A2">第八章 D/A与A/D转换</a><ul>
+<li><a href="#%E9%A2%98-8-3">题8-3</a></li>
+<li><a href="#%E9%A2%98-8-4">题8-4</a></li>
+<li><a href="#%E9%A2%98-8-5">题8-5</a></li>
+<li><a href="#%E9%A2%98-8-8">题8-8</a></li>
+<li><a href="#%E9%A2%98-8-9">题8-9</a></li>
+</ul>
+</li>
+</ul>
 <hr>
-<h2>二、技术架构</h2>
-<h3>2.1 整体架构</h3>
-<p>项目采用经典的<strong>前后端分离</strong>架构：</p>
-<pre><code class="language-text">┌─────────────────────┐     HTTP/JSON     ┌─────────────────────┐     SQL/JDBC     ┌─────────────┐
-│     前端（静态页面）    │ ◄──────────────► │   后端（Spring Boot）  │ ◄──────────────► │  MySQL 数据库 │
-│  HTML + CSS + JS     │    RESTful API   │  Spring Boot 2.7.18 │                  │  campus_mall │
-│  原生 Fetch API      │                  │  MyBatis 2.3.1       │                  │             │
-└─────────────────────┘                   └─────────────────────┘                  └─────────────┘</code></pre>
-<h3>2.2 技术栈</h3>
-<div class="table-wrapper"><table>
+<h1>第一章 半导体器件</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
 <tr>
-<th>层次</th>
-<th>技术</th>
-<th>版本</th>
+<th>知识点</th>
 <th>说明</th>
 </tr>
-<tr>
-<td>**前端**</td>
-<td>HTML5 + CSS3 + JavaScript (ES6+)</td>
-<td>—</td>
-<td>原生开发，无框架依赖</td>
+</thead>
+<tbody><tr>
+<td><strong>理想二极管</strong></td>
+<td>正向导通=短路（0V），反向截止=开路（0mA）</td>
 </tr>
 <tr>
-<td>**后端框架**</td>
-<td>Spring Boot</td>
-<td>2.7.18</td>
-<td>自动配置、内嵌Tomcat</td>
+<td><strong>KVL</strong></td>
+<td>沿任一回路，电压升之和 = 电压降之和</td>
 </tr>
 <tr>
-<td>**ORM框架**</td>
-<td>MyBatis</td>
-<td>2.3.1</td>
-<td>XML映射 + 注解</td>
+<td><strong>KCL</strong></td>
+<td>流入节点的电流之和 = 流出节点的电流之和</td>
 </tr>
 <tr>
-<td>**数据库**</td>
-<td>MySQL</td>
-<td>5.7+</td>
-<td>InnoDB引擎，支持事务</td>
+<td><strong>假设-验证法</strong></td>
+<td>先假设二极管状态，算出电流/电压后验证是否自洽</td>
 </tr>
 <tr>
-<td>**构建工具**</td>
-<td>Maven</td>
-<td>—</td>
-<td>依赖管理与打包</td>
+<td><strong>晶体管三种状态</strong></td>
+<td>截止（I_B=0）、放大（I_C=β·I_B）、饱和（I_C=I_C(sat)）</td>
 </tr>
-<tr>
-<td>**JDK**</td>
-<td>Java</td>
-<td>1.8</td>
-<td>LTS版本</td>
-</tr>
-<tr>
-<td>**Lombok**</td>
-<td>—</td>
-<td>—</td>
-<td>简化实体类代码</td>
-</tr>
-</table></div>
-<h3>2.3 后端分层架构</h3>
-<pre><code class="language-text">Controller（控制器层）
-    ↓ 调用
-Service（业务逻辑层）
-    ↓ 调用
-Mapper（数据访问层）← XML SQL映射
-    ↓ JDBC
-MySQL 数据库</code></pre>
-<p>每一层职责分明：</p>
-<p class="list-item">• <strong>Controller</strong>：接收HTTP请求，参数校验，调用Service，返回统一JSON响应</p>
-<p class="list-item">• <strong>Service</strong>：业务逻辑处理，事务管理，数据组装</p>
-<p class="list-item">• <strong>Mapper</strong>：数据库CRUD操作，SQL映射</p>
-<p class="list-item">• <strong>Entity</strong>：数据库表对应的Java实体</p>
-<h3>2.4 前端架构</h3>
-<p>前端采用原生HTML/CSS/JavaScript开发，通过 <code>fetch</code> API 调用后端 RESTful 接口。所有页面共用：</p>
-<p class="list-item">• <code>css/style.css</code>：全局CSS变量 + 组件样式</p>
-<p class="list-item">• <code>js/api.js</code>：API请求封装（含Token管理、Toast提示、工具函数）</p>
-<p class="list-item">• <code>js/app.js</code>：公共逻辑（导航栏渲染、登录状态检查、分页组件）</p>
+</tbody></table>
 <hr>
-<h2>三、数据库设计</h2>
-<h3>3.1 数据库概况</h3>
-<p>数据库名：<code>campus_mall</code>，字符集 <code>utf8mb4</code>，引擎 <code>InnoDB</code>。</p>
-<p>共包含 <strong>13 张核心表</strong>、<strong>4 个存储过程</strong>、<strong>8 个触发器</strong>、<strong>8 个视图</strong>。</p>
-<h3>3.2 表结构详解</h3>
-<h4>3.2.1 用户表（t_user）</h4>
-<div class="table-wrapper"><table>
+<h2>题 1-3</h2>
+<p><strong>题目：</strong> 在图 1-29 所示电路中，D₁、D₂ 为理想元件，试判断图中的二极管是导通的还是截止的，并求 AB 两端的电压 U_AB。</p>
+<h3>图 (a)</h3>
+<p><strong>电路结构：</strong> 6V 电源 → D₁ → 3V 电源 + 3kΩ 电阻</p>
+<p><strong>假设 D₁ 导通：</strong></p>
+<p>$$I = \frac{6 - 3}{3k} = 1\text{mA}$$</p>
+<p>电流为正值（从阳极→阴极），假设成立。</p>
+<p>$$\boxed{U_{AB} = 3V}$$</p>
+<h3>图 (b)</h3>
+<p><strong>电路结构：</strong> 6V 电源 → D₁（阳极朝上）→ A；中间节点 → D₂（阳极朝下）→ 3V + 3kΩ → B</p>
+<p><strong>假设 D₁ 导通，D₂ 截止：</strong></p>
+<ul>
+<li>D₁ 导通 → V_A = 6V</li>
+<li>D₂ 截止 → 支路断开</li>
+</ul>
+<p>$$\boxed{U_{AB} = 6V}$$</p>
+<hr>
+<h2>题 1-6</h2>
+<p><img src="images/03%E9%A2%981-6_1-7.jpg?v=" alt="原题图 1-6, 1-7"></p>
+<p><strong>题目：</strong> 在图 1-32 所示的电路中，D_A、D_B 为理想器件，R = 3kΩ，+U_CC = +6V。试求下列几种情况下输出 F 的电压 U_F 及各元件中的电流。</p>
+<p><img src="images/02%E9%A2%981-3.jpg?v=" alt="原题图 1-3"></p>
+<p>(1) U_A = U_B = 0V
+(2) U_A = 3V，U_B = 0V
+(3) U_A = U_B = 3V</p>
+<h3>📖 知识点：二极管与门电路</h3>
+<p>D_A：阳极接 F，阴极接 A；D_B：阳极接 F，阴极接 B。</p>
+<p><strong>规律：全1出1，有0出0（输入低电平被钳位到输出）</strong></p>
+<h3>(1) U_A = U_B = 0V</h3>
+<p>两个二极管都导通，U_F = 0V</p>
+<p>$$I_R = \frac{6-0}{3k} = 2\text{mA}, \quad I_{D_A} = I_{D_B} = 1\text{mA}$$</p>
+<table>
+<thead>
 <tr>
-<th>字段</th>
-<th>类型</th>
+<th>结果</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>U_F</strong></td>
+<td><strong>0V</strong></td>
+</tr>
+<tr>
+<td><strong>I_R</strong></td>
+<td><strong>2mA</strong></td>
+</tr>
+<tr>
+<td><strong>I_{D_A}</strong></td>
+<td><strong>1mA</strong></td>
+</tr>
+<tr>
+<td><strong>I_{D_B}</strong></td>
+<td><strong>1mA</strong></td>
+</tr>
+</tbody></table>
+<h3>(2) U_A = 3V，U_B = 0V</h3>
+<p>D_B 导通（阴极=0V），D_A 截止（阴极=3V &gt; U_F=0V）</p>
+<p>$$U_F = 0V, \quad I_R = 2\text{mA}, \quad I_{D_A} = 0, \quad I_{D_B} = 2\text{mA}$$</p>
+<h3>(3) U_A = U_B = 3V</h3>
+<p>两个二极管都导通（临界），U_F = 3V</p>
+<p>$$I_R = \frac{6-3}{3k} = 1\text{mA}, \quad I_{D_A} = I_{D_B} = 0.5\text{mA}$$</p>
+<hr>
+<h2>题 1-7</h2>
+<p><strong>题目：</strong> 在图 1-33 所示的电路中，已知 U = 10V，u = 30sinωt V。试画出二极管上的电压 u_D。</p>
+<p><strong>分析：</strong></p>
+<ul>
+<li>总驱动电压 = 30sinωt - 10</li>
+<li>当 30sinωt &gt; 10V → D 导通 → u_D = 0V</li>
+<li>当 30sinωt ≤ 10V → D 截止 → u_D = 30sinωt - 10V</li>
+</ul>
+<p><strong>最大反向电压：</strong></p>
+<p>$$u_{D,max}^- = -30 - 10 = -40V$$</p>
+<hr>
+<h2>题 1-11</h2>
+<p><img src="images/04%E9%A2%981-11.jpg?v=" alt="原题图 1-11"></p>
+<p><strong>题目：</strong> 在图 1-34 所示各电路中，试问晶体管工作于何种状态？</p>
+<h3>📖 知识点：晶体管工作状态判断</h3>
+<p><strong>判断流程：</strong></p>
+<ol>
+<li>算 I_B = (V_BB - V_BE) / R_B</li>
+<li>算 I_C(sat) = (V_CC - 0.7) / R_C</li>
+<li>比较 β·I_B 与 I_C(sat)</li>
+</ol>
+<h3>图 (a)：β=50，R_B=50kΩ，R_C=1kΩ</h3>
+<p>$$I_B = \frac{6-0.7}{50k} = 0.106\text{mA}$$</p>
+<p>$$I_{C(sat)} = \frac{12-0.7}{1k} = 11.3\text{mA}$$</p>
+<p>$$\beta I_B = 50 \times 0.106 = 5.3\text{mA} < 11.3\text{mA}$$</p>
+<p>$$\boxed{\text{放大状态}}$$</p>
+<h3>图 (b)：β=40，R_B=47kΩ，R_C=1.5kΩ</h3>
+<p>$$I_B = \frac{12-0.7}{47k} \approx 0.24\text{mA}$$</p>
+<p>$$I_{C(sat)} = \frac{12-0.7}{1.5k} \approx 7.53\text{mA}$$</p>
+<p>$$\beta I_B = 40 \times 0.24 = 9.6\text{mA} &gt; 7.53\text{mA}$$</p>
+<p>$$\boxed{\text{饱和状态}}$$</p>
+<h3>图 (c)：β=40，R_B=20kΩ，V_BB=-6V</h3>
+<p>$$V_{BE} = -6V - 0V = -6V < 0.7V$$</p>
+<p>发射结反偏。</p>
+<p>$$\boxed{\text{截止状态}}$$</p>
+<hr>
+<h1>第二章 基本放大电路</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
 <th>说明</th>
 </tr>
-<tr>
-<td>user_id</td>
-<td>INT, PK, AUTO_INCREMENT</td>
-<td>用户ID</td>
+</thead>
+<tbody><tr>
+<td><strong>静态工作点</strong></td>
+<td>I_B、I_C、U_CE 三个值确定晶体管的工作状态</td>
 </tr>
 <tr>
-<td>username</td>
-<td>VARCHAR(50), UNIQUE</td>
-<td>用户名</td>
+<td><strong>固定偏置</strong></td>
+<td>I_B = U_CC / R_B</td>
 </tr>
 <tr>
-<td>password</td>
-<td>VARCHAR(100)</td>
-<td>密码（BCrypt加密）</td>
+<td><strong>分压偏置</strong></td>
+<td>V_BB = U_CC × R_B2/(R_B1+R_B2)，R_E 负反馈稳定 Q 点</td>
 </tr>
 <tr>
-<td>nickname</td>
-<td>VARCHAR(50)</td>
-<td>昵称</td>
+<td><strong>r_π</strong></td>
+<td>$r_\pi = \beta V_T / I_C$，晶体管交流输入电阻</td>
 </tr>
 <tr>
-<td>avatar</td>
-<td>VARCHAR(255)</td>
-<td>头像URL</td>
+<td><strong>电压增益</strong></td>
+<td>$A_u = -\beta(R_C | R_L) / r_\pi$（C_E 旁路时）</td>
 </tr>
 <tr>
-<td>phone</td>
-<td>VARCHAR(20)</td>
-<td>手机号</td>
+<td><strong>耦合电容</strong></td>
+<td>隔直通交，静态时充电到两端直流电位差</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>题 2-3</h2>
+<p><img src="images/05%E9%A2%982-3%E7%94%B5%E8%B7%AF%E5%9B%BE.jpg?v=" alt="原题图 2-3"></p>
+<p><strong>题目：</strong> 晶体管放大电路如图 2-36 所示，已知 U_CC = 12V，R_C = 3kΩ，R_B = 240kΩ，β = 40，忽略 U_BE。
+(1) 估算静态工作点的 I_B、I_C、U_CE
+(2) 静态时 C₁、C₂ 上的电压各为多少？并标出极性
+(3) 改变 R_B 使 U_CE = 3V，求 R_B
+(4) 改变 R_B 使 I_C = 1.5mA，求 R_B</p>
+<h3>(1) 静态工作点</h3>
+<p>$$I_B = \frac{U_{CC}}{R_B} = \frac{12}{240k} = 0.05\text{mA} = 50\mu A$$</p>
+<p>$$I_C = \beta I_B = 40 \times 0.05 = 2\text{mA}$$</p>
+<p>$$U_{CE} = U_{CC} - I_C R_C = 12 - 2 \times 3 = 6V$$</p>
+<p>$$\boxed{I_B = 50\mu A, \quad I_C = 2mA, \quad U_{CE} = 6V}$$</p>
+<h3>(2) 电容电压</h3>
+<ul>
+<li><strong>C₁：</strong> 左端=0V（信号源），右端≈0V（基极）→ <strong>U_{C₁} ≈ 0V</strong></li>
+<li><strong>C₂：</strong> 左端=U_CE=6V（集电极），右端=0V → <strong>U_{C₂} = 6V，左正右负</strong></li>
+</ul>
+<h3>(3) U_CE = 3V 时求 R_B</h3>
+<p>$$I_C = \frac{12-3}{3k} = 3\text{mA}$$</p>
+<p>$$I_B = \frac{3}{40} = 0.075\text{mA}$$</p>
+<p>$$R_B = \frac{12}{0.075} = \boxed{160k\Omega}$$</p>
+<h3>(4) I_C = 1.5mA 时求 R_B</h3>
+<p>$$I_B = \frac{1.5}{40} = 0.0375\text{mA}$$</p>
+<p>$$R_B = \frac{12}{0.0375} = \boxed{320k\Omega}$$</p>
+<hr>
+<h2>题 2-8</h2>
+<p><img src="images/06%E9%A2%982-8_2-9_2-10.jpg?v=" alt="原题图 2-8, 2-9, 2-10"></p>
+<p><strong>题目：</strong> 图 2-40 所示电路中，U_CC = 12V，R_B = 360kΩ，R_C = 3kΩ，R_E = 2kΩ，R_L = 3kΩ，β = 60。
+(1) 试求静态工作点的 I_B、I_C、U_CE
+(2) 画出微变等效电路
+(3) 求电压放大倍数 A_u、输入电阻 R_i、输出电阻 R_o</p>
+<h3>📖 知识点：集电极反馈偏置</h3>
+<p>R_B 从集电极接到基极（非 U_CC），形成直流负反馈自动稳定 Q 点。</p>
+<h3>(1) 静态工作点</h3>
+<p><strong>列 KVL 方程：</strong></p>
+<p>$$U_{CC} - V_{BE} = I_B[\beta R_C + R_B + (1+\beta)R_E]$$</p>
+<p>$$I_B = \frac{12-0.7}{60 \times 3k + 360k + 61 \times 2k} = \frac{11.3}{662k} \approx 17.1\mu A$$</p>
+<p>$$I_C = 60 \times 17.1\mu A \approx 1.02\text{mA}$$</p>
+<p>$$U_{CE} = 12 - 1.02 \times 3 - 1.05 \times 2 = 6.84V$$</p>
+<p>$$\boxed{I_B \approx 17.1\mu A, \quad I_C \approx 1.02mA, \quad U_{CE} \approx 6.84V}$$</p>
+<h3>(2) 微变等效电路</h3>
+<ul>
+<li>U_CC 接地，C₁、C₂ 短路</li>
+<li>R_B 跨接在输入和输出之间（密勒效应）</li>
+<li>R_E 未被旁路，交流通路中保留</li>
+</ul>
+<h3>(3) A_u、R_i、R_o</h3>
+<p>$$r_\pi = \frac{60 \times 26mV}{1.02mA} \approx 1.53k\Omega$$</p>
+<p>$$A_u \approx -\frac{\beta(R_C | R_L)}{r_\pi + (1+\beta)R_E} = -\frac{60 \times 1.5k}{1.53k + 122k} \approx \boxed{-0.73}$$</p>
+<p>$$r_{in(base)} = r_\pi + (1+\beta)R_E = 123.5k\Omega$$</p>
+<p>$$R_{B(Miller)} = \frac{R_B}{1-A_u} = \frac{360k}{1.73} \approx 208k\Omega$$</p>
+<p>$$R_i = r_{in(base)} | R_{B(Miller)} \approx \boxed{77.5k\Omega}$$</p>
+<p>$$R_o \approx R_C = \boxed{3k\Omega}$$</p>
+<hr>
+<h2>题 2-9</h2>
+<p><strong>题目：</strong> 图 2-41 所示放大电路中，U_CC = 12V，R_B1 = 360kΩ，R_C = 3kΩ，R_E = 2kΩ，R_L = 3kΩ，β = 60。
+(1) 求静态工作点 I_B、I_C、U_CE
+(2) 画出微变等效电路
+(3) 求 A_u、R_i、R_o</p>
+<blockquote>
+<p>⚠️ 假设 R_B2 = 120kΩ（题目文字未明确给出）</p>
+</blockquote>
+<h3>(1) 静态工作点</h3>
+<p>$$V_{BB} = 12 \times \frac{120}{360+120} = 3V, \quad R_{BB} = 360k | 120k = 90k\Omega$$</p>
+<p>$$I_B = \frac{3-0.7}{90k + 61 \times 2k} = \frac{2.3}{212k} \approx 10.8\mu A$$</p>
+<p>$$I_C = 60 \times 10.8\mu A \approx 0.65\text{mA}$$</p>
+<p>$$U_{CE} = 12 - 0.65 \times 3 - 0.66 \times 2 = 8.73V$$</p>
+<p>$$\boxed{I_B \approx 10.8\mu A, \quad I_C \approx 0.65mA, \quad U_{CE} \approx 8.73V}$$</p>
+<h3>(2) 微变等效电路</h3>
+<p>C_E 短路 R_E → 发射极交流接地</p>
+<h3>(3) A_u、R_i、R_o</h3>
+<p>$$r_\pi = \frac{60 \times 26}{0.65} \approx 2.4k\Omega$$</p>
+<p>$$A_u = -\frac{60 \times 1.5k}{2.4k} = \boxed{-37.5}$$</p>
+<p>$$R_i = 90k | 2.4k \approx \boxed{2.34k\Omega}$$</p>
+<p>$$R_o = R_C = \boxed{3k\Omega}$$</p>
+<hr>
+<h2>题 2-10</h2>
+<p><strong>题目：</strong> 图 2-42 所示电路中，U_CC = 12V，R_C = 6kΩ，R_B1 = 60kΩ，R_B2 = 20kΩ，R_E1 = 300Ω，R_E2 = 2.7kΩ，R_L = 6kΩ，β = 50，U_BE = 0.7V。
+(1) 求静态工作点 I_B、I_C、U_CE
+(2) 画出微变等效电路
+(3) 求 A_u、R_i、R_o
+(4) 若 R_S = 500Ω，U_o = 400mV，求 U_S</p>
+<h3>📖 知识点：部分发射极电阻旁路</h3>
+<p>C_E 只旁路 R_E2（2.7kΩ），R_E1（300Ω）不被旁路。</p>
+<h3>(1) 静态工作点</h3>
+<p>$$V_{BB} = 12 \times \frac{20}{60+20} = 3V, \quad R_{BB} = 60k | 20k = 15k\Omega$$</p>
+<p>$$I_B = \frac{3-0.7}{15k + 51 \times 3k} = \frac{2.3}{168k} \approx 13.7\mu A$$</p>
+<p>$$I_C = 50 \times 13.7\mu A \approx 0.685\text{mA}$$</p>
+<p>$$U_{CE} = 12 - 0.685 \times 6 - 0.70 \times 3 = 5.79V$$</p>
+<p>$$\boxed{I_B \approx 13.7\mu A, \quad I_C \approx 0.685mA, \quad U_{CE} \approx 5.79V}$$</p>
+<h3>(2) 微变等效电路</h3>
+<p>C_E 短路 R_E2，R_E1 保留</p>
+<h3>(3) A_u、R_i、R_o</h3>
+<p>$$r_\pi = \frac{50 \times 26}{0.685} \approx 1.9k\Omega$$</p>
+<p>$$r_{in(base)} = 1.9k + 51 \times 0.3k = 17.2k\Omega$$</p>
+<p>$$R_i = 60k | 20k | 17.2k \approx \boxed{8k\Omega}$$</p>
+<p>$$A_u = -\frac{50 \times 3k}{17.2k} \approx \boxed{-8.72}$$</p>
+<p>$$R_o = R_C = \boxed{6k\Omega}$$</p>
+<h3>(4) 求 U_S</h3>
+<p>$$A_{us} = \frac{R_i}{R_S + R_i} \times A_u = \frac{8k}{8.5k} \times (-8.72) \approx -8.21$$</p>
+<p>$$|U_S| = \frac{400mV}{8.21} \approx \boxed{48.7mV}$$</p>
+<hr>
+<h3>三题对比</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>2-8（集电极反馈）</th>
+<th>2-9（分压偏置）</th>
+<th>2-10（部分旁路）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>偏置方式</td>
+<td>集电极反馈</td>
+<td>分压式</td>
+<td>分压式</td>
 </tr>
 <tr>
-<td>email</td>
-<td>VARCHAR(100)</td>
-<td>邮箱</td>
+<td>R_E</td>
+<td>2kΩ（无旁路）</td>
+<td>2kΩ（C_E旁路）</td>
+<td>300Ω+2.7kΩ（部分旁路）</td>
 </tr>
 <tr>
-<td>balance</td>
-<td>DECIMAL(10,2)</td>
-<td>账户余额</td>
+<td>I_C</td>
+<td>1.02mA</td>
+<td>0.65mA</td>
+<td>0.685mA</td>
 </tr>
 <tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0正常 / 1封禁</td>
+<td>U_CE</td>
+<td>6.84V</td>
+<td>8.73V</td>
+<td>5.79V</td>
 </tr>
 <tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
+<td>A_u</td>
+<td>-0.73</td>
+<td>-37.5</td>
+<td>-8.72</td>
 </tr>
 <tr>
-<td>update_time</td>
-<td>DATETIME</td>
-<td>更新时间（自动）</td>
+<td>R_i</td>
+<td>77.5kΩ</td>
+<td>2.34kΩ</td>
+<td>8kΩ</td>
 </tr>
-</table></div>
-<p><strong>设计要点</strong>：余额字段用于模拟支付，status 字段支持账号封禁管理。</p>
-<h4>3.2.2 商品分类表（t_category）— 三级分类</h4>
-<div class="table-wrapper"><table>
 <tr>
-<th>字段</th>
-<th>类型</th>
+<td>稳定性</td>
+<td>较好</td>
+<td>一般</td>
+<td>最好</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>第三章 集成运算放大器</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
 <th>说明</th>
 </tr>
-<tr>
-<td>category_id</td>
-<td>INT, PK</td>
-<td>分类ID</td>
+</thead>
+<tbody><tr>
+<td><strong>虚短</strong></td>
+<td>V⁺ = V⁻，理想运放负反馈下的核心条件</td>
 </tr>
 <tr>
-<td>parent_id</td>
-<td>INT</td>
-<td>父分类ID，0=顶级</td>
+<td><strong>虚断</strong></td>
+<td>输入电流 = 0</td>
 </tr>
 <tr>
-<td>name</td>
-<td>VARCHAR(50)</td>
-<td>分类名称</td>
+<td><strong>反相比例放大器</strong></td>
+<td>$A_u = -R_f/R_1$</td>
 </tr>
 <tr>
-<td>level</td>
-<td>TINYINT</td>
-<td>层级：1/2/3</td>
+<td><strong>同相比例放大器</strong></td>
+<td>$A_u = 1 + R_f/R_1$</td>
 </tr>
 <tr>
-<td>sort_order</td>
-<td>INT</td>
-<td>排序值</td>
+<td><strong>反相加法器</strong></td>
+<td>$u_o = -\sum \frac{R_f}{R_i} u_i$</td>
 </tr>
 <tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
+<td><strong>恒流源</strong></td>
+<td>$I_L = U_z / R$（运放+稳压管）</td>
 </tr>
-</table></div>
-<p><strong>设计要点</strong>：采用<strong>邻接表模型</strong>实现无限层级分类，通过 <code>parent_id</code> 关联父节点，<code>level</code> 字段冗余存储层级深度便于查询。</p>
-<h4>3.2.3 商品SPU表（t_product）</h4>
-<div class="table-wrapper"><table>
+</tbody></table>
+<hr>
+<h2>题 3-10</h2>
+<p><img src="images/07%E9%A2%983-10_3-11_3-12.jpg?v=" alt="原题图 3-10, 3-11, 3-12"></p>
+<p><strong>题目：</strong> 电路如图 3-52 所示，已知 u_o = -44u_i，其余参数如图所示，试求出 R₁ 的值。</p>
+<p><strong>电路：</strong> 反相比例放大器，R₂ = 100kΩ</p>
+<p>$$A_u = -\frac{R_2}{R_1} = -44$$</p>
+<p>$$R_1 = \frac{100k}{44} \approx \boxed{2.27k\Omega}$$</p>
+<hr>
+<h2>题 3-11</h2>
+<p><strong>题目：</strong> 图 3-53 所示为理想电流源电路，已知稳压管工作在稳压状态（U_z = 6V），R₁ = 10kΩ，R₂ = 10kΩ。试求负载电阻 R_L 中的电流。</p>
+<p><strong>分析：</strong></p>
+<ul>
+<li>虚短：V⁻ = V⁺ = U_z = 6V</li>
+<li>R₂ 上的电流：I = 6V / 10kΩ = 0.6mA</li>
+</ul>
+<p>$$\boxed{I_L = 0.6mA}$$</p>
+<hr>
+<h2>题 3-12</h2>
+<p><strong>题目：</strong> 分别求解图 3-54 所示各电路输入、输出信号的运算关系。</p>
+<h3>图 (a)：两级反相放大</h3>
+<p>$$u_{o1} = -\frac{R_2}{R_1} u_i$$</p>
+<p>$$u_o = -\frac{R_4}{R} u_{o1} = \frac{R_2 R_4}{R_1 R} u_i$$</p>
+<p>$$\boxed{u_o = \frac{R_2 R_4}{R_1 R} u_i}$$</p>
+<blockquote>
+<p>两级反相 → 最终同相（负负得正）</p>
+</blockquote>
+<h3>图 (b)：反相加法 + 反相</h3>
+<p>$$u_{o1} = -(u_{i1} + u_{i2})$$</p>
+<p>$$u_o = -u_{o1} = u_{i1} + u_{i2}$$</p>
+<p>$$\boxed{u_o = u_{i1} + u_{i2}}$$</p>
+<hr>
+<h2>题 3-14</h2>
+<p><strong>题目：</strong> 求解图 3-56 所示电路中输入、输出信号的运算关系。</p>
+<p><strong>电路：</strong> 两级运放级联</p>
+<ul>
+<li>第一级：反相比例（R₁=10kΩ，R₂=100kΩ）→ 增益 = -10</li>
+<li>第二级：反相加法器（R₄=10kΩ，R₅=100kΩ）→ 对两路各乘 -10</li>
+</ul>
+<p>$$u_{o1} = -10 \cdot u_{i1}$$</p>
+<p>$$u_o = -(10 \cdot u_{o1} + 10 \cdot u_{i2}) = -(-100u_{i1} + 10u_{i2})$$</p>
+<p>$$\boxed{u_o = 100 \cdot u_{i1} - 10 \cdot u_{i2}}$$</p>
+<hr>
+<h1>第五章 组合逻辑电路</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
 <tr>
-<th>字段</th>
-<th>类型</th>
+<th>知识点</th>
 <th>说明</th>
 </tr>
-<tr>
-<td>product_id</td>
-<td>INT, PK</td>
-<td>商品ID</td>
+</thead>
+<tbody><tr>
+<td><strong>与非门</strong></td>
+<td>F = $\overline{A·B·C}$，全1出0，有0出1</td>
 </tr>
 <tr>
-<td>title</td>
-<td>VARCHAR(200)</td>
-<td>商品标题</td>
+<td><strong>逻辑化简</strong></td>
+<td>提取公因子、幂等律、摩根定律</td>
 </tr>
 <tr>
-<td>subtitle</td>
-<td>VARCHAR(200)</td>
-<td>副标题</td>
+<td><strong>优先编码</strong></td>
+<td>多个请求同时到达时，优先级高的先响应</td>
 </tr>
 <tr>
-<td>brand</td>
-<td>VARCHAR(50)</td>
-<td>品牌</td>
+<td><strong>约束条件</strong></td>
+<td>蕴含式 A→B = A&#39;B&#39;（禁止状态）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>题 5-4</h2>
+<p><img src="images/08%E9%A2%985-4_5-8.jpg?v=" alt="原题图 5-4, 5-8"></p>
+<p><strong>题目：</strong> 三输入端与非门的输入信号 A、B、C 的波形如图 5-39 所示，画出输出端 F 的信号波形。</p>
+<p><strong>分析方法：</strong> 逐段判断 A、B、C 的值，只有 A=B=C=1 时 F=0，其余 F=1。</p>
+<p><strong>核心规律：全1出0，有0出1</strong></p>
+<hr>
+<h2>题 5-8</h2>
+<p><strong>题目：</strong> 写出图 5-41 中电路的逻辑表达式，并化简。</p>
+<h3>图 (a)</h3>
+<p>$$F = A&#39;B + AB = B(A&#39;+A) = B \cdot 1$$</p>
+<p>$$\boxed{F = B}$$</p>
+<h3>图 (b)</h3>
+<p>$$F = \overline{AB + AB} = \overline{AB} = A&#39; + B&#39;$$</p>
+<p>$$\boxed{F = A&#39; + B&#39; = \overline{AB}}$$</p>
+<hr>
+<h2>题 5-10</h2>
+<p><img src="images/09%E9%A2%985-10_5-11_5-12.jpg?v=" alt="原题图 5-10, 5-11, 5-12"></p>
+<p><strong>题目：</strong> 有三台电动机 A、B、C，要求：
+(1) A 开机则 B 必须开机
+(2) B 开机则 C 也必须开机
+试列出真值表，写出逻辑表达式并化简。</p>
+<h3>真值表</h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
 </tr>
 <tr>
-<td>category_id</td>
-<td>INT, FK</td>
-<td>三级分类ID</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
 </tr>
 <tr>
-<td>main_image</td>
-<td>VARCHAR(255)</td>
-<td>主图URL</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr>
-<td>images</td>
-<td>TEXT</td>
-<td>图片列表（JSON数组）</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
 </tr>
 <tr>
-<td>description</td>
-<td>TEXT</td>
-<td>商品详情（富文本HTML）</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0下架 / 1在售 / 2待审核</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
 </tr>
 <tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr>
-<td>update_time</td>
-<td>DATETIME</td>
-<td>更新时间</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
 </tr>
-</table></div>
-<p><strong>设计要点</strong>：SPU（Standard Product Unit）与 SKU 分离设计。<code>images</code> 字段存储JSON格式的图片列表，<code>description</code> 存储HTML富文本。</p>
-<h4>3.2.4 商品SKU表（t_sku）</h4>
-<div class="table-wrapper"><table>
+</tbody></table>
+<h3>卡诺图化简</h3>
+<p>$$\boxed{F = A&#39;B&#39; + A&#39;C + BC}$$</p>
+<hr>
+<h2>题 5-11</h2>
+<p><strong>题目：</strong> 一台电机可以用两个开关中的任意一个起动与关闭，另有一个温度传感器，当温度超过设定值时关闭电机并报警。试设计组合逻辑电路。</p>
+<h3>变量定义</h3>
+<p>S₁、S₂：开关；T：温度传感器（1=超温）；M：电机；A：报警</p>
+<h3>逻辑表达式</h3>
+<p>$$M = (S_1 + S_2) \cdot T&#39;$$</p>
+<p>$$A = T$$</p>
+<h3>真值表</h3>
+<table>
+<thead>
 <tr>
-<th>字段</th>
-<th>类型</th>
+<th>S₁</th>
+<th>S₂</th>
+<th>T</th>
+<th>M</th>
+<th>A</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>题 5-12</h2>
+<p><strong>题目：</strong> 某港口对进港船只分为 A、B、C 三类，每次只允许一类进港，A 优于 B，B 优于 C。设计优先级编码逻辑电路。</p>
+<h3>逻辑表达式</h3>
+<p>$$F_A = A$$</p>
+<p>$$F_B = A&#39; \cdot B$$</p>
+<p>$$F_C = A&#39; \cdot B&#39; \cdot C$$</p>
+<h3>真值表</h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>F_A</th>
+<th>F_B</th>
+<th>F_C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>第六章 时序逻辑电路</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
 <th>说明</th>
 </tr>
-<tr>
-<td>sku_id</td>
-<td>INT, PK</td>
-<td>SKU ID</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>INT, FK</td>
-<td>所属SPU</td>
-</tr>
-<tr>
-<td>spec_json</td>
-<td>VARCHAR(500)</td>
-<td>规格JSON，如 `{"颜色":"黑色","容量":"256GB"}`</td>
-</tr>
-<tr>
-<td>price</td>
-<td>DECIMAL(10,2)</td>
-<td>售价</td>
-</tr>
-<tr>
-<td>stock</td>
-<td>INT</td>
-<td>库存</td>
-</tr>
-<tr>
-<td>sku_image</td>
-<td>VARCHAR(255)</td>
-<td>SKU图片</td>
-</tr>
-<tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0禁用 / 1启用</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：SKU（Stock Keeping Unit）是实际交易的最小单位。<code>spec_json</code> 以JSON格式存储规格组合，灵活支持不同品类的规格属性。</p>
-<h4>3.2.5 收货地址表（t_address）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>address_id</td>
-<td>INT, PK</td>
-<td>地址ID</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>receiver_name</td>
-<td>VARCHAR(50)</td>
-<td>收货人姓名</td>
-</tr>
-<tr>
-<td>phone</td>
-<td>VARCHAR(20)</td>
-<td>联系电话</td>
-</tr>
-<tr>
-<td>province / city / district</td>
-<td>VARCHAR(50)</td>
-<td>省市区</td>
-</tr>
-<tr>
-<td>detail</td>
-<td>VARCHAR(200)</td>
-<td>详细地址</td>
-</tr>
-<tr>
-<td>is_default</td>
-<td>TINYINT</td>
-<td>0否 / 1是默认</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<h4>3.2.6 购物车表（t_cart）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>cart_id</td>
-<td>INT, PK</td>
-<td>购物车项ID</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>sku_id</td>
-<td>INT, FK</td>
-<td>SKU ID</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>INT</td>
-<td>数量</td>
-</tr>
-<tr>
-<td>checked</td>
-<td>TINYINT</td>
-<td>0未选中 / 1选中</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：<code>UNIQUE KEY uk_user_sku (user_id, sku_id)</code> 保证同一用户对同一SKU只有一条购物车记录，添加时累加数量。</p>
-<h4>3.2.7 订单表（t_order）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>order_id</td>
-<td>INT, PK</td>
-<td>订单ID</td>
-</tr>
-<tr>
-<td>order_no</td>
-<td>VARCHAR(50), UNIQUE</td>
-<td>订单编号</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>total_amount</td>
-<td>DECIMAL(10,2)</td>
-<td>商品总额</td>
-</tr>
-<tr>
-<td>discount_amount</td>
-<td>DECIMAL(10,2)</td>
-<td>优惠金额</td>
-</tr>
-<tr>
-<td>pay_amount</td>
-<td>DECIMAL(10,2)</td>
-<td>实付金额</td>
-</tr>
-<tr>
-<td>coupon_id</td>
-<td>INT</td>
-<td>使用的优惠券ID</td>
-</tr>
-<tr>
-<td>address_snapshot</td>
-<td>TEXT</td>
-<td>收货地址快照（JSON）</td>
-</tr>
-<tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0待付款/1待发货/2待收货/3已完成/4已取消/5已退款</td>
-</tr>
-<tr>
-<td>remark</td>
-<td>VARCHAR(200)</td>
-<td>买家留言</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>下单时间</td>
-</tr>
-<tr>
-<td>pay_time</td>
-<td>DATETIME</td>
-<td>付款时间</td>
-</tr>
-<tr>
-<td>ship_time</td>
-<td>DATETIME</td>
-<td>发货时间</td>
-</tr>
-<tr>
-<td>receive_time</td>
-<td>DATETIME</td>
-<td>收货时间</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：</p>
-<p class="list-item">• <code>address_snapshot</code> 存储下单时的地址快照JSON，防止用户修改地址后影响历史订单</p>
-<p class="list-item">• <code>status</code> 字段驱动订单状态机（0→1→2→3，或 0/1→4）</p>
-<p class="list-item">• 时间戳字段记录状态流转的关键节点</p>
-<h4>3.2.8 订单项表（t_order_item）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>item_id</td>
-<td>INT, PK</td>
-<td>订单项ID</td>
-</tr>
-<tr>
-<td>order_id</td>
-<td>INT, FK</td>
-<td>订单ID</td>
-</tr>
-<tr>
-<td>sku_id</td>
-<td>INT, FK</td>
-<td>SKU ID</td>
-</tr>
-<tr>
-<td>product_title</td>
-<td>VARCHAR(200)</td>
-<td>商品标题（快照）</td>
-</tr>
-<tr>
-<td>sku_spec</td>
-<td>VARCHAR(500)</td>
-<td>规格快照</td>
-</tr>
-<tr>
-<td>sku_image</td>
-<td>VARCHAR(255)</td>
-<td>图片快照</td>
-</tr>
-<tr>
-<td>price</td>
-<td>DECIMAL(10,2)</td>
-<td>下单时价格（快照）</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>INT</td>
-<td>数量</td>
-</tr>
-<tr>
-<td>subtotal</td>
-<td>DECIMAL(10,2)</td>
-<td>小计</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：订单项采用<strong>冗余快照</strong>设计，将商品标题、规格、图片、价格在下单时固化到订单项中，确保即使商品信息变更也不影响历史订单展示。</p>
-<h4>3.2.9 支付记录表（t_payment）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>payment_id</td>
-<td>INT, PK</td>
-<td>支付记录ID</td>
-</tr>
-<tr>
-<td>order_id</td>
-<td>INT, FK, UNIQUE</td>
-<td>订单ID</td>
-</tr>
-<tr>
-<td>pay_amount</td>
-<td>DECIMAL(10,2)</td>
-<td>支付金额</td>
-</tr>
-<tr>
-<td>pay_method</td>
-<td>TINYINT</td>
-<td>1余额 / 2模拟支付</td>
-</tr>
-<tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0待支付 / 1成功 / 2失败</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<h4>3.2.10 评价表（t_review）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>review_id</td>
-<td>INT, PK</td>
-<td>评价ID</td>
-</tr>
-<tr>
-<td>order_id</td>
-<td>INT, FK, UNIQUE</td>
-<td>订单ID（一单一评）</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>rating</td>
-<td>TINYINT</td>
-<td>1-5星评分</td>
-</tr>
-<tr>
-<td>content</td>
-<td>TEXT</td>
-<td>评价内容</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<h4>3.2.11 收藏表（t_favorite）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>favorite_id</td>
-<td>INT, PK</td>
-<td>收藏ID</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>INT, FK</td>
-<td>商品ID</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：<code>UNIQUE KEY uk_user_product (user_id, product_id)</code> 防止重复收藏。</p>
-<h4>3.2.12 优惠券表（t_coupon）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>coupon_id</td>
-<td>INT, PK</td>
-<td>优惠券ID</td>
-</tr>
-<tr>
-<td>name</td>
-<td>VARCHAR(100)</td>
-<td>券名</td>
-</tr>
-<tr>
-<td>type</td>
-<td>TINYINT</td>
-<td>1满减 / 2折扣 / 3无门槛</td>
-</tr>
-<tr>
-<td>discount_value</td>
-<td>DECIMAL(10,2)</td>
-<td>优惠值（金额或折扣率）</td>
-</tr>
-<tr>
-<td>min_amount</td>
-<td>DECIMAL(10,2)</td>
-<td>最低消费门槛</td>
-</tr>
-<tr>
-<td>total_count</td>
-<td>INT</td>
-<td>发放总量</td>
-</tr>
-<tr>
-<td>used_count</td>
-<td>INT</td>
-<td>已领取数</td>
-</tr>
-<tr>
-<td>start_time</td>
-<td>DATETIME</td>
-<td>有效期开始</td>
-</tr>
-<tr>
-<td>end_time</td>
-<td>DATETIME</td>
-<td>有效期结束</td>
-</tr>
-<tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0禁用 / 1启用</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</table></div>
-<h4>3.2.13 用户优惠券表（t_user_coupon）</h4>
-<div class="table-wrapper"><table>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>id</td>
-<td>INT, PK</td>
-<td>记录ID</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>INT, FK</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>coupon_id</td>
-<td>INT, FK</td>
-<td>优惠券ID</td>
-</tr>
-<tr>
-<td>status</td>
-<td>TINYINT</td>
-<td>0未使用 / 1已使用 / 2已过期</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>DATETIME</td>
-<td>领取时间</td>
-</tr>
-</table></div>
-<p><strong>设计要点</strong>：<code>UNIQUE KEY uk_user_coupon (user_id, coupon_id)</code> 限制每人每种优惠券只能领取一次。</p>
-<h3>3.3 ER关系分析</h3>
-<pre><code class="language-text">t_user ──1:N──&gt; t_address       （一个用户有多个收货地址）
-t_user ──1:N──&gt; t_cart          （一个用户有多个购物车项）
-t_user ──1:N──&gt; t_order         （一个用户有多个订单）
-t_user ──1:N──&gt; t_favorite      （一个用户收藏多个商品）
-t_user ──1:N──&gt; t_user_coupon   （一个用户领取多张优惠券）
-t_user ──1:N──&gt; t_review        （一个用户发表多条评价）
-
-t_category ──1:N──&gt; t_product   （一个分类下有多个商品）
-t_category ──自引用──&gt; t_category （父子分类关系）
-
-t_product ──1:N──&gt; t_sku        （一个商品有多个SKU）
-t_sku ──1:N──&gt; t_cart           （一个SKU可被多人加入购物车）
-t_sku ──1:N──&gt; t_order_item     （一个SKU可出现在多个订单项中）
-
-t_order ──1:N──&gt; t_order_item   （一个订单有多个订单项）
-t_order ──1:1──&gt; t_payment      （一个订单对应一条支付记录）
-t_order ──1:1──&gt; t_review       （一个订单对应一条评价）
-
-t_coupon ──1:N──&gt; t_user_coupon （一张优惠券被多个用户领取）</code></pre>
-<h3>3.4 索引设计</h3>
-<div class="table-wrapper"><table>
-<tr>
-<th>表</th>
-<th>索引名</th>
-<th>字段</th>
-<th>用途</th>
-</tr>
-<tr>
-<td>t_product</td>
-<td>idx_product_category</td>
-<td>category_id</td>
-<td>按分类查询商品</td>
-</tr>
-<tr>
-<td>t_product</td>
-<td>idx_product_brand</td>
-<td>brand</td>
-<td>按品牌查询</td>
-</tr>
-<tr>
-<td>t_product</td>
-<td>idx_product_status_time</td>
-<td>status, create_time DESC</td>
-<td>按状态+时间排序</td>
-</tr>
-<tr>
-<td>t_product</td>
-<td>idx_product_search (FULLTEXT)</td>
-<td>title, subtitle, description</td>
-<td>全文搜索</td>
-</tr>
-<tr>
-<td>t_sku</td>
-<td>idx_sku_product</td>
-<td>product_id</td>
-<td>按商品查SKU</td>
-</tr>
-<tr>
-<td>t_sku</td>
-<td>idx_sku_stock</td>
-<td>stock</td>
-<td>库存查询</td>
-</tr>
-<tr>
-<td>t_order</td>
-<td>idx_order_user</td>
-<td>user_id</td>
-<td>用户订单查询</td>
-</tr>
-<tr>
-<td>t_order</td>
-<td>idx_order_status</td>
-<td>status</td>
-<td>按状态筛选</td>
-</tr>
-<tr>
-<td>t_order</td>
-<td>idx_order_user_status</td>
-<td>user_id, status</td>
-<td>用户+状态组合查询</td>
-</tr>
-<tr>
-<td>t_order_item</td>
-<td>idx_order_item_order</td>
-<td>order_id</td>
-<td>订单项查询</td>
-</tr>
-<tr>
-<td>t_order_item</td>
-<td>idx_order_item_sku</td>
-<td>sku_id</td>
-<td>SKU维度统计</td>
-</tr>
-<tr>
-<td>t_address</td>
-<td>idx_address_user</td>
-<td>user_id</td>
-<td>用户地址查询</td>
-</tr>
-<tr>
-<td>t_cart</td>
-<td>idx_cart_user</td>
-<td>user_id</td>
-<td>用户购物车查询</td>
-</tr>
-<tr>
-<td>t_review</td>
-<td>idx_review_order</td>
-<td>order_id</td>
-<td>订单评价查询</td>
+</thead>
+<tbody><tr>
+<td><strong>基本 RS 触发器</strong></td>
+<td>S̄=0 置位，R̄=0 复位，都为1保持</td>
 </tr>
 <tr>
-<td>t_payment</td>
-<td>idx_payment_order</td>
-<td>order_id</td>
-<td>订单支付查询</td>
+<td><strong>JK 触发器</strong></td>
+<td>J=K=1 时翻转，下降沿触发</td>
 </tr>
 <tr>
-<td>t_coupon</td>
-<td>idx_coupon_status</td>
-<td>status</td>
-<td>优惠券状态筛选</td>
+<td><strong>D 触发器</strong></td>
+<td>Q^{n+1} = D</td>
 </tr>
 <tr>
-<td>t_user_coupon</td>
-<td>idx_user_coupon_user</td>
-<td>user_id</td>
-<td>用户优惠券查询</td>
+<td><strong>二分频</strong></td>
+<td>翻转功能的输出频率 = 时钟频率的一半</td>
 </tr>
-</table></div>
-<h3>3.5 存储过程</h3>
-<h4>3.5.1 sp_create_order — 创建订单</h4>
-<p><strong>功能</strong>：从购物车选中商品创建订单的完整事务流程。</p>
-<p><strong>参数</strong>：</p>
-<p class="list-item">• <code>IN p_user_id</code> — 用户ID</p>
-<p class="list-item">• <code>IN p_address_id</code> — 收货地址ID</p>
-<p class="list-item">• <code>IN p_coupon_user_id</code> — 用户优惠券ID（可为NULL）</p>
-<p class="list-item">• <code>IN p_remark</code> — 买家留言</p>
-<p class="list-item">• <code>OUT p_order_id</code> — 生成的订单ID</p>
-<p class="list-item">• <code>OUT p_result</code> — 操作结果消息</p>
-<p><strong>核心流程</strong>：</p>
-<p class="list-item">校验收货地址是否存在且属于该用户</p>
-<p class="list-item">计算购物车选中商品总额（SUM(price × quantity)）</p>
-<p class="list-item">处理优惠券：根据类型（满减/折扣/无门槛）计算折扣金额</p>
-<p class="list-item">生成唯一订单号（MALL + 时间戳 + 随机数）</p>
-<p class="list-item">创建订单记录</p>
-<p class="list-item">批量创建订单项（从购物车快照商品信息）</p>
-<p class="list-item">清空已下单的购物车商品</p>
-<p class="list-item">标记优惠券为已使用</p>
-<p class="list-item">全程事务管理，异常自动回滚</p>
-<h4>3.5.2 sp_pay_order — 支付订单</h4>
-<p><strong>功能</strong>：模拟支付，支持余额支付和模拟直接成功。</p>
-<p><strong>核心流程</strong>：</p>
-<p class="list-item">校验订单状态为待付款（status=0）</p>
-<p class="list-item">余额支付：检查余额是否充足，扣减余额</p>
-<p class="list-item">模拟支付：直接标记成功</p>
-<p class="list-item">更新订单状态为待发货（status=1），记录支付时间</p>
-<p class="list-item">插入支付记录</p>
-<h4>3.5.3 sp_cancel_order — 取消订单</h4>
-<p><strong>功能</strong>：取消订单并恢复库存。</p>
-<p><strong>核心流程</strong>：</p>
-<p class="list-item">校验订单状态为待付款或待发货（status=0或1）</p>
-<p class="list-item">更新订单状态为已取消（status=4）</p>
-<p class="list-item">通过游标遍历订单项，恢复每个SKU的库存</p>
-<p class="list-item">恢复用户优惠券状态为未使用</p>
-<h4>3.5.4 sp_confirm_receive — 确认收货</h4>
-<p><strong>功能</strong>：确认收货，将订单状态从待收货(2)更新为已完成(3)，记录收货时间。</p>
-<h3>3.6 触发器</h3>
-<div class="table-wrapper"><table>
+</tbody></table>
+<hr>
+<h2>题 6-3</h2>
+<p><img src="images/10%E9%A2%986-3_6-6_6-7.jpg?v=" alt="原题图 6-3, 6-6, 6-7"></p>
+<p><strong>题目：</strong> 画出由与非门组成的基本 RS 触发器输出端 Q、Q̄ 的电压波形。</p>
+<h3>与非门 RS 触发器特性表</h3>
+<table>
+<thead>
 <tr>
-<th>触发器</th>
-<th>触发时机</th>
+<th>S̄_D</th>
+<th>R̄_D</th>
+<th>Q^{n+1}</th>
 <th>功能</th>
 </tr>
-<tr>
-<td>trg_order_check_stock</td>
-<td>BEFORE INSERT ON t_order_item</td>
-<td>下单前校验库存是否充足，防止超卖</td>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>Q^n</td>
+<td>保持</td>
 </tr>
 <tr>
-<td>trg_order_item_after_insert</td>
-<td>AFTER INSERT ON t_order_item</td>
-<td>下单后自动扣减SKU库存</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>置位</td>
 </tr>
 <tr>
-<td>trg_order_cancel_restore_stock</td>
-<td>AFTER UPDATE ON t_order</td>
-<td>订单取消/退款时自动恢复库存</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>复位</td>
 </tr>
 <tr>
-<td>trg_user_coupon_after_insert</td>
-<td>AFTER INSERT ON t_user_coupon</td>
-<td>领取优惠券后自动更新已领取数量</td>
+<td>0</td>
+<td>0</td>
+<td>1*</td>
+<td>禁止</td>
 </tr>
-<tr>
-<td>trg_user_coupon_before_update</td>
-<td>BEFORE UPDATE ON t_user_coupon</td>
-<td>使用优惠券前校验有效期</td>
-</tr>
-<tr>
-<td>trg_cart_check_quantity</td>
-<td>BEFORE INSERT ON t_cart</td>
-<td>购物车插入时校验数量>0</td>
-</tr>
-<tr>
-<td>trg_cart_before_update</td>
-<td>BEFORE UPDATE ON t_cart</td>
-<td>购物车更新时校验数量>0</td>
-</tr>
-<tr>
-<td>trg_review_check_rating</td>
-<td>BEFORE INSERT ON t_review</td>
-<td>评价时校验评分为1-5</td>
-</tr>
-</table></div>
-<h3>3.7 视图</h3>
-<div class="table-wrapper"><table>
-<tr>
-<th>视图名</th>
-<th>功能</th>
-</tr>
-<tr>
-<td>v_product_detail</td>
-<td>商品详情（含SKU价格区间、分类名称、总库存）</td>
-</tr>
-<tr>
-<td>v_order_detail</td>
-<td>订单详情（含用户昵称、订单项数量、总数量）</td>
-</tr>
-<tr>
-<td>v_order_item_detail</td>
-<td>订单项详情（含订单号、订单状态、买家昵称）</td>
-</tr>
-<tr>
-<td>v_user_stats</td>
-<td>用户统计（订单数、完成数、消费总额、收藏/购物车/优惠券数）</td>
-</tr>
-<tr>
-<td>v_category_stats</td>
-<td>分类统计（商品数、在售数）</td>
-</tr>
-<tr>
-<td>v_daily_sales</td>
-<td>按日销售统计（订单数、销售额、买家数）</td>
-</tr>
-<tr>
-<td>v_hot_products</td>
-<td>热销商品排行（按销量降序）</td>
-</tr>
-<tr>
-<td>v_pending_reviews</td>
-<td>待评价订单（已完成但未评价的订单）</td>
-</tr>
-</table></div>
-<h3>3.8 测试数据</h3>
-<p>数据库预置了丰富的测试数据：</p>
-<p class="list-item">• <strong>4个一级分类</strong>、<strong>10个二级分类</strong>、<strong>10个三级分类</strong>（数码电子、图书教材、服饰鞋帽、生活用品）</p>
-<p class="list-item">• <strong>6个用户</strong>（含管理员admin）</p>
-<p class="list-item">• <strong>10个商品SPU</strong>、<strong>20个SKU</strong>（覆盖手机、电脑、耳机、教材、服饰、生活用品）</p>
-<p class="list-item">• <strong>7条购物车记录</strong>、<strong>4个订单</strong>、<strong>5个订单项</strong></p>
-<p class="list-item">• <strong>3条支付记录</strong>、<strong>2条评价</strong>、<strong>11条收藏记录</strong></p>
-<p class="list-item">• <strong>3种优惠券</strong>、<strong>5条用户优惠券记录</strong></p>
+</tbody></table>
+<h3>波形分析</h3>
+<ul>
+<li>S̄_D 低脉冲 → Q 跳变为 1</li>
+<li>R̄_D 低脉冲 → Q 跳变为 0</li>
+<li>都为高 → Q 保持不变</li>
+<li>Q 和 Q̄ 始终互补</li>
+</ul>
 <hr>
-<h2>四、后端代码详解</h2>
-<h3>4.1 启动与配置</h3>
-<h4>4.1.1 ShopApplication.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/ShopApplication.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：Spring Boot 应用启动类</p>
-<p class="list-item">• <strong>关键注解</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>@SpringBootApplication</code> — 自动配置、组件扫描</p>
-<p style="margin-left:16px" class="list-item">• <code>@MapperScan("com.shop.mapper")</code> — 自动扫描并注册 Mapper 接口</p>
-<p class="list-item">• <strong>启动方式</strong>：<code>main()</code> 方法调用 <code>SpringApplication.run()</code></p>
-<h4>4.1.2 application.yml</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/resources/application.yml</code></p>
-<p class="list-item">• <strong>功能职责</strong>：应用配置文件</p>
-<p class="list-item">• <strong>关键配置</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>server.port: 8080</code> — 服务端口</p>
-<p style="margin-left:16px" class="list-item">• <code>spring.datasource</code> — MySQL 数据库连接（campus_mall 库）</p>
-<p style="margin-left:16px" class="list-item">• <code>mybatis.mapper-locations</code> — Mapper XML 文件位置</p>
-<p style="margin-left:16px" class="list-item">• <code>mybatis.configuration.map-underscore-to-camel-case: true</code> — 下划线自动转驼峰</p>
-<p style="margin-left:16px" class="list-item">• <code>logging.level.com.shop: debug</code> — 开发调试日志</p>
-<h4>4.1.3 WebConfig.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/config/WebConfig.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：Web MVC 全局配置</p>
-<p class="list-item">• <strong>关键功能</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <strong>跨域配置</strong>：<code>addCorsMappings()</code> — 允许所有来源的跨域请求（开发环境）</p>
-<p style="margin-left:16px" class="list-item">• <strong>拦截器注册</strong>：<code>addInterceptors()</code> — 注册 Token 认证拦截器</p>
-<p style="margin-left:16px" class="list-item">• <strong>白名单</strong>：登录、注册、商品列表、商品详情、分类、优惠券等接口无需认证</p>
-<h4>4.1.4 TokenInterceptor.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/config/TokenInterceptor.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：Token 认证拦截器</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• OPTIONS 请求直接放行（CORS 预检）</p>
-<p style="margin-left:16px" class="list-item">• 从 <code>Authorization</code> 头提取 Token</p>
-<p style="margin-left:16px" class="list-item">• 通过 <code>TokenManager.getUserId()</code> 验证 Token 有效性</p>
-<p style="margin-left:16px" class="list-item">• 验证失败返回 401 + 错误JSON</p>
-<p style="margin-left:16px" class="list-item">• 验证成功将 <code>userId</code> 存入 Request Attribute（<code>currentUserId</code>）</p>
-<h4>4.1.5 GlobalExceptionHandler.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/config/GlobalExceptionHandler.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：全局异常处理器</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>RuntimeException</code> → 返回 <code>Result.error(message)</code></p>
-<p style="margin-left:16px" class="list-item">• <code>Exception</code> → 返回服务器内部错误</p>
-<p style="margin-left:16px" class="list-item">• <code>IllegalArgumentException</code> → 返回 400 错误</p>
-<h4>4.1.6 JacksonConfig.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/config/JacksonConfig.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：Jackson JSON 序列化全局配置</p>
-<p class="list-item">• <strong>关键配置</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>LocalDateTime</code> 序列化为 <code>yyyy-MM-dd HH:mm:ss</code> 格式</p>
-<p style="margin-left:16px" class="list-item">• 启用 <code>SNAKE_CASE</code> 命名策略（Java camelCase ↔ JSON snake_case 自动转换）</p>
-<h3>4.2 实体层（Entity）</h3>
-<p>所有实体类位于 <code>backend/src/main/java/com/shop/entity/</code> 下，使用 Lombok <code>@Data</code> 注解自动生成 getter/setter/toString。</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>实体类</th>
-<th>对应表</th>
-<th>关键字段</th>
-</tr>
-<tr>
-<td>User.java</td>
-<td>t_user</td>
-<td>userId, username, password, nickname, phone, email, balance, status</td>
-</tr>
-<tr>
-<td>Product.java</td>
-<td>t_product</td>
-<td>productId, title, subtitle, brand, categoryId, mainImage, images, description, status</td>
-</tr>
-<tr>
-<td>Sku.java</td>
-<td>t_sku</td>
-<td>skuId, productId, specJson, price, stock, skuImage, status</td>
-</tr>
-<tr>
-<td>Category.java</td>
-<td>t_category</td>
-<td>categoryId, parentId, name, level, sortOrder</td>
-</tr>
-<tr>
-<td>Cart.java</td>
-<td>t_cart</td>
-<td>cartId, userId, skuId, quantity, checked</td>
-</tr>
-<tr>
-<td>OrderInfo.java</td>
-<td>t_order</td>
-<td>orderId, orderNo, userId, totalAmount, discountAmount, payAmount, couponId, addressSnapshot, status, remark</td>
-</tr>
-<tr>
-<td>OrderItem.java</td>
-<td>t_order_item</td>
-<td>id, orderId, skuId, productTitle, skuSpec, skuImage, price, quantity, subtotal</td>
-</tr>
-<tr>
-<td>Payment.java</td>
-<td>t_payment</td>
-<td>id, orderId, payAmount, payMethod, status</td>
-</tr>
-<tr>
-<td>Address.java</td>
-<td>t_address</td>
-<td>addressId, userId, receiverName, phone, province, city, district, detail, isDefault</td>
-</tr>
-<tr>
-<td>Review.java</td>
-<td>t_review</td>
-<td>id, orderId, userId, rating, content</td>
-</tr>
-<tr>
-<td>Coupon.java</td>
-<td>t_coupon</td>
-<td>id, name, type, amount, minAmount, total, used, startTime, endTime, status</td>
-</tr>
-<tr>
-<td>UserCoupon.java</td>
-<td>t_user_coupon</td>
-<td>id, userId, couponId, status</td>
-</tr>
-<tr>
-<td>Favorite.java</td>
-<td>t_favorite</td>
-<td>id, userId, productId</td>
-</tr>
-</table></div>
-<p><strong>设计说明</strong>：</p>
-<p class="list-item">• 字段名采用 Java camelCase 命名（如 <code>userId</code>），通过 MyBatis 和 Jackson 的 snake_case 映射自动转换为数据库/JSON 的 <code>user_id</code></p>
-<p class="list-item">• 实体类仅包含数据字段，不含业务逻辑</p>
-<h3>4.3 数据访问层（Mapper）</h3>
-<h4>4.3.1 Mapper 接口</h4>
-<p>所有 Mapper 接口位于 <code>backend/src/main/java/com/shop/mapper/</code> 下，使用 <code>@Mapper</code> 注解。</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>Mapper</th>
-<th>文件</th>
-<th>主要方法</th>
-</tr>
-<tr>
-<td>UserMapper</td>
-<td>UserMapper.java</td>
-<td>findById, findByUsername, findByPhone, insert, update, updateStatus, updateBalance</td>
-</tr>
-<tr>
-<td>ProductMapper</td>
-<td>ProductMapper.java</td>
-<td>findList(多条件), findById, insert, update, updateStatus</td>
-</tr>
-<tr>
-<td>SkuMapper</td>
-<td>SkuMapper.java</td>
-<td>findByProductId, findById, insert, update, updateStock</td>
-</tr>
-<tr>
-<td>CategoryMapper</td>
-<td>CategoryMapper.java</td>
-<td>findAll, findById, findByParentId, insert, update, deleteById</td>
-</tr>
-<tr>
-<td>CartMapper</td>
-<td>CartMapper.java</td>
-<td>findByUserId, findById, findByUserAndSku, insert, updateQuantity, updateChecked, updateAllChecked, delete, deleteByUserId, deleteByIds</td>
-</tr>
-<tr>
-<td>OrderMapper</td>
-<td>OrderMapper.java</td>
-<td>findByUserId, findById, findByOrderNo, insert, updateStatus, updatePayTime, updateShipTime, updateReceiveTime, + 存储过程调用</td>
-</tr>
-<tr>
-<td>OrderItemMapper</td>
-<td>OrderItemMapper.java</td>
-<td>findByOrderId, insert, batchInsert</td>
-</tr>
-<tr>
-<td>PaymentMapper</td>
-<td>PaymentMapper.java</td>
-<td>findByOrderId, insert, updateStatus</td>
-</tr>
-<tr>
-<td>AddressMapper</td>
-<td>AddressMapper.java</td>
-<td>findByUserId, findById, insert, update, delete, clearDefault</td>
-</tr>
-<tr>
-<td>ReviewMapper</td>
-<td>ReviewMapper.java</td>
-<td>findByProductId(关联查询), findByUserId, findById, insert</td>
-</tr>
-<tr>
-<td>CouponMapper</td>
-<td>CouponMapper.java</td>
-<td>findAvailable, findById, insert, update, updateUsed</td>
-</tr>
-<tr>
-<td>UserCouponMapper</td>
-<td>UserCouponMapper.java</td>
-<td>findByUserId, findById, findByUserAndCoupon, insert, updateStatus</td>
-</tr>
-<tr>
-<td>FavoriteMapper</td>
-<td>FavoriteMapper.java</td>
-<td>findByUserId, findByUserAndProduct, insert, delete</td>
-</tr>
-</table></div>
-<h4>4.3.2 Mapper XML 映射文件</h4>
-<p>所有 XML 映射文件位于 <code>backend/src/main/resources/mapper/</code> 下。</p>
-<p><strong>核心设计模式</strong>：</p>
-<p class="list-item"><strong>ResultMap 显式映射</strong>：每个XML都定义了 <code>resultMap</code>，将数据库下划线字段名映射到Java驼峰字段名（如 <code>user_id</code> → <code>userId</code>）。</p>
-<p class="list-item"><strong>动态SQL</strong>：</p>
-<p style="margin-left:24px" class="list-item">• <code>ProductMapper.xml</code> 使用 <code><sql id="whereClause"></code> 定义可复用的动态条件片段</p>
-<p style="margin-left:24px" class="list-item">• <code>UserMapper.xml</code> 的 <code>update</code> 方法使用 <code><set></code> + <code><if></code> 实现选择性更新</p>
-<p style="margin-left:24px" class="list-item">• <code>CartMapper.xml</code> 的 <code>deleteByIds</code> 使用 <code><foreach></code> 批量删除</p>
-<p class="list-item"><strong>存储过程调用</strong>：<code>OrderMapper.xml</code> 定义了4个 <code>statementType="CALLABLE"</code> 的 select 语句，分别调用 <code>sp_create_order</code>、<code>sp_pay_order</code>、<code>sp_cancel_order</code>、<code>sp_confirm_receive</code> 存储过程。</p>
-<p class="list-item"><strong>关联查询</strong>：<code>ReviewMapper.xml</code> 的 <code>findByProductId</code> 通过 JOIN t_order → t_order_item → t_sku 实现按商品ID查询评价。</p>
-<p class="list-item"><strong>批量插入</strong>：<code>OrderItemMapper.xml</code> 的 <code>batchInsert</code> 使用 <code><foreach></code> 一次插入多条订单项。</p>
-<h3>4.4 业务逻辑层（Service）</h3>
-<p>所有 Service 类位于 <code>backend/src/main/java/com/shop/service/</code> 下，使用 <code>@Service</code> 注解。</p>
-<h4>4.4.1 UserService.java</h4>
-<p class="list-item">• <strong>功能</strong>：用户注册、登录、信息修改、密码修改</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>register()</code> — 检查用户名唯一性、手机号唯一性，创建用户（密码明文存储，注释说明实际应加密）</p>
-<p style="margin-left:16px" class="list-item">• <code>login()</code> — 校验用户名、密码、账号状态</p>
-<p style="margin-left:16px" class="list-item">• <code>changePassword()</code> — 验证旧密码后更新</p>
-<h4>4.4.2 ProductService.java</h4>
-<p class="list-item">• <strong>功能</strong>：商品CRUD、SKU查询</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>getProductList()</code> — 支持分类ID、关键词、状态多条件组合查询</p>
-<p style="margin-left:16px" class="list-item">• <code>addProduct()</code> — 新商品默认状态为"待审核"(status=2)</p>
-<p style="margin-left:16px" class="list-item">• <code>getProductSkus()</code> — 查询商品的所有SKU规格</p>
-<h4>4.4.3 CategoryService.java</h4>
-<p class="list-item">• <strong>功能</strong>：分类管理、分类树构建</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>getCategoryTree()</code> — 将平铺的分类列表构建为树形结构（递归算法）</p>
-<p style="margin-left:16px" class="list-item">• <code>buildTree()</code> — 递归方法，按 <code>parentId</code> 分组后逐层构建</p>
-<h4>4.4.4 CartService.java</h4>
-<p class="list-item">• <strong>功能</strong>：购物车增删改查</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>addToCart()</code> — 检查库存，如已存在则累加数量，否则新增</p>
-<p style="margin-left:16px" class="list-item">• <code>updateQuantity/updateChecked</code> — 校验购物车项归属权</p>
-<p style="margin-left:16px" class="list-item">• <code>deleteFromCart</code> — 删除时校验用户归属</p>
-<h4>4.4.5 OrderService.java（核心）</h4>
-<p class="list-item">• <strong>功能</strong>：订单全生命周期管理</p>
-<p class="list-item">• <strong>关键方法</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>createOrder()</code> — <strong>@Transactional 事务</strong>，完整下单流程：</p>
-<p class="list-item">校验收货地址</p>
-<p class="list-item">获取选中购物车商品</p>
-<p class="list-item">校验库存并计算总价</p>
-<p class="list-item">扣减库存</p>
-<p class="list-item">处理优惠券（计算折扣金额）</p>
-<p class="list-item">计算实付金额</p>
-<p class="list-item">生成订单号（ORD + UUID）</p>
-<p class="list-item">创建订单记录（含地址快照JSON）</p>
-<p class="list-item">批量创建订单项</p>
-<p class="list-item">清空已下单购物车</p>
-<p style="margin-left:16px" class="list-item">• <code>payOrder()</code> — 模拟支付，更新订单状态</p>
-<p style="margin-left:16px" class="list-item">• <code>cancelOrder()</code> — 取消订单，恢复库存和优惠券</p>
-<p style="margin-left:16px" class="list-item">• <code>shipOrder()</code> — 发货（状态1→2）</p>
-<p style="margin-left:16px" class="list-item">• <code>confirmReceive()</code> — 确认收货（状态2→3）</p>
-<h4>4.4.6 PaymentService.java</h4>
-<p class="list-item">• <strong>功能</strong>：支付处理</p>
-<p class="list-item">• <strong>关键逻辑</strong>：验证订单状态、记录支付信息、更新订单状态</p>
-<h4>4.4.7 AddressService.java</h4>
-<p class="list-item">• <strong>功能</strong>：收货地址管理</p>
-<p class="list-item">• <strong>关键逻辑</strong>：新增/更新时处理默认地址（先清除旧默认再设置新默认）</p>
-<h4>4.4.8 ReviewService.java</h4>
-<p class="list-item">• <strong>功能</strong>：评价管理</p>
-<p class="list-item">• <strong>关键逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 校验评分范围（1-5）</p>
-<p style="margin-left:16px" class="list-item">• 只有已收货(status=3)的订单才能评价</p>
-<p style="margin-left:16px" class="list-item">• 同一订单只能评价一次</p>
-<h4>4.4.9 CouponService.java</h4>
-<p class="list-item">• <strong>功能</strong>：优惠券全生命周期管理</p>
-<p class="list-item">• <strong>关键方法</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>getAvailableCoupons()</code> — 查询启用且未发完、在有效期内的优惠券</p>
-<p style="margin-left:16px" class="list-item">• <code>claimCoupon()</code> — 领取优惠券（校验有效期、库存、重复领取）</p>
-<p style="margin-left:16px" class="list-item">• <code>useCoupon()</code> — 使用优惠券（校验未使用状态、有效期、最低消费门槛）</p>
-<p style="margin-left:16px" class="list-item">• <code>restoreCoupon()</code> — 恢复优惠券状态（订单取消时调用）</p>
-<p style="margin-left:16px" class="list-item">• <code>useCouponById()</code> — 通过用户优惠券ID使用（订单创建流程中调用）</p>
-<h4>4.4.10 FavoriteService.java</h4>
-<p class="list-item">• <strong>功能</strong>：收藏管理（添加、取消、检查是否已收藏）</p>
-<h3>4.5 控制器层（Controller）</h3>
-<p>所有 Controller 位于 <code>backend/src/main/java/com/shop/controller/</code> 下，使用 <code>@RestController</code> + <code>@RequestMapping</code> 注解。</p>
-<h4>4.5.1 UserController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/user</code></p>
-<p class="list-item">• <strong>接口列表</strong>：</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>方法</th>
-<th>路径</th>
-<th>功能</th>
-<th>认证</th>
-</tr>
-<tr>
-<td>POST</td>
-<td>/register</td>
-<td>用户注册</td>
-<td>无需</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/login</td>
-<td>用户登录（返回Token）</td>
-<td>无需</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/info</td>
-<td>获取当前用户信息</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/update</td>
-<td>更新用户信息</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/{id}/password</td>
-<td>修改密码</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/logout</td>
-<td>退出登录（删除Token）</td>
-<td>需要</td>
-</tr>
-</table></div>
-<p class="list-item">• <strong>安全处理</strong>：<code>sanitizeUser()</code> 方法在返回用户信息前将 <code>password</code> 字段置空</p>
-<h4>4.5.2 ProductController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/product</code></p>
-<p class="list-item">• <strong>接口列表</strong>：</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>方法</th>
-<th>路径</th>
-<th>功能</th>
-<th>认证</th>
-</tr>
-<tr>
-<td>GET</td>
-<td>/list</td>
-<td>商品列表（支持分类、关键词搜索）</td>
-<td>无需</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/{id}</td>
-<td>商品详情</td>
-<td>无需</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/{id}/sku</td>
-<td>商品SKU列表</td>
-<td>无需</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/</td>
-<td>添加商品（管理员）</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/{id}</td>
-<td>更新商品</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/{id}/offline</td>
-<td>下架商品</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/{id}/online</td>
-<td>上架商品</td>
-<td>需要</td>
-</tr>
-</table></div>
-<h4>4.5.3 CategoryController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/category</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/tree</code>（分类树）、<code>/list</code>（平铺列表）、<code>/{parentId}/children</code>（子分类）、<code>/{id}</code>（单个分类）</p>
-<p class="list-item">• 全部无需认证</p>
-<h4>4.5.4 CartController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/cart</code></p>
-<p class="list-item">• <strong>接口列表</strong>：</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>方法</th>
-<th>路径</th>
-<th>功能</th>
-</tr>
-<tr>
-<td>GET</td>
-<td>/list</td>
-<td>获取购物车列表</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/add</td>
-<td>添加到购物车</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/update</td>
-<td>更新数量/选中状态</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>/{id}</td>
-<td>删除购物车项</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>/clear</td>
-<td>清空购物车</td>
-</tr>
-</table></div>
-<p class="list-item">• <strong>兼容处理</strong>：<code>addToCart</code> 和 <code>updateCart</code> 同时兼容 <code>snake_case</code> 和 <code>camelCase</code> 字段名</p>
-<h4>4.5.5 OrderController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/order</code></p>
-<p class="list-item">• <strong>接口列表</strong>：</p>
-<div class="table-wrapper"><table>
-<tr>
-<th>方法</th>
-<th>路径</th>
-<th>功能</th>
-</tr>
-<tr>
-<td>POST</td>
-<td>/create</td>
-<td>创建订单</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/cancel/{id}</td>
-<td>取消订单</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/ship/{id}</td>
-<td>发货（管理员）</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/receive/{id}</td>
-<td>确认收货</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/list</td>
-<td>订单列表</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/{id}</td>
-<td>订单详情</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/{id}/items</td>
-<td>订单项列表</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/{id}/review</td>
-<td>提交评价</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/{id}/pay</td>
-<td>支付订单</td>
-</tr>
-</table></div>
-<h4>4.5.6 PaymentController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/payment</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>POST /pay</code>（模拟支付）、<code>GET /record/{orderId}</code>（查询支付记录）</p>
-<p class="list-item">• 支付方式校验：仅支持 1-余额、2-模拟支付</p>
-<h4>4.5.7 AddressController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/address</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/list</code>、<code>/{id}</code>、<code>/add</code>、<code>/update</code>、<code>/{id}</code>(DELETE)、<code>/{id}/default</code>(PUT)</p>
-<h4>4.5.8 ReviewController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/review</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/product/{productId}</code>（商品评价列表）、<code>/my</code>（我的评价）、<code>POST /</code>（发表评价）</p>
-<h4>4.5.9 CouponController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/coupon</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/available</code>（可领取列表）、<code>/list</code>（列表）、<code>/{id}</code>（详情）</p>
-<p class="list-item">• 全部无需认证</p>
-<h4>4.5.10 UserCouponController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/user-coupon</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/claim/{couponId}</code>（领取）、<code>/my</code>（我的优惠券）、<code>/use</code>（使用优惠券）</p>
-<h4>4.5.11 FavoriteController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/favorite</code></p>
-<p class="list-item">• <strong>接口</strong>：<code>/list</code>（列表）、<code>/check</code>（检查是否收藏）、<code>/add</code>（添加收藏）、<code>/{productId}</code>(DELETE)（取消收藏）</p>
-<h4>4.5.12 AdminController.java</h4>
-<p class="list-item">• <strong>路径前缀</strong>：<code>/api/admin</code></p>
-<p class="list-item">• <strong>接口</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>GET /stats</code> — 数据统计概览（用户数、商品数、订单数、总销售额、最近订单）</p>
-<p style="margin-left:16px" class="list-item">• <code>GET /hot-products</code> — 热销商品 TOP10</p>
-<h3>4.6 工具类</h3>
-<h4>4.6.1 Result.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/util/Result.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：统一 API 响应格式</p>
-<p class="list-item">• <strong>结构</strong>：<code>{ code: 200, message: "success", data: T }</code></p>
-<p class="list-item">• <strong>静态工厂方法</strong>：<code>success(data)</code>、<code>success()</code>、<code>error(message)</code>、<code>error(code, message)</code></p>
-<h4>4.6.2 TokenManager.java</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>backend/src/main/java/com/shop/util/TokenManager.java</code></p>
-<p class="list-item">• <strong>功能职责</strong>：简易 Token 管理（课程设计用途）</p>
-<p class="list-item">• <strong>存储方式</strong>：<code>ConcurrentHashMap<String, Long></code> 内存存储</p>
-<p class="list-item">• <strong>关键方法</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>generateToken(userId)</code> — 生成 UUID Token 并存储映射</p>
-<p style="margin-left:16px" class="list-item">• <code>getUserId(token)</code> — 通过 Token 查找用户ID（支持 Bearer 前缀）</p>
-<p style="margin-left:16px" class="list-item">• <code>removeToken(token)</code> — 删除 Token（退出登录）</p>
-<p class="list-item">• <strong>注意</strong>：注释明确说明"生产环境应使用 JWT + Redis"</p>
+<h2>题 6-6</h2>
+<p><strong>题目：</strong> 已知边沿型 JK 触发器输入端的电压波形，J=1，K=1，画出 Q 端波形。</p>
+<p><strong>J = K = 1 → 翻转功能</strong></p>
+<p>每个 CP 下降沿，Q 翻转一次。</p>
+<p>$$\boxed{Q \text{ 的频率} = \frac{1}{2} f_{CP}}$$</p>
 <hr>
-<h2>五、前端代码详解</h2>
-<h3>5.1 公共模块</h3>
-<h4>5.1.1 js/api.js — API 请求封装</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>frontend/js/api.js</code></p>
-<p class="list-item">• <strong>功能职责</strong>：封装所有 HTTP 请求逻辑，是前端与后端通信的桥梁</p>
-<p class="list-item">• <strong>核心组件</strong>：</p>
-<p><strong>Token 管理对象</strong>：</p>
-<p class="list-item">• <code>Token.get()</code> / <code>Token.set(token)</code> / <code>Token.remove()</code> — localStorage 存取 Token</p>
-<p><strong>UserInfo 缓存对象</strong>：</p>
-<p class="list-item">• <code>UserInfo.get()</code> / <code>UserInfo.set(info)</code> / <code>UserInfo.remove()</code> — localStorage 存取用户信息</p>
-<p><strong>request() 统一请求方法</strong>：</p>
-<p class="list-item">• 自动附加 <code>Authorization: Bearer <token></code> 请求头</p>
-<p class="list-item">• 处理 401 响应（自动跳转登录页）</p>
-<p class="list-item">• 解析 JSON 响应，提取 <code>data</code> 字段</p>
-<p class="list-item">• 网络异常处理（检测后端是否启动）</p>
-<p><strong>API 快捷对象</strong>：</p>
-<p class="list-item">• <code>API.get(url, params)</code> — GET 请求，自动拼接查询参数</p>
-<p class="list-item">• <code>API.post(url, data)</code> — POST 请求</p>
-<p class="list-item">• <code>API.put(url, data)</code> — PUT 请求</p>
-<p class="list-item">• <code>API.delete(url)</code> — DELETE 请求</p>
-<p><strong>Toast 提示组件</strong>：</p>
-<p class="list-item">• <code>Toast.success(msg)</code> / <code>Toast.error(msg)</code> / <code>Toast.warning(msg)</code> / <code>Toast.info(msg)</code></p>
-<p class="list-item">• 右上角浮层通知，自动消失</p>
-<p><strong>Utils 工具对象</strong>：</p>
-<p class="list-item">• <code>formatPrice(price)</code> — 格式化价格为 ¥xx.xx</p>
-<p class="list-item">• <code>getParam(name)</code> — 获取URL查询参数</p>
-<p class="list-item">• <code>formatDate(dateStr)</code> — 格式化日期</p>
-<p class="list-item">• <code>orderStatus(status)</code> — 订单状态文字映射</p>
-<p class="list-item">• <code>throttle(fn, delay)</code> / <code>debounce(fn, delay)</code> — 节流/防抖</p>
-<h4>5.1.2 js/app.js — 公共逻辑</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>frontend/js/app.js</code></p>
-<p class="list-item">• <strong>功能职责</strong>：所有页面共用的公共逻辑</p>
-<p class="list-item">• <strong>核心函数</strong>：</p>
-<p><strong>登录状态管理</strong>：</p>
-<p class="list-item">• <code>isLoggedIn()</code> — 检查是否已登录</p>
-<p class="list-item">• <code>requireLogin()</code> — 要求登录，未登录则跳转</p>
-<p><strong>导航栏渲染</strong>：</p>
-<p class="list-item">• <code>renderNavbar()</code> — 动态渲染顶部导航栏（Logo、搜索框、购物车、订单、用户信息）</p>
-<p class="list-item">• <code>updateCartBadge()</code> — 更新购物车角标数量</p>
-<p class="list-item">• <code>doSearch()</code> — 搜索跳转</p>
-<p class="list-item">• <code>doLogout()</code> — 退出登录</p>
-<p><strong>分类导航</strong>：</p>
-<p class="list-item">• <code>renderCategoryNav(activeCategoryId)</code> — 渲染分类导航栏（从 <code>/category/tree</code> API 获取）</p>
-<p><strong>分页组件</strong>：</p>
-<p class="list-item">• <code>renderPagination(current, total, size, onPageChange)</code> — 渲染分页按钮（最多显示7页）</p>
-<p><strong>页面初始化</strong>：</p>
-<p class="list-item">• <code>initPage()</code> — DOM Ready 时自动调用，渲染导航栏 + 页脚</p>
-<h4>5.1.3 js/product-images.js — 商品图片映射</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>frontend/js/product-images.js</code></p>
-<p class="list-item">• <strong>功能职责</strong>：维护商品名称到本地图片路径的映射表</p>
-<p class="list-item">• <strong>核心函数</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <code>getProductImageUrl(title, fallback)</code> — 根据商品名获取图片URL（支持精确匹配和模糊匹配）</p>
-<h4>5.1.4 css/style.css — 全局样式</h4>
-<p class="list-item">• <strong>文件路径</strong>：<code>frontend/css/style.css</code></p>
-<p class="list-item">• <strong>功能职责</strong>：定义全局CSS变量、组件样式、响应式布局</p>
-<p class="list-item">• <strong>核心设计</strong>：</p>
-<p style="margin-left:16px" class="list-item">• <strong>CSS变量</strong>：定义主题色（primary/success/warning/danger）、文字色、背景色、阴影、圆角等</p>
-<p style="margin-left:16px" class="list-item">• <strong>响应式</strong>：<code>@media (max-width: 768px)</code> 和 <code>@media (max-width: 480px)</code> 两档适配</p>
-<p style="margin-left:16px" class="list-item">• <strong>组件</strong>：按钮(btn)、卡片(card)、表单(form)、标签页(tabs)、模态框(modal)、Toast、分页(pagination)等</p>
-<h3>5.2 页面功能</h3>
-<h4>5.2.1 index.html — 首页/商品列表</h4>
-<p class="list-item">• <strong>功能</strong>：商品网格展示、搜索、分类筛选、分页</p>
-<p class="list-item">• <strong>加载流程</strong>：渲染分类导航 → 调用 <code>/product/list</code> → 渲染商品卡片</p>
-<p class="list-item">• <strong>搜索支持</strong>：URL参数 <code>?keyword=xxx</code> 和 <code>?category_id=xxx</code></p>
-<p class="list-item">• <strong>分页</strong>：每页12件商品</p>
-<h4>5.2.2 product.html — 商品详情页</h4>
-<p class="list-item">• <strong>功能</strong>：商品图片展示、规格选择、数量选择、加入购物车、收藏</p>
-<p class="list-item">• <strong>核心逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 解析SKU的 <code>spec_json</code> 为规格分组（颜色、容量等）</p>
-<p style="margin-left:16px" class="list-item">• 规格选择联动（点击规格匹配对应SKU，更新价格和库存）</p>
-<p style="margin-left:16px" class="list-item">• 收藏功能（检查收藏状态、添加/取消收藏）</p>
-<p style="margin-left:16px" class="list-item">• 图片切换（主图+缩略图）</p>
-<h4>5.2.3 cart.html — 购物车页</h4>
-<p class="list-item">• <strong>功能</strong>：购物车列表展示、数量调整、选中/取消、删除、全选、结算</p>
-<p class="list-item">• <strong>核心逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 实时计算已选商品总价</p>
-<p style="margin-left:16px" class="list-item">• 前端维护 <code>cartList</code> 状态，操作后局部更新</p>
-<p style="margin-left:16px" class="list-item">• 去结算跳转到 <code>checkout.html</code></p>
-<h4>5.2.4 checkout.html — 结算页</h4>
-<p class="list-item">• <strong>功能</strong>：选择收货地址、商品清单确认、优惠券选择、金额计算、提交订单</p>
-<p class="list-item">• <strong>核心逻辑</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 并行加载地址、购物车、优惠券数据</p>
-<p style="margin-left:16px" class="list-item">• 优惠券折扣计算（满减/折扣/无门槛）</p>
-<p style="margin-left:16px" class="list-item">• 新增地址弹窗</p>
-<p style="margin-left:16px" class="list-item">• 提交订单调用 <code>/order/create</code></p>
-<h4>5.2.5 order-list.html — 订单列表页</h4>
-<p class="list-item">• <strong>功能</strong>：按状态Tab筛选订单、订单卡片展示、快捷操作</p>
-<p class="list-item">• <strong>支持操作</strong>：立即付款、取消订单、确认收货、去评价</p>
-<h4>5.2.6 order-detail.html — 订单详情页</h4>
-<p class="list-item">• <strong>功能</strong>：订单状态时间线、收货地址、商品清单、金额明细、操作按钮</p>
-<p class="list-item">• <strong>时间线展示</strong>：下单→付款→发货→收货→完成</p>
-<h4>5.2.7 user-center.html — 个人中心</h4>
-<p class="list-item">• <strong>功能</strong>：左侧导航（个人信息/收货地址/我的收藏/我的优惠券）+ 右侧内容区</p>
-<p class="list-item">• <strong>懒加载</strong>：切换Tab时才加载对应数据</p>
-<p class="list-item">• <strong>地址管理</strong>：新增、编辑、删除、设置默认</p>
-<h4>5.2.8 login.html — 登录页</h4>
-<p class="list-item">• <strong>功能</strong>：用户名+密码登录</p>
-<p class="list-item">• <strong>登录流程</strong>：调用 <code>/user/login</code> → 保存Token和UserInfo → 跳转首页</p>
-<p class="list-item">• <strong>已登录检测</strong>：如已登录自动跳转首页</p>
-<h4>5.2.9 register.html — 注册页</h4>
-<p class="list-item">• <strong>功能</strong>：用户名、密码、确认密码、昵称、手机号注册</p>
-<p class="list-item">• <strong>校验</strong>：密码至少6位、两次密码一致</p>
-<h4>5.2.10 review.html — 评价页</h4>
-<p class="list-item">• <strong>功能</strong>：星级评分（1-5星交互）、评价内容输入、提交评价</p>
-<p class="list-item">• <strong>交互</strong>：星星hover高亮效果、字数统计（500字限制）</p>
-<h4>5.2.11 admin.html — 管理后台</h4>
-<p class="list-item">• <strong>功能</strong>：数据概览、商品管理、分类管理、优惠券管理</p>
-<p class="list-item">• <strong>数据概览</strong>：用户数/商品数/订单数/销售额 + 热销TOP10 + 最近订单</p>
-<p class="list-item">• <strong>商品管理</strong>：列表展示、状态筛选、上架/下架操作</p>
-<p class="list-item">• <strong>分类管理</strong>：列表展示、新增/编辑/删除分类</p>
-<p class="list-item">• <strong>优惠券管理</strong>：列表展示、新增/编辑/删除优惠券</p>
-<h4>5.2.12 coupon.html — 领券中心</h4>
-<p class="list-item">• <strong>功能</strong>：展示可领取的优惠券列表、一键领取</p>
-<p class="list-item">• <strong>状态处理</strong>：已领取/已过期/已领完 按钮置灰</p>
+<h2>题 6-7</h2>
+<p><strong>题目：</strong> 图 6-55 中各触发器初始状态 Q = 0，画出在 CP 连续作用下各触发器输出端的电压波形。</p>
+<table>
+<thead>
+<tr>
+<th>电路</th>
+<th>触发器类型</th>
+<th>输入接法</th>
+<th>功能</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(a)</td>
+<td>JK</td>
+<td>J=K=1</td>
+<td>翻转</td>
+<td>二分频方波</td>
+</tr>
+<tr>
+<td>(b)</td>
+<td>D</td>
+<td>D=Q̄</td>
+<td>翻转</td>
+<td>二分频方波</td>
+</tr>
+<tr>
+<td>(c)</td>
+<td>JK</td>
+<td>J=1,K=0</td>
+<td>置位</td>
+<td>第一个CP后恒为1</td>
+</tr>
+<tr>
+<td>(d)</td>
+<td>JK</td>
+<td>J=K=Q̄</td>
+<td>反馈翻转</td>
+<td>第一个CP后恒为1</td>
+</tr>
+</tbody></table>
 <hr>
-<h2>六、核心业务流程</h2>
-<h3>6.1 用户注册与登录</h3>
-<pre><code class="language-text">用户 → register.html → POST /api/user/register
-  → UserService.register()
-    → 检查用户名唯一
-    → 检查手机号唯一
-    → 创建用户记录
-  → 返回成功 → 跳转登录页
-
-用户 → login.html → POST /api/user/login
-  → UserService.login()
-    → 校验用户名
-    → 校验密码
-    → 校验账号状态
-  → TokenManager.generateToken(userId)
-  → 返回 {token, user} → 前端存储到 localStorage</code></pre>
-<h3>6.2 商品浏览与搜索</h3>
-<pre><code class="language-text">首页 → index.html
-  → 渲染分类导航（GET /api/category/tree）
-  → 加载商品列表（GET /api/product/list?keyword=&category_id=）
-  → 渲染商品卡片网格
-  → 用户点击 → 跳转 product.html?id=xxx
-
-商品详情 → product.html
-  → 加载商品信息（GET /api/product/{id}）
-  → 加载SKU列表（GET /api/product/{id}/sku）
-  → 解析spec_json为规格选项
-  → 用户选择规格 → 匹配SKU → 更新价格/库存</code></pre>
-<h3>6.3 购物车流程</h3>
-<pre><code class="language-text">加入购物车 → POST /api/cart/add {sku_id, quantity}
-  → CartService.addToCart()
-    → 检查库存
-    → 检查是否已存在（累加数量 or 新增）
-  → 返回成功 → 更新导航栏购物车角标
-
-购物车页 → cart.html
-  → 加载列表（GET /api/cart/list）
-  → 前端渲染购物车项（含SKU信息、价格、小计）
-  → 用户操作：
-    - 调整数量 → PUT /api/cart/update
-    - 选中/取消 → PUT /api/cart/update
-    - 删除 → DELETE /api/cart/{id}
-  → 实时计算总价
-  → 去结算 → 跳转 checkout.html</code></pre>
-<h3>6.4 下单与支付</h3>
-<pre><code class="language-text">结算页 → checkout.html
-  → 并行加载：地址列表 + 购物车 + 可用优惠券
-  → 用户选择：地址 + 优惠券
-  → 前端计算折扣金额
-  → 提交订单 → POST /api/order/create
-
-后端创建订单流程（OrderService.createOrder）：
-  ① 校验收货地址
-  ② 获取选中购物车商品
-  ③ 校验库存 → 计算总价
-  ④ 扣减库存
-  ⑤ 处理优惠券 → 计算实付金额
-  ⑥ 生成订单号 → 创建订单记录（含地址快照）
-  ⑦ 批量创建订单项
-  ⑧ 清空已下单购物车
-  ⑨ 返回订单详情
-
-支付 → POST /api/payment/pay {order_id, pay_method}
-  → PaymentService.pay()
-    → 校验订单状态
-    → 模拟支付成功
-    → 记录支付信息
-    → 更新订单状态为待发货(1)</code></pre>
-<h3>6.5 订单状态机</h3>
-<pre><code class="language-text">         创建订单           支付              发货             确认收货
-[待付款(0)] ────→ [待付款(0)] ──→ [待发货(1)] ──→ [待收货(2)] ──→ [已完成(3)]
-    │                  │
-    │ 取消订单         │ 取消订单
-    ↓                  ↓
-[已取消(4)]        [已取消(4)]</code></pre>
-<h3>6.6 优惠券流程</h3>
-<pre><code class="language-text">领券中心 → coupon.html
-  → 加载可领取优惠券（GET /api/coupon/available）
-  → 加载我的优惠券（GET /api/user-coupon/my）
-  → 领取 → POST /api/user-coupon/claim/{couponId}
-    → CouponService.claimCoupon()
-      → 校验优惠券状态、有效期、库存、重复领取
-      → 创建用户优惠券记录
-      → 更新已领取数量
-
-下单时使用 → checkout.html
-  → 选择优惠券 → 前端计算折扣
-  → 提交订单时传入 userCouponId
-  → OrderService.createOrder() 中调用 CouponService.useCouponById()
-    → 校验未使用状态、有效期、最低消费
-    → 标记为已使用</code></pre>
+<h1>第八章 D/A与A/D转换</h1>
+<h2>核心知识点</h2>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>D/A 输出</strong></td>
+<td>$u_O = -\frac{R_F}{R} \cdot \frac{U_{REF}}{2^n} \times D$</td>
+</tr>
+<tr>
+<td><strong>A/D 量化</strong></td>
+<td>$D = \text{round}(U_I/U_{REF} \times 2^n)$</td>
+</tr>
+<tr>
+<td><strong>最小分辨电压</strong></td>
+<td>$U_{LSB} = U_m / (2^n - 1)$</td>
+</tr>
+<tr>
+<td><strong>分辨率</strong></td>
+<td>$1/(2^n - 1) \times 100%$</td>
+</tr>
+<tr>
+<td><strong>A/D 转换时间</strong></td>
+<td>$T = (n+1)/f_{CP}$（逐次逼近型）</td>
+</tr>
+<tr>
+<td><strong>量化误差</strong></td>
+<td>$\varepsilon = \pm U_{REF}/2^{n+1}$</td>
+</tr>
+</tbody></table>
 <hr>
-<h2>七、安全设计</h2>
-<h3>7.1 认证机制</h3>
-<p class="list-item">• <strong>Token 认证</strong>：基于 UUID Token 的简易认证方案</p>
-<p class="list-item">• <strong>Token 存储</strong>：后端使用 <code>ConcurrentHashMap</code> 内存存储，前端使用 <code>localStorage</code></p>
-<p class="list-item">• <strong>传递方式</strong>：<code>Authorization: Bearer <token></code> 请求头</p>
-<p class="list-item">• <strong>拦截器</strong>：<code>TokenInterceptor</code> 拦截所有 <code>/api/**</code> 路径，白名单路径除外</p>
-<h3>7.2 接口权限</h3>
-<p class="list-item">• <strong>游客可访问</strong>：商品列表、商品详情、SKU列表、分类、优惠券列表</p>
-<p class="list-item">• <strong>登录用户</strong>：购物车、订单、地址、收藏、评价、支付</p>
-<p class="list-item">• <strong>管理员</strong>：商品上下架、数据统计（通过 AdminController）</p>
-<h3>7.3 数据安全</h3>
-<p class="list-item">• <strong>密码处理</strong>：数据库存储BCrypt哈希（测试数据中密码字段注释为BCrypt），但实际注册/登录代码中为明文比较（注释说明"实际项目中应加密存储"）</p>
-<p class="list-item">• <strong>敏感信息过滤</strong>：<code>UserController.sanitizeUser()</code> 在返回用户信息时将 <code>password</code> 字段置空</p>
-<p class="list-item">• <strong>地址快照</strong>：订单中的收货地址为JSON快照，防止历史订单信息被修改</p>
-<h3>7.4 业务安全</h3>
-<p class="list-item">• <strong>库存防超卖</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 触发器 <code>trg_order_check_stock</code> 在插入订单项前校验库存</p>
-<p style="margin-left:16px" class="list-item">• Service 层在创建订单时也校验库存</p>
-<p class="list-item">• <strong>数据一致性</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 订单创建使用 <code>@Transactional</code> 事务管理</p>
-<p style="margin-left:16px" class="list-item">• 存储过程使用 <code>START TRANSACTION</code> + <code>COMMIT/ROLLBACK</code></p>
-<p class="list-item">• <strong>操作校验</strong>：</p>
-<p style="margin-left:16px" class="list-item">• 购物车操作校验用户归属</p>
-<p style="margin-left:16px" class="list-item">• 订单操作校验用户归属和状态合法性</p>
-<p style="margin-left:16px" class="list-item">• 评价校验订单状态和重复评价</p>
-<p style="margin-left:16px" class="list-item">• 优惠券校验有效期、使用条件、重复领取</p>
-<h3>7.5 跨域安全</h3>
-<p class="list-item">• 开发环境配置 <code>allowedOriginPatterns("*")</code> 允许所有来源</p>
-<p class="list-item">• 生产环境应限制为特定域名</p>
-<h3>7.6 已知安全限制（课程设计说明）</h3>
-<p class="list-item">• Token 存储在内存中，重启丢失（生产环境应使用 JWT + Redis）</p>
-<p class="list-item">• 密码未加密存储（生产环境应使用 BCrypt）</p>
-<p class="list-item">• 无 CSRF 防护（前后端分离+Token认证可缓解）</p>
-<p class="list-item">• 无接口限流（生产环境应添加 Rate Limiting）</p>
+<h2>题 8-3</h2>
+<p><img src="images/11%E9%A2%988-3_8-4_8-5.jpg?v=" alt="原题图 8-3, 8-4, 8-5"></p>
+<p><strong>题目：</strong> AD7520 为 10 位倒 T 形电阻网络 D/A 转换器，U_REF 已知。试计算输入数字量为全 0、全 1、0010010010 时的输出电压。</p>
+<p><strong>公式（R_F = R 时）：</strong></p>
+<p>$$u_O = -\frac{U_{REF}}{1024} \times D$$</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>十进制 D</th>
+<th>输出 u_O</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全0</td>
+<td>0</td>
+<td><strong>0V</strong></td>
+</tr>
+<tr>
+<td>全1</td>
+<td>1023</td>
+<td><strong>-0.999·U_REF</strong></td>
+</tr>
+<tr>
+<td>0010010010</td>
+<td>146</td>
+<td><strong>-0.1426·U_REF</strong></td>
+</tr>
+</tbody></table>
 <hr>
-<p>> <strong>项目路径</strong>：<code>C:\Users\shiyi\Desktop\购物商城-数据库课设</code></p>
-<p>></p>
-<p>> <strong>文档生成时间</strong>：2026-06-25</p>
-            </div>
-            <div class="article-footer">
-                <a href="blog.html" class="back-link">← 返回文章列表</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<h2>题 8-4</h2>
+<p><strong>题目：</strong> 将 R-2R 倒 T 形电阻网络 D/A 转换电路扩展到 8 位，U_REF = -10V，输入 D = 11010110。</p>
+<p><strong>D = 11010110 = 214</strong></p>
+<p>$$u_O = -\frac{R_F}{R} \cdot \frac{U_{REF}}{256} \times 214$$</p>
+<table>
+<thead>
+<tr>
+<th>R_F</th>
+<th>输出 u_O</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R_F = R</td>
+<td>$\frac{10 \times 214}{256} \approx$ <strong>8.36V</strong></td>
+</tr>
+<tr>
+<td>R_F = 2R</td>
+<td>$\frac{20 \times 214}{256} \approx$ <strong>16.72V</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>题 8-5</h2>
+<p><strong>题目：</strong> 12 位 D/A 转换器，最大满刻度输出 U_m = 10V，求最小分辨电压 U_LSB 和分辨率。</p>
+<p>$$U_{LSB} = \frac{10}{2^{12}-1} = \frac{10}{4095} \approx \boxed{2.44mV}$$</p>
+<p>$$\text{分辨率} = \frac{1}{4095} \times 100% \approx \boxed{0.0244%}$$</p>
+<hr>
+<h2>题 8-8</h2>
+<p><strong>题目：</strong> 逐次逼近型 A/D 转换器扩展到 8 位，时钟频率 2MHz，求转换时间。</p>
+<p>$$T_{CP} = \frac{1}{2MHz} = 0.5\mu s$$</p>
+<p>$$T_{conv} = (8+1) \times 0.5\mu s = \boxed{4.5\mu s}$$</p>
+<hr>
+<h2>题 8-9</h2>
+<p><strong>题目：</strong> 逐次逼近型 8 位 A/D 转换器，U_REF = 10V，U_I = 8.22V。
+(1) 输出 d₇~d₀？
+(2) 改用 10 位 DAC，输出数字量？
+(3) 两种情况下的量化误差？</p>
+<h3>(1) 8 位</h3>
+<p>$$D = \frac{8.22}{10} \times 256 = 210.432 \approx 210 = 11010010_2$$</p>
+<p>$$\boxed{d_7 \sim d_0 = 11010010}$$</p>
+<h3>(2) 10 位</h3>
+<p>$$D = \frac{8.22}{10} \times 1024 = 841.728 \approx 842 = 1101001010_2$$</p>
+<p>$$\boxed{d_9 \sim d_0 = 1101001010}$$</p>
+<h3>(3) 量化误差</h3>
+<table>
+<thead>
+<tr>
+<th>位数</th>
+<th>量化误差</th>
+<th>反推电压</th>
+<th>电压误差</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8位</td>
+<td>±19.53mV</td>
+<td>8.203V</td>
+<td>17mV</td>
+</tr>
+<tr>
+<td>10位</td>
+<td>±4.88mV</td>
+<td>8.222V</td>
+<td>2mV</td>
+</tr>
+</tbody></table>
+<p>$$\boxed{\text{10 位比 8 位精度提高 4 倍}}$$</p>
+<hr>
+<h1>附录：常用公式速查</h1>
+<h2>半导体器件</h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I = β·I_B</td>
+<td>晶体管电流放大</td>
+</tr>
+<tr>
+<td>r_π = βV_T/I_C</td>
+<td>晶体管交流输入电阻</td>
+</tr>
+<tr>
+<td>I_C(sat) = (V_CC-0.7)/R_C</td>
+<td>饱和集电极电流</td>
+</tr>
+</tbody></table>
+<h2>放大电路</h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I_B = U_CC/R_B</td>
+<td>固定偏置基极电流</td>
+</tr>
+<tr>
+<td>A_u = -β(R_C∥R_L)/r_π</td>
+<td>共射电压增益</td>
+</tr>
+<tr>
+<td>R_i = R_B1∥R_B2∥r_π</td>
+<td>输入电阻</td>
+</tr>
+<tr>
+<td>R_o = R_C</td>
+<td>输出电阻</td>
+</tr>
+</tbody></table>
+<h2>运算放大器</h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u_o = -(R_f/R_1)u_i</td>
+<td>反相比例</td>
+</tr>
+<tr>
+<td>u_o = (1+R_f/R_1)u_i</td>
+<td>同相比例</td>
+</tr>
+<tr>
+<td>u_o = -Σ(R_f/R_i)u_i</td>
+<td>反相加法</td>
+</tr>
+</tbody></table>
+<h2>数字逻辑</h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F = A&#39;B&#39;+A&#39;C+BC</td>
+<td>5-10 化简结果</td>
+</tr>
+<tr>
+<td>F_A=A, F_B=A&#39;B, F_C=A&#39;B&#39;C</td>
+<td>优先编码器</td>
+</tr>
+</tbody></table>
+<h2>D/A 与 A/D</h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u_O = -(R_F/R)·(U_REF/2^n)·D</td>
+<td>D/A 输出</td>
+</tr>
+<tr>
+<td>D = round(U_I/U_REF × 2^n)</td>
+<td>A/D 量化</td>
+</tr>
+<tr>
+<td>U_LSB = U_m/(2^n-1)</td>
+<td>最小分辨电压</td>
+</tr>
+<tr>
+<td>T = (n+1)/f_CP</td>
+<td>逐次逼近转换时间</td>
+</tr>
+<tr>
+<td>ε = ±U_REF/2^(n+1)</td>
+<td>量化误差</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p>📝 本文档整理自《电子技术（电工学Ⅱ）》第3版习题解答
+共计 25 道题，覆盖第一章、第二章、第三章、第五章、第六章、第八章</p>
+</blockquote>
+</div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
+<footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
+<script src="script.js"></script></body></html>

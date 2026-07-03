@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目 · 十一</title>
+    <meta name="description" content="十一的项目作品集，记录个人工具、博客系统和 AI 工具链实践。">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Projects page */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .project-card {
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .project-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Theme color strip */
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+        .project-card[data-theme="amber"]::before  { background: linear-gradient(90deg, #d4913a, #e8b86d); }
+        .project-card[data-theme="teal"]::before    { background: linear-gradient(90deg, #1f6f73, #3fa8a5); }
+        .project-card[data-theme="violet"]::before  { background: linear-gradient(90deg, #7c5cbf, #a78bfa); }
+
+        .project-head {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 26px 28px 22px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .project-icon {
+            flex-shrink: 0;
+            width: 52px; height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-size: 1.5rem;
+        }
+        .project-card[data-theme="amber"] .project-icon  { background: rgba(212,145,58,0.12); }
+        .project-card[data-theme="teal"] .project-icon    { background: rgba(31,111,115,0.10); }
+        .project-card[data-theme="violet"] .project-icon  { background: rgba(124,92,191,0.10); }
+
+        .project-info { flex: 1; min-width: 0; }
+
+        .project-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .project-num {
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .project-status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .status-done    { background: rgba(34,139,87,0.10);  color: #1a7f4a; }
+        .status-active  { background: rgba(31,111,115,0.10); color: #1a6f73; }
+        .status-practice { background: rgba(180,130,50,0.10); color: #8a6420; }
+
+        .project-title {
+            color: var(--text);
+            font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+            line-height: 1.3;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 640px;
+        }
+
+        .project-toggle {
+            flex-shrink: 0;
+            align-self: center;
+            width: 32px; height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.04);
+            color: var(--text-soft);
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, background 0.2s ease;
+        }
+        .project-card.open .project-toggle {
+            transform: rotate(180deg);
+            background: rgba(0,0,0,0.07);
+        }
+
+        /* Tech tags */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 28px 20px;
+        }
+        .project-tag {
+            padding: 3px 11px;
+            border-radius: 6px;
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: var(--tag-tech-bg);
+            color: var(--tag-tech-text);
+        }
+
+        /* Expandable detail */
+        .project-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card.open .project-detail {
+            max-height: 2000px;
+        }
+
+        .project-detail-inner {
+            padding: 0 28px 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        .detail-section {
+            padding-top: 22px;
+        }
+        .detail-section:first-child {
+            padding-top: 26px;
+        }
+
+        .detail-section h3 {
+            margin-bottom: 12px;
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .detail-section p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        /* Architecture flow */
+        .arch-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin: 14px 0;
+        }
+        .arch-node {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.7);
+        }
+        .arch-node-label {
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            margin-bottom: 4px;
+        }
+        .arch-node-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .arch-node-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Code block */
+        .mini-code {
+            margin-top: 14px;
+            border: 1px solid #2f2a25;
+            border-radius: var(--radius);
+            background: #24201d;
+            overflow: hidden;
+        }
+        .mini-code-head {
+            padding: 8px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #f7f3ec;
+        }
+        .mini-code pre {
+            padding: 14px;
+            overflow-x: auto;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: #f7f3ec;
+        }
+        .mini-code code {
+            font-family: "Cascadia Code", Consolas, monospace;
+        }
+
+        /* Links row */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.04);
+            color: var(--text);
+            transition: background 0.2s, color 0.2s;
+        }
+        .project-links a:hover {
+            background: rgba(0,0,0,0.08);
+            color: var(--primary);
+        }
+
+        /* Footer note */
+        .project-note {
+            margin-top: 40px;
+            padding: 18px 22px;
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--radius);
+            color: var(--text-soft);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .project-head { padding: 20px; gap: 14px; }
+            .project-tags { padding: 0 20px 16px; }
+            .project-detail-inner { padding: 0 20px 20px; }
+            .project-icon { width: 42px; height: 42px; font-size: 1.2rem; }
+            .arch-flow { grid-template-columns: 1fr; }
+            .project-toggle { display: none; }
+            .project-detail { max-height: none !important; }
+        }
+    </style>
+</head>
+<body class="theme-light">
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">十一</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="projects.html" class="active">项目</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="菜单" aria-expanded="false">☰</button>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="section-title">项目</h1>
+                <p class="page-desc">把写过的工具、系统和技术实践整理成可复盘的作品。</p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- 01 Desktop Widget -->
+                <article class="project-card" data-theme="amber">
+                    <div class="project-head" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="project-icon">📊</div>
+                        <div class="project-info">
+                            <div class="project-label">
+                                <span class="project-num">01</span>
+                                <span class="project-status status-done">已完成</span>
+                            </div>
+                            <h2 class="project-title">DeepSeek API 用量实时监控小组件</h2>
+                            <p class="project-desc">用 Python、pywebview 和前端技术做的 Windows 桌面小组件，实时查看 DeepSeek API 余额、Token 消耗和 7 日趋势。</p>
+                        </div>
+                        <div class="project-toggle">▾</div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">pywebview</span>
+                        <span class="project-tag">HTML/CSS/JS</span>
+                        <span class="project-tag">DeepSeek API</span>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-inner">
+                            <div class="detail-section">
+                                <h3>架构概览</h3>
+                                <p>核心是一条本地数据链路：后台采集器负责拿数据，桌面组件只负责读取和展示，UI 不直接碰 API。</p>
+                                <div class="arch-flow">
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Source</div>
+                                        <div class="arch-node-title">DeepSeek API</div>
+                                        <div class="arch-node-desc">读取账户余额和用量数据</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Fetcher</div>
+                                        <div class="arch-node-title">fetch_balance.py</div>
+                                        <div class="arch-node-desc">定时请求，汇总模型分布和趋势</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Cache</div>
+                                        <div class="arch-node-title">balance.json</div>
+                                        <div class="arch-node-desc">本地缓存，UI 不依赖网络</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Widget</div>
+                                        <div class="arch-node-title">pywebview</div>
+                                        <div class="arch-node-desc">JS bridge 读取 JSON 渲染界面</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h3>核心代码</h3>
+                                <div class="mini-code">
+                                    <div class="mini-code-head">fetch_balance.py · usage 汇总</div>
+                                    <pre><code>def compute_usage_stats(usage_data):
+    today = datetime.date.today().isoformat()
+    total_tokens = 0
+    model_breakdown = {}
+
+    for model in usage_data.get("total", []):
+        model_total = sum(int(u["amount"]) for u in model["usage"])
+        total_tokens += model_total
+        model_breakdown[model["model"]] = model_total
+
+    return {
+        "total_tokens": total_tokens,
+        "model_breakdown": model_breakdown,
+    }</code></pre>
+                                </div>
+                            </div>
+                            <div class="project-links">
+                                <a href="article-8.html">阅读项目复盘 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 02 Blog System -->
+                <article class="project-card" data-theme="teal">
+                    <div class="project-head" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="project-icon">✍️</div>
+                        <div class="project-info">
+                            <div class="project-label">
+                                <span class="project-num">02</span>
+                                <span class="project-status status-done">已完成</span>
+                            </div>
+                            <h2 class="project-title">个人博客 CMS 管理系统</h2>
+                            <p class="project-desc">博客系统从本地 CMS 迁移到服务器端部署。前台 Nginx 静态托管，后台 Node.js + sql.js 运行在服务器上，支持文章管理、项目管理、拖拽排序、密码保护。</p>
+                        </div>
+                        <div class="project-toggle">▾</div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Express</span>
+                        <span class="project-tag">SQLite</span>
+                        <span class="project-tag">Nginx</span>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-inner">
+                            <div class="detail-section">
+                                <h3>架构概览</h3>
+                                <p>前后端分离架构：CMS 后台跑在本地 Windows（localhost:3000），服务器上 Nginx 托管静态前端，后台不在公网暴露保证安全性。</p>
+                                <div class="arch-flow">
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Editor</div>
+                                        <div class="arch-node-title">admin.html</div>
+                                        <div class="arch-node-desc">Markdown 编辑器 + 实时预览</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">API</div>
+                                        <div class="arch-node-title">Express + SQLite</div>
+                                        <div class="arch-node-desc">文章 CRUD、自动保存</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Deploy</div>
+                                        <div class="arch-node-title">deploy.js</div>
+                                        <div class="arch-node-desc">生成静态 HTML → SCP 上传</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Serve</div>
+                                        <div class="arch-node-title">Nginx</div>
+                                        <div class="arch-node-desc">腾讯云服务器 80 端口托管</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h3>技术选型</h3>
+                                <p>数据库用 SQLite 而非 MySQL，因为个人博客不需要复杂关系查询，单文件部署最省心。服务器端用 sql.js（WASM）替代 better-sqlite3，绕过了 GLIBC 兼容性问题。</p>
+                            </div>
+                            <div class="project-links">
+                                <a href="article-5.html">后台系统记录 →</a>
+                                <a href="article-1.html">部署复盘 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 03 AI Toolchain -->
+                <article class="project-card" data-theme="violet">
+                    <div class="project-head" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="project-icon">🤖</div>
+                        <div class="project-info">
+                            <div class="project-label">
+                                <span class="project-num">03</span>
+                                <span class="project-status status-practice">实践</span>
+                            </div>
+                            <h2 class="project-title">CC-Switch + DeepSeek 驱动 Codex CLI</h2>
+                            <p class="project-desc">通过协议转换把 DeepSeek API 接入 OpenAI Codex CLI，探索低成本 AI 编程助手工作流。</p>
+                        </div>
+                        <div class="project-toggle">▾</div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">DeepSeek</span>
+                        <span class="project-tag">Codex CLI</span>
+                        <span class="project-tag">CC-Switch</span>
+                        <span class="project-tag">Node.js</span>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-inner">
+                            <div class="detail-section">
+                                <h3>架构概览</h3>
+                                <p>CC-Switch 作为协议转换代理，把 Codex CLI 发出的 OpenAI 格式请求转发为 DeepSeek API 调用，实现零成本使用 Codex。</p>
+                                <div class="arch-flow">
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Client</div>
+                                        <div class="arch-node-title">Codex CLI</div>
+                                        <div class="arch-node-desc">发送 OpenAI 格式请求</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Proxy</div>
+                                        <div class="arch-node-title">CC-Switch</div>
+                                        <div class="arch-node-desc">协议转换，端口 11437</div>
+                                    </div>
+                                    <div class="arch-node">
+                                        <div class="arch-node-label">Provider</div>
+                                        <div class="arch-node-title">DeepSeek API</div>
+                                        <div class="arch-node-desc">免费额度驱动代码生成</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h3>踩坑记录</h3>
+                                <p>BAT 脚本里中文被 CMD 乱码解析、UNC 路径不支持、端口占用 EADDRINUSE、环境变量传递机制……每个坑都记录在部署指南里。</p>
+                            </div>
+                            <div class="project-links">
+                                <a href="article-6.html">查看部署指南 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="project-note">
+                每个项目可以继续补充：问题背景、方案架构、核心截图、踩坑记录、下一步计划。内容足够多后，再拆成独立详情页。
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Default: first card open, others closed
+        document.querySelector('.project-card').classList.add('open');
+    </script>
+</body>
+</html>

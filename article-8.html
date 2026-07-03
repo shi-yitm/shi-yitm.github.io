@@ -1,268 +1,161 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南 · 十一</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-      background: url('images/bg-waves.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.2);
-      z-index: -1;
-    }
-    .navbar {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .navbar .logo {
-      -webkit-text-fill-color: white;
-      background: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.8) !important;
-    }
-    .nav-links a.active,
-    .nav-links a:hover {
-      color: white !important;
-    }
-    .nav-links a::after {
-      background: white;
-    }
-    .hero {
-      background: rgba(0,0,0,0.35);
-    }
-    .hero h1, .hero .highlight, .hero-subtitle, .hero-desc {
-      color: white;
-      -webkit-text-fill-color: white;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-    }
-    .hero .highlight {
-      background: none;
-      -webkit-text-fill-color: #fbbf24;
-    }
-    .section {
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      border-radius: 0;
-      margin: 0;
-      padding: 48px 24px;
-    }
-    .section-title {
-      color: white;
-    }
-    .section-title::after {
-      background: #fbbf24;
-    }
-    .page-desc {
-      color: rgba(255,255,255,0.7);
-    }
-    .post-card {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .post-card:hover {
-      background: rgba(0,0,0,0.6);
-      border-color: rgba(255,255,255,0.2);
-    }
-    .post-title a, .post-title {
-      color: white !important;
-    }
-    .post-excerpt {
-      color: rgba(255,255,255,0.75);
-    }
-    .post-date {
-      color: rgba(255,255,255,0.6);
-    }
-    .post-readmore {
-      color: #60a5fa !important;
-    }
-    .article-title {
-      color: white;
-    }
-    .article-meta {
-      color: rgba(255,255,255,0.7);
-    }
-    .article-content {
-      color: rgba(255,255,255,0.9);
-    }
-    .article-content h2, .article-content h3 {
-      color: white;
-    }
-    .article-content blockquote {
-      background: rgba(255,255,255,0.1);
-      border-left-color: #fbbf24;
-      color: rgba(255,255,255,0.8);
-    }
-    .article-content code {
-      background: rgba(255,255,255,0.15);
-      color: #fbbf24;
-    }
-    .article-content pre {
-      background: rgba(0,0,0,0.5);
-    }
-    .article-content th {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-    .article-content td {
-      color: rgba(255,255,255,0.85);
-    }
-    .article-content tr:nth-child(even) td {
-      background: rgba(255,255,255,0.05);
-    }
-    .article-footer {
-      border-top-color: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.6);
-    }
-    .back-link {
-      color: #60a5fa !important;
-    }
-    .footer {
-      background: rgba(0,0,0,0.5);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.5);
-    }
-    .tag-dev {
-      background: rgba(37,99,235,0.3);
-      color: #93c5fd;
-    }
-    .tag-life {
-      background: rgba(245,158,11,0.3);
-      color: #fcd34d;
-    }</style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="logo">十一</a>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">博客</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="菜单">☰</button>
-        </div>
-    </nav>
-
-    <section class="section post-article">
-        <div class="container">
-            <a href="index.html" class="back-link">← 返回首页</a>
-            <header class="article-header">
-                <div class="post-tag tag-dev">技术</div>
-                <h1 class="article-title">用 DeepSeek 免费跑 Codex CLI：CC-Switch 协议转换部署指南</h1>
-                <div class="article-meta">
-                    <span>📅 2026-06-07</span>
-                    <span>👁 0 次阅读</span>
-                    <span>#Codex CLI</span> <span>#DeepSeek</span> <span>#CC-Switch</span> <span>#AI编程</span> <span>#Windows</span>
-                </div>
-            </header>
-            <div class="article-content">
-                <h2>为什么不能直接改 base_url</h2>
-<p>很多人第一反应肯定是：DeepSeek 不是兼容 OpenAI 的 API 吗，那把 Codex 的 base_url 改成 <code>https://api.deepseek.com</code> 不就行了？</p>
-<p><strong>真不行。至少现在还不行。</strong></p>
-<p>Codex CLI 用的是 OpenAI 较新的 <strong>Responses API</strong> 协议——这是 OpenAI 为 agent 类应用专门设计的接口，支持多轮会话、工具调用、流式 SSE 这些高级能力。而 DeepSeek 官方 API 是基于 <strong>Chat Completions</strong> 协议，这是更早的对话补全接口。两者虽然看起来都是&quot;OpenAI 风格&quot;，但底层请求结构、参数名、SSE 事件格式都不一样。</p>
-<p>直接改 base_url 会踩的坑：</p>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 Python 手搓一个 Windows 桌面小组件：DeepSeek API 用量实时监控 · 十一</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script></head>
+<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul><button class="menu-toggle" aria-label="菜单">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">用 Python 手搓一个 Windows 桌面小组件：DeepSeek API 用量实时监控</h1><div class="article-meta"><span>📅 2026-06-10</span><span>👁 1 次阅读</span> <span>#Python</span> <span>#pywebview</span> <span>#DeepSeek</span> <span>#桌面小组件</span> <span>#Windows</span> <span>#教程</span></div></header><div class="article-content"><h2>背景</h2>
+<p>我日常重度依赖 DeepSeek，高频使用的时候一天能跑几百块。每次想查余额和用量，都要打开网页、登录后台、点好几层菜单——用久了真的很烦。</p>
+<p>正好 GitHub 上有个开源项目 <code>tristan-mcinnis/Deepseek-API-Balance-Checker</code>，提供了 API 数据采集的思路。我让 AI 帮我基于它写了一个 Windows 桌面小组件，钉在屏幕右上角，瞄一眼就知道今天跑了多少、还剩多少钱。</p>
+<p>这篇文章记录我从 Tkinter 到 pywebview 的完整选型、开发与踩坑过程。如果你想自己做一个桌面小组件（不限于 API 监控），这篇文章应该能帮你少走不少弯路。</p>
+<h2>成品效果</h2>
+<p>最终成品是一个 366×562 像素的暗色小组件，无边框、始终置顶、可拖动。上半部分显示实时余额和 Token 用量进度条，中间排列会话用量、今日用量、缓存命中率等卡片，下半部分是按模型分解的用量条和近 7 天柱状图。数据每 5 秒自动刷新，不需要任何手动操作。</p>
+<h2>技术架构</h2>
+<p>项目分为两层，职责清晰：</p>
 <ul>
-<li>请求路径返回 404</li>
-<li>多轮对话时上下文串不起来</li>
-<li>工具调用（tool calls）解析出错</li>
-<li>SSE 流式事件格式对不上</li>
-<li>单轮问答能通，一跑实际任务就挂</li>
+<li><strong>数据采集层</strong>（<code>fetch_balance.py</code>）：每 30 秒向 DeepSeek API 请求一次，拉取余额、总用量、按模型分解、缓存命中/未命中、近 7 天用量等数据，写入 <code>balance.json</code>。这部分沿用 Codex 之前写好的实现，不做改动。</li>
+<li><strong>UI 展示层</strong>（<code>widget.html</code> + <code>widget_test.py</code>）：HTML / CSS / JavaScript 负责前端渲染，pywebview 提供桌面窗口壳。数据通过 JS Bridge 从 <code>balance.json</code> 读取，每 5 秒刷新一次 DOM。</li>
 </ul>
-<p>所以必须有一个协议翻译层在中间做转换。</p>
-<h2>方案对比：CC-Switch vs OpenRouter</h2>
-<h3>CC-Switch（本地代理）</h3>
-<p>开源项目 <code>ccswitch-deepseek</code>，一个轻量的 Node.js HTTP 代理。在本地跑一个 <code>index.js</code>，监听 11437 端口，负责把 Codex 发来的 Responses API 请求翻译成 Chat Completions 格式再发给 DeepSeek，回来的时候再转回去。</p>
-<p><strong>优点</strong>：全本地运行，零数据泄露，延迟低
-<strong>缺点</strong>：需要自己启动和维护代理进程</p>
-<h3>OpenRouter BYOK</h3>
-<p>OpenRouter 是个第三方 API 路由服务，BYOK（Bring Your Own Key）模式能绑定你自己的 DeepSeek API Key 由它做协议转换。</p>
-<p><strong>优点</strong>：不用跑本地服务
-<strong>缺点</strong>：多一层网络延迟，API Key 和数据需要经过第三方</p>
-<h2>Windows 下的完整部署</h2>
-<h3>前置条件</h3>
+<p>数据流非常简洁：</p>
+<pre><code>DeepSeek API → fetch_balance.py → balance.json → JS Bridge → widget.html
+</code></pre>
+<h2>UI 选型：为什么是 pywebview</h2>
+<p>第一版用的是 Tkinter——Python 自带的 GUI 库。出来的效果怎么说呢，大概就是 Windows 95 控制面板的白底黑字风格，方方正正，毫无美感可言。而我要的是 Windows 11 小组件那种暗色玻璃拟态：半透明卡片、柔和圆角、精致的阴影。</p>
+<p>我考察了以下方案：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tkinter</td>
+<td>Python 自带，零依赖</td>
+<td>现代化 UI 极其痛苦，控件自由度极低</td>
+</tr>
+<tr>
+<td>Electron</td>
+<td>效果精美，生态丰富</td>
+<td>一个小组件就要 150MB，太重型</td>
+</tr>
+<tr>
+<td>Tauri</td>
+<td>比 Electron 轻量很多</td>
+<td>需要 Rust 工具链，学习曲线陡峭</td>
+</tr>
+<tr>
+<td><strong>pywebview</strong></td>
+<td>用系统自带 WebView 渲染，包不到 10MB</td>
+<td>文档和边缘 case 需要自己踩坑</td>
+</tr>
+</tbody></table>
+<p>最终选 pywebview 的理由很直接：能用 HTML/CSS/JS 写界面（玻璃拟态、动画、图表随便折腾），Python 环境现成，不需要额外装 Node.js 或 Rust 工具链。</p>
+<h2>踩坑实录</h2>
+<p>pywebview 看起来美好，实际踩坑不少。下面是过程中遇到的五个典型问题及其解法。</p>
+<h3>坑一：GUI 后端自动检测失败</h3>
+<p>pywebview 在 Windows 上默认使用 Edge WebView2 渲染。但我的 Python 3.13 环境中，<code>webview.guilib</code> 的自动检测结果是 <code>None</code>——识别机制挂了。</p>
+<p><strong>解决</strong>：手动强制初始化。</p>
+<pre><code class="language-python">from webview.guilib import initialize
+initialize()  # 强制检测，返回 winforms 后端
+</code></pre>
+<h3>坑二：start() 函数签名容易写错</h3>
+<p>pywebview v6 的 <code>webview.start()</code> 第一个参数是 <code>callable</code>，不是 <code>js_api</code> 对象——这个很容易被文档误导。</p>
+<pre><code class="language-python"># ❌ 错误写法
+webview.start(api, gui=&quot;winforms&quot;)
+
+# ✅ 正确写法：js_api 在 create_window 时传入
+window = webview.create_window(&quot;Title&quot;, html=html, js_api=api)
+webview.start(gui=&quot;winforms&quot;)
+</code></pre>
+<h3>坑三：CORS 与 HTTP Server 端口冲突</h3>
+<p>pywebview 自带一个内部 HTTP Server。如果自己再起一个同端口的服务，直接冲突报错。Python 的 <code>socketserver</code> 和 pywebview 的 Bottle Server 不能共用一个端口。</p>
+<p><strong>最终方案</strong>：彻底放弃自主 HTTP Server，数据完全通过 JS Bridge 传递。Python 端暴露 <code>get_data()</code> 方法直接读 <code>balance.json</code> 返回字符串，HTML 端用 <code>window.pywebview.api.get_data()</code> 异步获取。这样不仅绕过了端口冲突，连 CORS 问题也一并消失了。</p>
+<p>JavaScript 端：</p>
+<pre><code class="language-javascript">async function refresh() {
+    const raw = await window.pywebview.api.get_data();
+    const data = JSON.parse(raw);
+    // 更新 DOM 元素...
+}
+</code></pre>
+<p>Python 端：</p>
+<pre><code class="language-python">class Api:
+    def get_data(self):
+        with open(&quot;balance.json&quot;, &quot;r&quot;) as f:
+            return f.read()
+</code></pre>
+<h3>坑四：debug=True 弹出 DevTools</h3>
+<p>开发阶段开 <code>debug=True</code> 方便调试，结果忘了关——生产环境用户看到的是一个 Chrome DevTools 窗口加一个空白页面。关掉 <code>debug=False</code> 立马恢复正常。</p>
+<h3>坑五：WinForms WebBrowser 控件不懂现代 CSS</h3>
+<p>某个中间版本我试图绕过 pywebview，直接用 pythonnet + WinForms WebBrowser 控件来嵌入页面。结果发现这个控件的底层是 IE 引擎——CSS 变量（<code>var(--bg)</code>）、<code>rgba()</code>、<code>Flexbox</code> 全都不认。页面渲染出来是白底黑字，跟没写 CSS 一样。果断回到 pywebview 的 Edge WebView2 引擎。</p>
+<h2>核心实现要点</h2>
+<h3>无边框、置顶、可拖动的桌面窗口</h3>
+<pre><code class="language-python">window = webview.create_window(
+    &quot;DeepSeek Monitor&quot;,
+    html=html,
+    js_api=api,
+    width=366, height=562,
+    frameless=True,      # 无标题栏
+    on_top=True,         # 始终置顶
+    easy_drag=True,      # 可拖动（这参数是关键）
+    background_color=&quot;#0d1117&quot;,
+)
+</code></pre>
+<p><code>easy_drag=True</code> 让 frameless 窗口也能直接用鼠标拖动，不需要自己处理 <code>WM_NCHITTEST</code> 消息。</p>
+<h3>最小化与关闭按钮</h3>
+<p>HTML 按钮通过 JS Bridge 调用 Python 端方法：</p>
+<pre><code class="language-html">&lt;button onclick=&quot;minimize()&quot;&gt;−&lt;/button&gt;
+&lt;button onclick=&quot;closeWidget()&quot;&gt;✕&lt;/button&gt;
+</code></pre>
+<pre><code class="language-javascript">function minimize() { window.pywebview.api.minimize(); }
+function closeWidget() { window.pywebview.api.close_window(); }
+</code></pre>
+<h3>玻璃拟态暗色主题</h3>
+<p>用 CSS 变量集中管理主题色，卡片使用半透明背景 + 细边框：</p>
+<pre><code class="language-css">:root {
+    --bg: #0d1117;
+    --card: rgba(22, 27, 34, 0.92);
+    --border: rgba(48, 54, 61, 0.6);
+    --text: #e6edf3;
+    --accent: #58a6ff;
+}
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+</code></pre>
+<h3>纯 CSS 近 7 天柱状图</h3>
+<p>不引入 Chart.js 等额外依赖，直接用 <code>div</code> 的高度来表示每日用量占比：</p>
+<pre><code class="language-javascript">const days = data.seven_days || [];
+const maxV = Math.max(...days.map(d =&gt; d.tokens), 1);
+for (const d of days) {
+    const h = Math.max((d.tokens / maxV) * 52, 2);
+    chartHtml += `&lt;div class=&quot;chart-bar&quot; style=&quot;height:${h}px&quot;&gt;&lt;/div&gt;`;
+}
+</code></pre>
+<h2>项目启动</h2>
+<p>双击 <code>start-monitor.bat</code> 即可启动：</p>
+<pre><code class="language-batch">start /min python fetch_balance.py    # 后台采集数据
+python widget_test.py                  # 桌面小组件窗口
+</code></pre>
+<h2>常见问题</h2>
+<h3>窗口不出现怎么办？</h3>
+<p>确保安装了 Edge WebView2 Runtime（Windows 11 自带，Windows 10 需手动安装）。运行 <code>python widget_test.py</code> 查看终端报错。</p>
+<h3>数据不更新？</h3>
+<p>检查 <code>fetch_balance.py</code> 是否在后台运行，以及 <code>.env</code> 中的 <code>api_key</code> 是否正确。</p>
+<h3>能不能自定义颜色和刷新频率？</h3>
+<p>可以。颜色在 <code>widget.html</code> 的 <code>:root</code> CSS 变量中修改，刷新频率改文件末尾的 <code>setInterval(refresh, 5000)</code> 即可。</p>
+<h2>总结</h2>
+<p>整个项目从决策到落地大约花了两个小时，其中至少一个半小时在踩 pywebview 的各种坑。但做完之后确实好用——瞄一眼桌面右上角，就知道 API 跑了多少、还剩多少钱。</p>
+<p>几条关键经验：</p>
 <ol>
-<li><strong>Node.js</strong>——装 LTS 版本</li>
-<li><strong>DeepSeek API Key</strong>——在 platform.deepseek.com 注册获取</li>
-<li><strong>Codex CLI</strong>——全局安装：<code>npm i -g @openai/codex</code></li>
+<li><strong>pywebview 是 Python 生态里做小型桌面工具的最优解之一</strong>，比 Electron 轻十倍以上</li>
+<li><strong>用 JS Bridge 传数据比自己搭 HTTP Server 简单可靠得多</strong>，天然免疫 CORS 和端口冲突</li>
+<li><strong>先跑通最简配置，再逐步加功能</strong>——<code>frameless</code>、<code>on_top</code>、<code>easy_drag</code> 一起上容易出幺蛾子</li>
+<li><strong>Edge WebView2 是现代 Web 标准的保障</strong>，WinForms 内嵌的 IE 控件可以安心扔进历史垃圾桶了</li>
 </ol>
-<h3>第一步：装 CC-Switch</h3>
-<pre><code class="language-bash">git clone https://github.com/liuzhengming/ccswitch-deepseek.git D:\ccswitch-deepseek
-cd D:\ccswitch-deepseek
-npm install
-</code></pre>
-<h3>第二步：配置 API Key</h3>
-<p>在 <code>D:\ccswitch-deepseek\</code> 下创建 <code>.env</code>：</p>
-<pre><code>api_key=sk-your-key
-DEEPSEEK_API_KEY=sk-your-key
-model=deepseek-v4-pro
-port=11437
-</code></pre>
-<p>改 <code>index.js</code> 让 <code>.env</code> 加载路径变成绝对路径：</p>
-<pre><code class="language-js">dotenv.config({ path: &quot;D:/ccswitch-deepseek/.env&quot; });
-</code></pre>
-<h3>第三步：配置 Codex Profile</h3>
-<p>在 <code>C:\Users\你的用户名\.codex\</code> 下创建 <code>deepseek-local.config.toml</code>：</p>
-<pre><code class="language-toml">model = &quot;deepseek-v4-pro&quot;
-model_provider = &quot;ccx-bridge&quot;
-
-[model_providers.ccx-bridge]
-name = &quot;CCX Bridge (DeepSeek)&quot;
-base_url = &quot;http://127.0.0.1:11437/v1&quot;
-env_key = &quot;DEEPSEEK_API_KEY&quot;
-</code></pre>
-<h3>第四步：启动</h3>
-<p>一个窗口跑代理：</p>
-<pre><code class="language-bash">D:\nodejs\node.exe D:\ccswitch-deepseek\index.js
-</code></pre>
-<p>另一个窗口跑 Codex：</p>
-<pre><code class="language-bash">set DEEPSEEK_API_KEY=sk-your-key
-codex --profile deepseek-local
-</code></pre>
-<h3>第五步：一键启动脚本</h3>
-<p>每次开两个窗口还是有点烦，写一个 <code>run-codex.bat</code>：</p>
-<pre><code class="language-bat">@echo off
-set &quot;DEEPSEEK_API_KEY=sk-your-key&quot;
-taskkill /f /im node.exe &gt;nul 2&gt;&amp;1
-start &quot;Proxy&quot; /min D:\nodejs\node.exe D:\ccswitch-deepseek\index.js
-ping -n 4 127.0.0.1 &gt;nul
-codex --profile deepseek-local
-taskkill /f /im node.exe &gt;nul 2&gt;&amp;1
-</code></pre>
-<p>保存后放到桌面快捷方式，双击即可一键启动。</p>
-<h2>踩坑记录</h2>
-<h3>&quot;UNC 路径&quot;错误</h3>
-<p>从 WSL/PowerShell 启动 Codex 时，工作目录继承了 <code>\\wsl.localhost\...</code> 这种路径，Windows CMD 不支持。解决：<code>codex.cmd ... -C D:\</code> 或 bat 里先 <code>pushd D:\</code>。</p>
-<h3>端口被占用</h3>
-<p>重复启动代理会报 <code>EADDRINUSE</code>。脚本里的 <code>taskkill /f /im node.exe</code> 自动清理残留。</p>
-<h3>环境变量传不过去</h3>
-<p><code>set DEEPSEEK_API_KEY=...</code> 必须放在启动 Codex 的同一个 CMD 进程里。</p>
-<h2>验证</h2>
-<p>在 Codex 里问一句&quot;你是谁&quot;，如果回答&quot;我是 DeepSeek&quot;就说明一切正常。我从实际运行中验证过，V4 Pro 和 V4 Flash 都能正常工作。</p>
-
-            </div>
-            <div class="article-footer">
-                <p>感谢阅读，欢迎留言交流！</p>
-                <a href="blog.html" class="back-link">← 返回文章列表</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 十一 · 用 ❤️ 和代码构建</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<p>项目代码已开源在 GitHub：<code>shi-yitm/deepseek-monitor-widget</code>，欢迎 Star ⭐</p>
+<hr>
+<p><em>如果你也想做一个桌面小组件，我的建议是：从 pywebview 官方最简单的示例入手，先跑通一个带标题栏的普通窗口，再逐步叠加 frameless、on_top、自定义拖动等功能。别学我一开始就往死里叠 buff——那是我两个小时踩坑生涯的「精华」所在。</em></p>
+</div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
+<footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
+<script src="script.js"></script></body></html>
