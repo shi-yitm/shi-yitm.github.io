@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Web 复习资料</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.7;color:#333;background:#f5f5f5;padding:12px;max-width:100vw;overflow-x:hidden}
+h1{font-size:1.5em;color:#1a1a1a;margin:16px 0 8px;border-bottom:2px solid #e74c3c;padding-bottom:6px}
+h2{font-size:1.3em;color:#2c3e50;margin:14px 0 6px}
+h3{font-size:1.1em;color:#34495e;margin:10px 0 4px}
+h4{font-size:1em;color:#555;margin:8px 0 4px}
+p{margin:4px 0}
+hr{border:none;border-top:1px solid #ddd;margin:12px 0}
+blockquote{background:#fff3cd;border-left:4px solid #ffc107;padding:8px 12px;margin:8px 0;border-radius:4px;font-size:.95em}
+code{background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:.9em;color:#e74c3c}
+pre{background:#2d2d2d;color:#f8f8f2;padding:10px;border-radius:6px;overflow-x:auto;font-size:.85em;margin:8px 0;white-space:pre-wrap;word-break:break-all}
+pre code{background:none;color:#f8f8f2;padding:0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.9em}
+th,td{border:1px solid #ddd;padding:6px 8px;text-align:left}
+th{background:#3498db;color:white}
+tr:nth-child(even){background:#f9f9f9}
+strong{color:#e74c3c}
+ul,ol{padding-left:20px;margin:4px 0}
+li{margin:2px 0}
+a{color:#3498db;text-decoration:none}
+.content{background:#fff;border-radius:8px;padding:12px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+</style>
+</head>
+<body>
+<div class="content">
+<h1 id="java-web开发技术---期末复习资料整理">Java Web开发技术 -
+期末复习资料整理</h1>
+<blockquote>
+<p>河南科技大学软件工程专业 | 六次考试题库整理 整理时间：2026-07-07</p>
+</blockquote>
+<hr />
+<h2 id="目录">📋 目录</h2>
+<ul>
+<li><a href="#第一次考试---jsp基础">第一次考试 - JSP基础</a></li>
+<li><a href="#第二次考试---servlethttpservletrequestjavabean">第二次考试
+- Servlet/HttpServletRequest/JavaBean</a></li>
+<li><a href="#第三次考试---httpservletresponsesession">第三次考试 -
+HttpServletResponse/Session</a></li>
+<li><a href="#第四次考试---cookiesessionjsp隐式对象">第四次考试 -
+Cookie/Session/JSP隐式对象</a></li>
+<li><a href="#第五次考试---el表达式">第五次考试 - EL表达式</a></li>
+<li><a href="#第六次考试---jstl标签">第六次考试 - JSTL标签</a></li>
+<li><a href="#高频考点统计">高频考点统计</a></li>
+</ul>
+<hr />
+<h1 id="第一次考试---jsp基础">第一次考试 - JSP基础</h1>
+<blockquote>
+<p>共65题 | 单选45题(60分) + 填空20题(20分) + 判断10题(20分)</p>
+</blockquote>
+<h2 id="一单选题共45题60分">一、单选题（共45题，60分）</h2>
+<h3 id="page指令import属性">1. page指令import属性</h3>
+<p><strong>题目：</strong> 在JSP页面中有如下代码:</p>
+<pre><code>&lt;%@page import=&quot;java.util.Date&quot;%&gt;
+&lt;%@page import=&quot;java.io.*&quot;%&gt;</code></pre>
+<p>下面选项中,与之功能相同的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;%@page import="java.util.Date, java.io.*"%&gt;</code> - B.
+<code>&lt;%@page import="java.util.Date java.io.*"%&gt;</code> - C.
+<code>&lt;%@page import="java.util.Date! java.io.*"%&gt;</code> - D.
+<code>&lt;%@page import="java.util.Date; java.io.*"%&gt;</code></p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+page指令的import属性支持逗号分隔的多个导入，<code>&lt;%@page import="java.util.Date, java.io.*"%&gt;</code>
+与分开写两条import指令功能完全相同。</p>
+<hr />
+<h3 id="page指令的contenttype属性">2. page指令的contentType属性</h3>
+<p><strong>题目：</strong>
+下列是page指令中的一些属性,其中,用于告知客户端浏览器采用什么文档类型的属性是？</p>
+<p><strong>选项：</strong> A. contentType B. content C. isThreadSafe D.
+session</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>contentType</code>属性设置HTTP响应的Content-Type头，告诉浏览器以什么格式解析响应内容。</p>
+<hr />
+<h3 id="jsp脚本片段中的循环">3. JSP脚本片段中的循环</h3>
+<p><strong>题目：</strong> 阅读下面JSP脚本代码:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;</span><span class="dv">3</span><span class="op">;</span>i<span class="op">++){</span><span class="pp">%&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>&lt;h<span class="pp">&lt;%=</span>i<span class="pp">%&gt;</span>&gt;haust&lt;/h<span class="pp">&lt;%=</span>i<span class="pp">%&gt;</span>&gt;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="op">}</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p>下列关于程序输出结果的描述中,正确的是？</p>
+<p><strong>选项：</strong> - A. THR - B. 正常输出:haust - C.
+出现语法错误 - D.
+<code>&lt;h1&gt;haust&lt;/h1&gt;&lt;h2&gt;haust&lt;/h2&gt;</code></p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+只要多个脚本片段及其它元素组合的结果是一个完整的Java语句,就能正常翻译。循环i=1,2，拼接成完整的HTML标签输出。</p>
+<hr />
+<h3 id="out.print的作用">4. out.print()的作用</h3>
+<p><strong>题目：</strong> 在JSP页面中包含如下jsp代码:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span>out<span class="op">.</span><span class="fu">print</span><span class="op">(</span><span class="kw">new</span> java<span class="op">.</span><span class="fu">util</span><span class="op">.</span><span class="fu">Date</span><span class="op">().</span><span class="fu">toLocaleString</span><span class="op">());</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p>下面说法正确的是？</p>
+<p><strong>选项：</strong> - A.
+每次在客户端浏览器上访问此jsp页面,显示时间都是一样的 - B.
+该代码是将信息打印在客户端控制台上 - C.
+该代码是将信息打印在客户端浏览器上 - D.
+该代码是将信息打印在服务器控制台上</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+<code>out</code>是JSP隐式对象，输出的内容会发送到客户端浏览器。每次访问都会生成新的Date对象，所以时间不同。</p>
+<hr />
+<h3 id="jsp运行容器">5. JSP运行容器</h3>
+<p><strong>题目：</strong> 下面选项,属于JSP运行容器的是？</p>
+<p><strong>选项：</strong> A. 浏览器 B. Tomcat服务器 C. 文件系统 D.
+操作系统</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+JSP需要Servlet容器来运行，Tomcat是最常用的JSP/Servlet容器。</p>
+<hr />
+<h3 id="isthreadsafe属性">6. isThreadSafe属性</h3>
+<p><strong>题目：</strong>
+下列是page指令的一些属性,其中,用于指定线程是否安全的属性是？</p>
+<p><strong>选项：</strong> A. buffer B. autoFlush C. session D.
+isThreadSafe</p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+<code>isThreadSafe</code>属性指定JSP页面是否可以同时被多个线程访问。默认为true。</p>
+<hr />
+<h3 id="iserrorpage属性">7. isErrorPage属性</h3>
+<p><strong>题目：</strong>
+下列是page指令的一些属性,其中,用于指定该页面是否为错误处理页面的属性是？</p>
+<p><strong>选项：</strong> A. session B. errorPage C. isThreadSafe D.
+isErrorPage</p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+<code>isErrorPage="true"</code>表示当前页面是错误处理页面，可以使用exception隐式对象。<code>errorPage</code>是指定错误跳转到哪个页面。</p>
+<hr />
+<h3 id="import属性">8. import属性</h3>
+<p><strong>题目：</strong>
+下列选项中,哪个属性可以指定JSP翻译成Servlet源文件中导入包或类？</p>
+<p><strong>选项：</strong> A. session B. import C. language D.
+extends</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+<code>import</code>属性用于在生成的Servlet中添加import语句，类似于Java中的import。</p>
+<hr />
+<h3 id="jsp实例变量的作用域">9. JSP实例变量的作用域</h3>
+<p><strong>题目：</strong> test.jsp文件的源代码如下:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> a<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="pp">%&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> b<span class="op">=</span><span class="dv">0</span><span class="op">;</span>a<span class="op">++;</span>b<span class="op">++;</span><span class="pp">%&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>a=<span class="pp">&lt;%=</span>a<span class="pp">%&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>b=<span class="pp">&lt;%=</span>b<span class="pp">%&gt;</span></span></code></pre></div>
+<p>当浏览器第二次访问该test.jsp时得到的返回结果是什么？</p>
+<p><strong>选项：</strong> A. a=2 b=1 B. a=1 b=0 C. a=0 b=0 D. a=1
+b=1</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>&lt;%! int a=0; %&gt;</code>是成员变量（全局），只初始化一次。<code>&lt;% int b=0; %&gt;</code>是局部变量，每次请求都重新初始化。第二次访问时，a累加为2，b重新声明为0后加1变为1。</p>
+<hr />
+<h3 id="jsp访问路径">10. JSP访问路径</h3>
+<p><strong>题目：</strong>
+hello.jsp文件的路径是WebContent/hello/hello.jsp,则在应用helloapp中,浏览器端访问hello.jsp的URL是？</p>
+<p><strong>选项：</strong> - A. http://localhost:8080/hello.jsp - B.
+http://localhost:8080/hello/hello.jsp - C.
+http://localhost:8080/helloapp/hello/hello.jsp - D.
+http://localhost:8080/helloapp/hello.jsp</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+URL格式：<code>http://主机:端口/应用名/资源路径</code>。应用名是helloapp，JSP在hello目录下。</p>
+<hr />
+<h3 id="jsp注释">11. JSP注释</h3>
+<p><strong>题目：</strong> 下列选项中,哪个是正确的JSP注释？</p>
+<p><strong>选项：</strong> - A. <code>&lt;%! 注释信息 %&gt;</code> - B.
+<code>&lt;%= 注释信息 %&gt;</code> - C.
+<code>&lt;!-- 注释信息 --&gt;</code> - D.
+<code>&lt;%-- 注释信息 --%&gt;</code></p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+JSP注释语法是<code>&lt;%-- 注释信息 --%&gt;</code>，不会发送到客户端。</p>
+<hr />
+<h3 id="jsp翻译结果">12. JSP翻译结果</h3>
+<p><strong>题目：</strong> 下列选项中,哪个是JSP翻译后的结果？</p>
+<p><strong>选项：</strong> A. Servlet B. Html C. Css D. Js</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong> JSP最终会被翻译并编译成Servlet类（.java →
+.class）。</p>
+<hr />
+<h3 id="jsp实例变量再次访问">13. JSP实例变量再次访问</h3>
+<p><strong>题目：</strong> 阅读JSP代码:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> a<span class="op">=</span><span class="dv">15</span><span class="op">;</span><span class="dt">int</span> b<span class="op">=</span>a<span class="op">++;</span><span class="pp">%&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a=<span class="pp">&lt;%=</span>a<span class="pp">%&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b=<span class="pp">&lt;%=</span>b<span class="pp">%&gt;</span></span></code></pre></div>
+<p>当第二次访问程序时,程序的输出结果是？</p>
+<p><strong>选项：</strong> A. 输出异常信息 B. a=15 b=16 C. a=16 b=15 D.
+a=16 b=16</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>a++</code>是后置自增，先赋值再自增。b=a++时b=15,a=16。但第二次访问时，a和b都是局部变量，重新声明为15，执行后a=16,b=15。这里正确答案是A（异常），可能因为<code>&lt;%int a=15;%&gt;</code>和<code>&lt;%int b=a++;%&gt;</code>分属不同脚本片段，第一次声明a=15，第二次引用a会出错。</p>
+<hr />
+<h3 id="html标签输出方式">14. HTML标签输出方式</h3>
+<p><strong>题目：</strong>
+当用户访问JSP文件时,对于HTML标签以及文本的输出形式是？</p>
+<p><strong>选项：</strong> - A. 以out.write()方法转化后输出 - B.
+以原样方式输出 - C. 通过out.print()方法转化后输出 - D.
+通过System.out.println()方法转化后输出</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+JSP中的HTML标签和文本在Servlet中会转换为<code>out.write()</code>方法调用输出。</p>
+<hr />
+<h3 id="jspservice方法不包含">15. _jspService()方法不包含</h3>
+<p><strong>题目：</strong>
+下面选项中,不会放入_jspService()方法内部的是？</p>
+<p><strong>选项：</strong> A. 脚本片段 B. 声明 C. 模板元素 D. 表达式</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+声明（<code>&lt;%! %&gt;</code>）定义的是类的成员，放在Servlet类体中，不在<code>_jspService()</code>方法内。脚本片段、模板元素、表达式都在<code>_jspService()</code>内。</p>
+<hr />
+<h3 id="jsp声明格式">16. JSP声明格式</h3>
+<p><strong>题目：</strong> 下列选项中,哪个是正确的JSP声明格式？</p>
+<p><strong>选项：</strong> A. <code>&lt;%-- java代码 --%&gt;</code> B.
+<code>&lt;% java代码 %&gt;</code> C. <code>&lt;%! java代码 %&gt;</code>
+D. <code>&lt;%= java代码 %&gt;</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+JSP声明语法：<code>&lt;%! 声明 %&gt;</code></p>
+<hr />
+<h3 id="jsp文件扩展名">17. JSP文件扩展名</h3>
+<p><strong>题目：</strong> 下面选项中,哪个是JSP文件的扩展名？</p>
+<p><strong>选项：</strong> A. js B. jsp C. html D. java</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="jsp运行时调用的方法">18. JSP运行时调用的方法</h3>
+<p><strong>题目：</strong>
+将jsp翻译成的Servlet源码后,用户访问JSP文件时会被调用的方法是？</p>
+<p><strong>选项：</strong> A. jspInit() B. service() C. _jspDestroy() D.
+_jspService()</p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+用户访问JSP时调用<code>_jspService()</code>方法处理请求。<code>service()</code>是HttpJspBase中的方法，它内部调用<code>_jspService()</code>。</p>
+<hr />
+<h3 id="page指令语法">19. page指令语法</h3>
+<p><strong>题目：</strong> 下列选项中,page指令语法格式正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;%@ page 属性名:"属性值" %&gt;</code> - B.
+<code>&lt;%! page 属性名="属性值" %&gt;</code> - C.
+<code>&lt;%@ page 属性名="属性值" %&gt;</code> - D.
+<code>&lt;%! page 属性名:"属性值" %&gt;</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+page指令用<code>&lt;%@ %&gt;</code>，属性用<code>=</code>赋值。</p>
+<hr />
+<h3 id="jsp表达式输出时间">20. JSP表达式输出时间</h3>
+<p><strong>题目：</strong>
+使用JSP表达式输出本地动态时间的格式,正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;%= new java.util.Date().toLocaleString() %&gt;</code> - B.
+<code>&lt;% new java.util.Date().toLocaleString() %&gt;</code> - C.
+<code>&lt;%! new java.util.Date().toLocaleString() %&gt;</code> - D.
+<code>&lt;%= new java.util.Date().toLocaleString(): %&gt;</code></p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+JSP表达式语法<code>&lt;%= 表达式 %&gt;</code>，会自动输出表达式结果。</p>
+<hr />
+<h3 id="脚本片段与声明的变量作用域">21. 脚本片段与声明的变量作用域</h3>
+<p><strong>题目：</strong> 阅读下列JSP代码片断:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> x<span class="op">=</span><span class="dv">5</span><span class="op">;</span><span class="pp">%&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%!</span><span class="kw">private</span> <span class="dt">int</span> <span class="fu">m</span><span class="op">(</span><span class="dt">int</span> a<span class="op">){</span><span class="cf">return</span> a<span class="op">+</span><span class="dv">1</span><span class="op">;}</span><span class="pp">%&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span>x<span class="op">=</span><span class="dv">3</span><span class="op">;</span><span class="pp">%&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x=<span class="pp">&lt;%=</span>x<span class="pp">%&gt;</span>, <span class="pp">&lt;%=</span><span class="fu">m</span><span class="op">(</span>x<span class="op">)</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p>其运行结果是？</p>
+<p><strong>选项：</strong> A. 编译错误 B. x=5,4 C. x=3,4 D. x=3,5</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+x先在脚本片段中被赋值为5，然后又变成3。调用m(x)即m(3)，返回3+1=4。所以输出x=3,4。</p>
+<hr />
+<h3 id="避免500错误">22. 避免500错误</h3>
+<p><strong>题目：</strong>
+下面选项中,为避免JSP页面出现500错误页面,可以采取的措施是？</p>
+<p><strong>选项：</strong> - A.
+在web.xml中配置<code>&lt;error-page&gt;</code>元素 - B.
+在page指令中配置errorPage属性 - C. 在page指令中配置isErrorPage属性 - D.
+在当前应用的web.xml中配置<code>&lt;exception-page&gt;</code>元素</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+在web.xml中配置<code>&lt;error-page&gt;</code>可以为整个应用设置统一的错误页面，避免显示默认的500错误页面。</p>
+<hr />
+<h3 id="jsp表达式语法">23. JSP表达式语法</h3>
+<p><strong>题目：</strong>
+下面选项中,关于JSP表达式的声明语法格式,正确的是？</p>
+<p><strong>选项：</strong> A. <code>&lt;%! 表达式 %&gt;</code> B.
+<code>&lt;% 表达式 %&gt;</code> C. <code>&lt;%= 表达式 %&gt;</code> D.
+<code>&lt;%= 表达式: %&gt;</code></p>
+<p><strong>正确答案：C</strong></p>
+<hr />
+<h3 id="include指令语法">24. include指令语法</h3>
+<p><strong>题目：</strong>
+下面关于include指令的语法格式中,正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;%@ include path="relativeURL" %&gt;</code> - B.
+<code>&lt;%@ include file="relativeURL" %&gt;</code> - C.
+<code>&lt;%# include file="relativeURL" %&gt;</code> - D.
+<code>&lt;%@ include path="relativeURL" %&gt;</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+include指令的属性是<code>file</code>，不是<code>path</code>。</p>
+<hr />
+<h3 id="errorpage属性">25. errorPage属性</h3>
+<p><strong>题目：</strong>
+下列是page指令中的一些属性,其中,用于指定一个错误页面的属性是？</p>
+<p><strong>选项：</strong> A. isErrorPage B. isThreadSafe C. errorPage
+D. session</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+<code>errorPage="error.jsp"</code>指定当前页面出错时跳转到error.jsp。</p>
+<hr />
+<h3 id="处理.jsp请求的servlet">26. 处理.jsp请求的Servlet</h3>
+<p><strong>题目：</strong>
+下面选项中,处理以.jsp为扩展名的URL访问请求的是？</p>
+<p><strong>选项：</strong> A. JspSourceDependent B. JspServlet C.
+HttpJspBase D. HttpServlet</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+Tomcat的web.xml中配置了JspServlet来处理所有.jsp文件的请求。</p>
+<hr />
+<h3 id="language属性默认值">27. language属性默认值</h3>
+<p><strong>题目：</strong>
+下面选项中,page指令中language属性的默认值是？</p>
+<p><strong>选项：</strong> A. java B. html C. english D. jsp</p>
+<p><strong>正确答案：A</strong></p>
+<hr />
+<h3 id="session属性">28. session属性</h3>
+<p><strong>题目：</strong>
+下列选项中,关于page指令中指明需要内置Session对象的设置是？</p>
+<p><strong>选项：</strong> A. session=“1” B. session=“0” C.
+session=“false” D. session=“true”</p>
+<p><strong>正确答案：D</strong></p>
+<hr />
+<h3 id="sessionfalse的影响">29. session=false的影响</h3>
+<p><strong>题目：</strong> 访问如下jsp页面将会出现什么输出:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">&lt;%@ page</span><span class="ot"> session</span>=<span class="st">false </span><span class="bu">%&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span>session<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;name&quot;</span><span class="op">,</span><span class="st">&quot;haust&quot;</span><span class="op">);</span>application<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;name&quot;</span><span class="op">,</span><span class="st">&quot;itheima&quot;</span><span class="op">);</span><span class="pp">%&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%=</span>session<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;name&quot;</span><span class="op">)</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p><strong>选项：</strong> A. 无输出 B. haust C. Jsp不能被正确翻译 D.
+itheima</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+<code>session=false</code>禁用了session隐式对象，代码中使用session会编译失败。</p>
+<hr />
+<h3 id="extends属性">30. extends属性</h3>
+<p><strong>题目：</strong>
+下列选项中,哪个属性可以指明编译JSP文件时所继承的类？</p>
+<p><strong>选项：</strong> A. language B. session C. import D.
+extends</p>
+<p><strong>正确答案：D</strong></p>
+<hr />
+<h3 id="page指令用法">31. page指令用法</h3>
+<p><strong>题目：</strong>
+下列选项中,关于page指令用法的描述,正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;%@ page %&gt;</code>指令中的属性只能出现一次 - B.
+可以在一个页面中使用多个<code>&lt;%@ page %&gt;</code>指令 - C.
+<code>&lt;%@ page %&gt;</code>作用于整个JSP页面 - D.
+为增强程序的可读性,建议将<code>&lt;%@ page %&gt;</code>放在JSP文件的开头,但不是必须的</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+page指令中除了import属性外，其他属性在整个页面中只能出现一次。但实际上可以写多个page指令（import可以多次出现）。</p>
+<hr />
+<h3 id="声明中的request和out">32. 声明中的request和out</h3>
+<p><strong>题目：</strong> helloapp应用中的test.jsp文件的源代码如下:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%!</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">amethod</span><span class="op">(){</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">String</span> username<span class="op">=</span>request<span class="op">.</span><span class="fu">getParameter</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  out<span class="op">.</span><span class="fu">print</span><span class="op">(</span>username<span class="op">);</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="pp">%&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="fu">amethod</span><span class="op">();</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p>当客户端访问…会出现什么情况？</p>
+<p><strong>选项：</strong> - A. test.jsp向客户端输出”Tom” - B.
+Servlet容器向客户端返回编译错误,因为无法识别amethod()方法中的request变量和out变量
+- C.
+Servlet容器向客户端返回编译错误,因为不允许JSP文件中定义amethod()方法 -
+D. test.jsp向客户端输出”null”</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+<code>&lt;%! %&gt;</code>声明的方法是类成员方法，无法直接访问<code>_jspService()</code>中的局部变量request和out。</p>
+<hr />
+<h3 id="jsp注释重复考点">33. JSP注释（重复考点）</h3>
+<p><strong>题目：</strong> 下面选项中,哪种是JSP注释？</p>
+<p><strong>选项：</strong> - A. <code>&lt;%-- 第一种 --%&gt;</code> - B.
+<code>&lt;!-- 第四种 --&gt;</code> - C.
+<code>&lt;% /*第三种*/ %&gt;</code> - D.
+<code>&lt;% //第二种 %&gt;</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>注意：</strong>
+这道题答案有争议。严格来说A（<code>&lt;%-- --%&gt;</code>）才是JSP注释，B是HTML注释。但正确答案给的是B，可能是OCR识别问题或题目本身有误。实际上：
+- JSP注释：<code>&lt;%-- --%&gt;</code> -
+HTML注释：<code>&lt;!-- --&gt;</code> -
+Java注释：<code>&lt;% /* */ %&gt;</code> 和
+<code>&lt;% // %&gt;</code></p>
+<hr />
+<h3 id="整型变量输出">34. 整型变量输出</h3>
+<p><strong>题目：</strong> 一个JSP文件中包含如下代码:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> a<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="pp">%&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>a=<span class="pp">&lt;%=</span>a<span class="pp">%&gt;</span></span></code></pre></div>
+<p>通过浏览器访问这个页面会输出什么？</p>
+<p><strong>选项：</strong> A. 正常输出:a=null B. 出现异常 C. 正常输出:a=
+D. 正常输出:a=0</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>注意：</strong>
+答案说输出a=null，这可能是OCR问题。实际上<code>&lt;%int a=0;%&gt;</code>声明局部变量，<code>&lt;%=a%&gt;</code>输出0，应该是D。但如果答案给A可能是题目中变量名写法有特殊之处。</p>
+<hr />
+<h3 id="jsp声明中方法的特性">35. JSP声明中方法的特性</h3>
+<p><strong>题目：</strong> 下列关于JSP声明的描述中,正确的是？</p>
+<p><strong>选项：</strong> - A. 声明的方法可以直接使用JSP内置对象 - B.
+一个声明仅在一个页面中有效</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>注意：</strong>
+这里答案可能有误。实际上声明的方法是类成员，<strong>不能</strong>直接使用JSP内置对象（request、out等是_jspService的局部变量）。正确答案应该是B。</p>
+<hr />
+<h3 id="tomcat配置文件">36. Tomcat配置文件</h3>
+<p><strong>题目：</strong>
+下面选项中,哪些是Tomcat服务器中jsp相关配置文件？</p>
+<p><strong>选项：</strong> - A. Tomcat安装目录.xml - B.
+Tomcat安装目录.xml - C. Tomcat安装目录.xml - D. Tomcat安装目录.xml</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>conf/web.xml</code>中配置了JspServlet来处理.jsp请求。</p>
+<hr />
+<h3 id="static块和jspinit">37. static块和jspInit()</h3>
+<p><strong>题目：</strong> 在JSP文件中有如下代码:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">static</span><span class="op">{</span><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;static code block&quot;</span><span class="op">);}</span><span class="pp">%&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%!</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">int</span> i<span class="op">=</span><span class="dv">9</span><span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> java<span class="op">.</span><span class="fu">lang</span><span class="op">.</span><span class="fu">String</span> str<span class="op">=</span><span class="st">&quot;www.haust.cn&quot;</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">jspInit</span><span class="op">(){</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;init method&quot;</span><span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;i=&quot;</span><span class="op">+</span>i<span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;str=&quot;</span><span class="op">+</span>str<span class="op">);</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="pp">%&gt;</span></span></code></pre></div>
+<p>则第一次在浏览器中访问该JSP页面时,控制台输出的结果是？</p>
+<p><strong>选项：</strong> - A. init method i=9 str=www.haust.cn - B.
+出现异常 - C. static code block init method i=9 str=www.haust.cn - D.
+static code block</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong> 类加载时先执行static块输出”static code
+block”，然后Tomcat创建Servlet实例后调用jspInit()输出其他信息。</p>
+<hr />
+<h3 id="jsp继承的父类">38. JSP继承的父类</h3>
+<p><strong>题目：</strong>
+下面选项中,关于jsp文件翻译后的Servlet源码中,它所继承的父类是？</p>
+<p><strong>选项：</strong> A. HttpBase B. HttpJspBase C. HttpServlet D.
+JspServlet</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+JSP翻译后的Servlet继承<code>org.apache.jasper.runtime.HttpJspBase</code>。</p>
+<hr />
+<h3 id="jsp表达式语法重复考点">39. JSP表达式语法（重复考点）</h3>
+<p><strong>题目：</strong>
+下面选项中,关于JSP表达式的语法格式,正确的是？</p>
+<p><strong>选项：</strong> A. <code>&lt;%= 表达式 %&gt;</code> B.
+<code>&lt;% 表达式; %&gt;</code> C. <code>&lt;%= 表达式: %&gt;</code> D.
+<code>&lt;%! 表达式: %&gt;</code></p>
+<p><strong>正确答案：B（注:OCR可能有误,应为C）</strong></p>
+<hr />
+<h3 id="jsp模板元素">40. JSP模板元素</h3>
+<p><strong>题目：</strong> 下面选项中,属于JSP模板元素的是？</p>
+<p><strong>选项：</strong> A. JSP指令 B. JAVA注释 C. HTML代码 D.
+JAVA代码</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+JSP模板元素是指JSP中的静态HTML内容，包括HTML标签和文本。</p>
+<hr />
+<h3 id="errorpage跳转">41. errorPage跳转</h3>
+<p><strong>题目：</strong> 在jsp文件中有如下代码:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">&lt;%@ page</span><span class="ot"> language</span>=<span class="st">&quot;java&quot;</span><span class="ot"> contentType</span>=<span class="st">&quot;text/html; charset=UTF-8&quot;</span><span class="ot"> errorPage</span>=<span class="st">&quot;error.jsp&quot;</span><span class="bu">%&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> a<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">0</span><span class="op">;</span><span class="pp">%&gt;</span></span></code></pre></div>
+<p>下列关于程序执行结果的描述中,正确的是？</p>
+<p><strong>选项：</strong> - A. 跳转到error.jsp页面 - B.
+不跳转到error.jsp页面 - C. 出现异常 - D. 出现500错误</p>
+<p><strong>解题思路：</strong>
+配置了errorPage，当发生异常时会转发到error.jsp。正确答案是A。</p>
+<hr />
+<h3 id="html注释中的java代码">42. HTML注释中的Java代码</h3>
+<p><strong>题目：</strong> 访问如下jsp时,浏览器得到的输出结果是:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">&lt;%</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="pp">%&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="pp">&lt;%</span>i<span class="op">=</span>i<span class="op">+</span><span class="dv">100</span><span class="op">;--&gt;--&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;%=</span>i<span class="pp">%&gt;</span></span></code></pre></div>
+<p><strong>选项：</strong> A. i B. 1 C. 0 D. 100</p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+HTML注释<code>&lt;!-- --&gt;</code>对Java代码无效，Java代码仍然会执行。i从0变成100，然后输出100。</p>
+<hr />
+<h3 id="session属性重复考点">43. session属性（重复考点）</h3>
+<p><strong>题目：</strong>
+下列是page指令中的一些属性,其中,用于指明是否内置Session对象的属性是？</p>
+<p><strong>选项：</strong> A. extends B. session C. import D.
+language</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="autoflush属性">44. autoFlush属性</h3>
+<p><strong>题目：</strong> 下列page指令中,用于指明是否运行缓存的是？</p>
+<p><strong>选项：</strong> A. buffer B. autoFlush C. isThreadSafe D.
+session</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+<code>autoFlush</code>指定当缓冲区满时是否自动刷新。默认true。</p>
+<hr />
+<h3 id="jsp注释特点">45. JSP注释特点</h3>
+<p><strong>题目：</strong> 下面关于JSP注释的说法中,正确的是？</p>
+<p><strong>选项：</strong> - A.
+JSP注释语法格式:<code>&lt;!-- 注释信息 --&gt;</code> - B.
+JSP注释会在服务器端翻译 - C. JSP注释不会发送到客户端 - D.
+JSP注释与HTML注释是一样的</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+JSP注释<code>&lt;%-- --%&gt;</code>在翻译时被忽略，不会出现在生成的Servlet中，也不会发送到客户端。</p>
+<hr />
+<h2 id="二填空题共20题20分">二、填空题（共20题，20分）</h2>
+<h3 id="题">46-55题</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>46</td>
+<td>需要在JSP页面静态包含一个文件时,可采用 ___ 指令</td>
+<td><strong>include</strong></td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td>JSP页面中的静态HTML内容称之为JSP ___</td>
+<td><strong>模板元素</strong></td>
+</tr>
+<tr class="odd">
+<td>48</td>
+<td>当用户访问JSP页面时,该页面都会被JspServlet翻译成一个Servlet源文件,然后将源文件编译为后缀名为___的文件</td>
+<td><strong>.class</strong></td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>JSP全名是_<strong>,它是建立在</strong>_规范之上的动态网页开发技术</td>
+<td><strong>Java Server Page</strong>; <strong>Servlet</strong></td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>page指令的buffer属性用于指定输出流的缓冲区大小,其取值为___时表示不使用缓冲区</td>
+<td><strong>none</strong></td>
+</tr>
+<tr class="even">
+<td>51</td>
+<td>page指令的autoFlush属性的默认值为___</td>
+<td><strong>true</strong></td>
+</tr>
+<tr class="odd">
+<td>52</td>
+<td>在JSP文件中,同时存在_<strong>和</strong>_</td>
+<td><strong>HTML</strong>; <strong>Java代码</strong></td>
+</tr>
+<tr class="even">
+<td>53</td>
+<td>page指令的isErrorPage属性指定该页面是否为错误处理页面,默认为false,表示该JSP___内置对象exception</td>
+<td><strong>不存在</strong></td>
+</tr>
+<tr class="odd">
+<td>54</td>
+<td>当用户第一次访问JSP页面时,该页面都会被JspServlet翻译成一个Servlet源文件,然后将源文件编译为后缀名为___的文件</td>
+<td><strong>.class</strong></td>
+</tr>
+<tr class="even">
+<td>55</td>
+<td>JSP全名是_<strong>,它是建立在</strong>_规范之上的动态网页开发技术</td>
+<td><strong>Java Server Page</strong>; <strong>Servlet</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共10题20分">三、判断题（共10题，20分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>56</td>
+<td>JSP文件与html文件一样,在编写好后都可以直接在浏览器中运行</td>
+<td>❌错</td>
+<td>JSP需要部署到Web服务器中才能运行</td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>JSP表达式用于将程序数据输出到客户端,它的变量或者表达式直接封装在<code>&lt;%=</code>和<code>%&gt;</code>标记中</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>58</td>
+<td>用户每次访问JSP页面时,该页面都会被JspServlet翻译成一个Servlet源文件</td>
+<td>❌错</td>
+<td>只有第一次访问时才会翻译编译</td>
+</tr>
+<tr class="even">
+<td>59</td>
+<td>JSP模版元素定义了网页的基本骨架,即定义了页面的结构和外观</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>一个<code>&lt;% %&gt;</code>中只能放入一条java代码,如果要放多行java代码那么要写多个<code>&lt;% %&gt;</code>才可以</td>
+<td>❌错</td>
+<td>一个<code>&lt;% %&gt;</code>可以包含多条Java语句</td>
+</tr>
+<tr class="even">
+<td>61</td>
+<td>page指令的autoFlush属性的默认值为false</td>
+<td>❌错</td>
+<td>默认值为true</td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>JSP是一套全新的技术,与Servlet完全没有任何联系</td>
+<td>❌错</td>
+<td>JSP本质就是Servlet</td>
+</tr>
+<tr class="even">
+<td>63</td>
+<td>Include指令用于静态包含一个文件,且file属性只能取相对路径</td>
+<td>✅对</td>
+<td>如果用/则代表相对于当前应用</td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>JSP本质是一个Servlet,但却不要做相应的配置信息,是因为Tomcat的web.xml已帮助我们实现了配置</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>Tomcat在将JSP页面翻译成Servlet程序时,会忽略JSP注释的内容,不会将注释信息发送到客户端</td>
+<td>✅对</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第二次考试---servlethttpservletrequestjavabean">第二次考试 -
+Servlet/HttpServletRequest/JavaBean</h1>
+<blockquote>
+<p>共75题 | 单选35题(45分) + 填空15题(30分) + 判断25题(25分)</p>
+</blockquote>
+<h2 id="一单选题共35题45分">一、单选题（共35题，45分）</h2>
+<h3 id="获取请求方式">1. 获取请求方式</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中用于获取HTTP请求消息中的请求方式的方法是？</p>
+<p><strong>选项：</strong> A. getRequestURI() B. getProtocol() C.
+getMethod() D. getQueryString()</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+<code>getMethod()</code>返回GET、POST、PUT等HTTP方法名。</p>
+<hr />
+<h3 id="javabean布尔属性的读写方法">2. JavaBean布尔属性的读写方法</h3>
+<p><strong>题目：</strong>
+下面选项中,属性married是布尔型,则默认读写方法是？</p>
+<p><strong>选项：</strong> - A. setmarried(boolean m), ismarried() - B.
+setMarried(boolean m), getMarried() - C. setMarried(boolean m),
+isMarried() - D. setmarried(boolean m), getMarried()</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+JavaBean规范：boolean类型的getter方法用<code>is</code>前缀（不是get），setter用<code>set</code>。属性名首字母小写，方法名首字母大写。</p>
+<hr />
+<h3 id="获取所有请求头名称">3. 获取所有请求头名称</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中,用于获取所有请求头名称并返回Enumeration对象的方法是？</p>
+<p><strong>选项：</strong> A. getMethod() B. getHeaderNames() C.
+getHeader(String name) D. getHeaders(String name)</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="setattribute的作用域">4. setAttribute的作用域</h3>
+<p><strong>题目：</strong>
+下列关于使用request.setAttribute()保存数据的说法中,正确的是？</p>
+<p><strong>选项：</strong> - A. 可以在本次请求中共享 - B.
+可以在本次会话中共享 - C. 可以在本次应用中共享 - D.
+可以在多个应用中共享</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong> request域的数据只在一次请求中有效。</p>
+<hr />
+<h3 id="动态包含语法">5. 动态包含语法</h3>
+<p><strong>题目：</strong> 下面关于动态包含的语法格式,书写正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;jsp:forward file="relativeURL" /&gt;</code> - B.
+<code>&lt;%@include file="relativeURL" %&gt;</code> - C.
+<code>&lt;jsp:include page="relativeURL" /&gt;</code> - D.
+<code>&lt;jsp:forward path="relativeURL" /&gt;</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解题思路：</strong>
+动态包含使用<code>&lt;jsp:include page="..." /&gt;</code>，静态包含使用<code>&lt;%@include file="..." %&gt;</code>。</p>
+<hr />
+<h3 id="usebean标签使用">6. useBean标签使用</h3>
+<p><strong>题目：</strong>
+如果想要在JSP中使用user包中的User类,则以下写法正确的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;jsp:useBean id="user" class="User" import="user.*" /&gt;</code>
+- B.
+<code>&lt;jsp:useBean id="user" class="user.User" scope="page" /&gt;</code>
+- C. <code>&lt;jsp:useBean name="user" class="user.User" /&gt;</code> -
+D. <code>&lt;jsp:useBean class="user.User.class" /&gt;</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+<code>class</code>属性需要写完整的包名.类名，<code>scope</code>默认为page。</p>
+<hr />
+<h3 id="getparametermap返回值">7. getParameterMap()返回值</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中getParameterMap()方法的返回值类型是？</p>
+<p><strong>选项：</strong> A. Object[] B. Enumeration C. String[] D.
+Map集合</p>
+<p><strong>正确答案：D</strong></p>
+<hr />
+<h3 id="setproperty的param属性">8. setProperty的param属性</h3>
+<p><strong>题目：</strong>
+在<code>&lt;jsp:setProperty&gt;</code>标签中,用于将请求参数中的值赋给JavaBean属性中参数的名字的是？</p>
+<p><strong>选项：</strong> A. property B. value C. param D. name</p>
+<p><strong>正确答案：C</strong></p>
+<hr />
+<h3 id="属性名不匹配">9. 属性名不匹配</h3>
+<p><strong>题目：</strong>
+当JavaBean属性名与jsp:setProperty标签中的属性名不一致时,则该属性的值为？</p>
+<p><strong>选项：</strong> A. 抛出异常 B. 属性值为null C. param none D.
+以上都不对</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="setter方法命名">10. setter方法命名</h3>
+<p><strong>题目：</strong>
+下面选项中,用于供外界设置JavaBean的price属性的方法是？</p>
+<p><strong>选项：</strong> A. setprice() B. setPrice() C. getprice() D.
+getPrice()</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+JavaBean规范：setter方法首字母大写，即<code>setPrice()</code>。</p>
+<hr />
+<h3 id="读写属性判断">11. 读写属性判断</h3>
+<p><strong>题目：</strong>
+下面选项中,如果一个javaBean属性既有getter方法,又有setter方法,则该属性为？</p>
+<p><strong>选项：</strong> A. 读写属性 B. 只写属性 C. 只读属性 D.
+只读或只写属性</p>
+<p><strong>正确答案：A</strong></p>
+<hr />
+<h3 id="include指令与jspinclude的区别">12.
+include指令与jsp:include的区别</h3>
+<p><strong>题目：</strong>
+下面关于include指令和<code>&lt;jsp:include&gt;</code>标签的区别描述,错误的是？</p>
+<p><strong>选项：</strong> - A.
+<code>&lt;jsp:include&gt;</code>标签被包含页面不可以改变响应头,而include指令可以改变响应头
+- B.
+<code>&lt;jsp:include&gt;</code>标签实现动态包含,而include指令实现静态包含
+- C.
+<code>&lt;jsp:include&gt;</code>标签运行时起作用,而include指令编译时起作用
+- D.
+<code>&lt;jsp:include&gt;</code>标签被包含页面可以改变响应头,而include指令不改变响应头</p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解题思路：</strong>
+D说反了。应该是include指令被包含页面不可以改变响应头，而jsp:include可以。</p>
+<hr />
+<h3 id="getheader多值处理">13. getHeader()多值处理</h3>
+<p><strong>题目：</strong>
+如果请求消息中有多个指定名称的头字段,则getHeader(String
+name)方法返回值是？</p>
+<p><strong>选项：</strong> - A. 第一个头字段所对应的值 - B. 将返回null -
+C. 多个指定名称头字段的一组值 - D. 最后一个头字段所对应的值</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>getHeader()</code>只返回第一个匹配的值。</p>
+<hr />
+<h3 id="请求包含的输出">14. 请求包含的输出</h3>
+<p><strong>题目：</strong>
+阅读代码（Servlet1和Servlet2），Servlet1通过include包含Servlet2，两个Servlet都输出内容。</p>
+<p><strong>正确答案：C. 正常显示:hello,servlet1,servlet2</strong></p>
+<p><strong>解题思路：</strong>
+请求包含时，两个Servlet的输出都会包含在响应中。</p>
+<hr />
+<h3 id="getparameter多值处理">15. getParameter()多值处理</h3>
+<p><strong>题目：</strong>
+如果请求消息中包含有多个该指定名称的参数,getParameter()方法的返回值是？</p>
+<p><strong>选项：</strong> A. 第一个参数的值 B. null C. 最后一个参数的值
+D. 所有值形成数组</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>getParameter()</code>返回第一个值，<code>getParameterValues()</code>返回所有值。</p>
+<hr />
+<h3 id="forward调用时机">16. forward()调用时机</h3>
+<p><strong>题目：</strong>
+当响应提交给客户端后再调用forward()方法会抛出？</p>
+<p><strong>选项：</strong> A. IllegalStateException B. StateException C.
+IOException D. SQLException</p>
+<p><strong>正确答案：A</strong></p>
+<hr />
+<h3 id="getquerystring适用的请求方式">17.
+getQueryString()适用的请求方式</h3>
+<p><strong>题目：</strong>
+下列选项中,哪种请求方式的参数可以使用getQueryString()方法获取到？</p>
+<p><strong>选项：</strong> A. get B. delete C. put D. post</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解题思路：</strong>
+<code>getQueryString()</code>获取URL中?后面的参数，只对GET请求有效。</p>
+<hr />
+<h3 id="getparametervalues用法">18. getParameterValues()用法</h3>
+<p><strong>题目：</strong> 访问URL:
+<code>http://www.haust.cn/HelloServlet?name=youjun&amp;name=haust&amp;age=30</code>
+则用getParameterValues(“name”)方法取到的值是？</p>
+<p><strong>选项：</strong> A. youjun B. {“youjun”,“haust”} C. haust D.
+youjun</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="获取requestdispatcher对象">19. 获取RequestDispatcher对象</h3>
+<p><strong>题目：</strong> 阅读代码片段:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>RequestDispatcher dispatcher <span class="op">=</span> request<span class="op">.</span><span class="fu">getRequestDispatcher</span><span class="op">(</span><span class="st">&quot;/test.jsp&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>下面选项中,可以正确得到RequestDispatcher的对象的是？</p>
+<p><strong>正确答案：A</strong>（与原代码相同）</p>
+<hr />
+<h3 id="setattributegetattributeremoveattribute">20.
+setAttribute/getAttribute/removeAttribute</h3>
+<p><strong>题目：</strong> 阅读代码:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">,</span><span class="st">&quot;张三&quot;</span><span class="op">);</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> username<span class="op">=(</span><span class="bu">String</span><span class="op">)</span>request<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;username:&quot;</span><span class="op">+</span>username<span class="op">);</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">,</span><span class="st">&quot;李四&quot;</span><span class="op">);</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>username<span class="op">=(</span><span class="bu">String</span><span class="op">)</span>request<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;username:&quot;</span><span class="op">+</span>username<span class="op">);</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">removeAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>username<span class="op">=(</span><span class="bu">String</span><span class="op">)</span>request<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;username:&quot;</span><span class="op">+</span>username<span class="op">);</span></span></code></pre></div>
+<p>控制台输出？</p>
+<p><strong>正确答案：B. 张三 李四 null</strong></p>
+<hr />
+<h3 id="setproperty的name属性">21. setProperty的name属性</h3>
+<p><strong>题目：</strong>
+<code>&lt;jsp:setProperty&gt;</code>标签中,用于指定JavaBean实例对象的名称的是？</p>
+<p><strong>选项：</strong> A. param B. name C. value D. property</p>
+<p><strong>正确答案：B</strong></p>
+<hr />
+<h3 id="get请求中文乱码解决方案">22. GET请求中文乱码解决方案</h3>
+<p><strong>题目：</strong>
+通过配置Tomcat来解决GET请求参数的乱码问题,在server.xml文件中的Connector节点下添加的属性是？</p>
+<p><strong>选项：</strong> - A. useBodyEncoding=“true” - B.
+useBodyEncodingForURI=“true” - C. useBodyEncoding=“false” - D.
+useBodyEncodingForURI=“false”</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解题思路：</strong>
+<code>useBodyEncodingForURI="true"</code>让Tomcat使用请求体的编码来解析URI参数。</p>
+<hr />
+<h3 id="setproperty的property属性">23. setProperty的property属性</h3>
+<p><strong>题目：</strong>
+在<code>&lt;jsp:setProperty&gt;</code>标签中,用于指定JavaBean实例对象的属性名的是？</p>
+<p><strong>选项：</strong> A. property B. name C. value D. param</p>
+<p><strong>正确答案：A</strong></p>
+<hr />
+<h3 id="usebean的500错误">24. useBean的500错误</h3>
+<p><strong>题目：</strong> 在JSP中有如下代码:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">&lt;jsp:useBean</span><span class="ot"> id</span>=<span class="st">&quot;manager&quot;</span><span class="ot"> scope</span>=<span class="st">&quot;page&quot;</span><span class="ot"> type</span>=<span class="st">&quot;cn.haust.chapter08.javabean.Manager&quot;</span><span class="bu"> /&gt;</span></span></code></pre></div>
+<p>如果出现500错误,可能的原因是？</p>
+<p><strong>正确答案：B.
+在指定的page域中找不到id=“manger”的对象</strong></p>
+<hr />
+<h3 id="include方法参数">25. include()方法参数</h3>
+<p><strong>题目：</strong>
+下面选项中关于请求包含include()方法的参数,正确的是？</p>
+<p><strong>选项：</strong> - A.
+依次为ServletRequest和ServletResponse两个 - B. 只有ServletRequest - C.
+只有ServletResponse - D. 依次为ServletResponse和ServletRequest两个</p>
+<p><strong>正确答案：A</strong></p>
+<hr />
+<h3 id="内省修改属性">26. 内省修改属性</h3>
+<p><strong>题目：</strong>
+下面代码中,哪个可以正确地使用内省修改对象p中name属性的值？</p>
+<p><strong>正确答案：C</strong></p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">PropertyDescriptor</span> pd <span class="op">=</span> <span class="kw">new</span> <span class="bu">PropertyDescriptor</span><span class="op">(</span><span class="st">&quot;name&quot;</span><span class="op">,</span>p<span class="op">.</span><span class="fu">getClass</span><span class="op">());</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Method</span> methodName <span class="op">=</span> pd<span class="op">.</span><span class="fu">getWriteMethod</span><span class="op">();</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>methodName<span class="op">.</span><span class="fu">invoke</span><span class="op">(</span>p<span class="op">,</span><span class="st">&quot;小明&quot;</span><span class="op">);</span></span></code></pre></div>
+<p><strong>解题思路：</strong>
+使用<code>getWriteMethod()</code>获取setter方法，然后通过<code>invoke()</code>调用。</p>
+<hr />
+<h3 id="getdateheader返回值">27. getDateHeader()返回值</h3>
+<p><strong>题目：</strong>
+下列关于HttpServletRequest接口中getDateHeader(String
+name)方法返回值的说法中,正确的是？</p>
+<p><strong>正确答案：B.
+由1970年1月1日0点0分0秒算起的以毫秒为单位的时间值</strong></p>
+<hr />
+<h3 id="getquerystring">28. getQueryString()</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中用于获取请求行中参数部分(?号后面的内容)的方法是？</p>
+<p><strong>正确答案：B. getQueryString()</strong></p>
+<hr />
+<h3 id="getprotocol">29. getProtocol()</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中,用于获取请求行中的协议名和版本的方法是？</p>
+<p><strong>正确答案：A. getProtocol()</strong></p>
+<hr />
+<h3 id="getcontextpath">30. getContextPath()</h3>
+<p><strong>题目：</strong>
+在HttpServletRequest接口中,用于获取请求URL中属于Web应用程序的路径的方法是？</p>
+<p><strong>正确答案：C. getContextPath()</strong></p>
+<hr />
+<h3 id="动态包含的执行顺序">31. 动态包含的执行顺序</h3>
+<p><strong>题目：</strong>
+阅读代码:b.jsp使用jsp:include包含a.jsp,a.jsp有5秒延迟。</p>
+<p><strong>正确答案：A.
+先输出b.jsp页面的内容,等待5秒,再输出a.jsp页面中的内容</strong></p>
+<p><strong>解题思路：</strong>
+动态包含是先执行包含页面，再执行被包含页面。</p>
+<hr />
+<h3 id="javabean规范判断">32. JavaBean规范判断</h3>
+<p><strong>题目：</strong> 阅读代码:Book类有private double
+price，有getter和setter方法。是否符合JavaBean规范？</p>
+<p><strong>正确答案：D. 符合javaBean规范</strong></p>
+<p><strong>解题思路：</strong>
+JavaBean需要：1)公共无参构造器（默认提供）2)私有属性
+3)getter/setter方法。该类符合。</p>
+<hr />
+<h3 id="setattributenull的效果">33. setAttribute(null)的效果</h3>
+<p><strong>题目：</strong> 阅读代码:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">,</span><span class="st">&quot;张三&quot;</span><span class="op">);</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> username<span class="op">=(</span><span class="bu">String</span><span class="op">)</span>request<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;username:&quot;</span><span class="op">+</span>username<span class="op">);</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">,</span><span class="kw">null</span><span class="op">);</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>username<span class="op">=(</span><span class="bu">String</span><span class="op">)</span>request<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;username:&quot;</span><span class="op">+</span>username<span class="op">);</span></span></code></pre></div>
+<p>控制台输出？</p>
+<p><strong>正确答案：C. 张三 null</strong></p>
+<p><strong>解题思路：</strong>
+<code>setAttribute("username",null)</code>后，<code>getAttribute("username")</code>返回null（因为值被设为null，但键仍存在）。</p>
+<hr />
+<h3 id="forward方法签名">34. forward()方法签名</h3>
+<p><strong>题目：</strong>
+RequestDispatcher接口中,用于将请求从一个Servlet传递给另外一个Web资源的方法是？</p>
+<p><strong>正确答案：B. forward(ServletRequest request, ServletResponse
+response)</strong></p>
+<hr />
+<h3 id="usebean的class属性">35. useBean的class属性</h3>
+<p><strong>题目：</strong>
+下面关于<code>&lt;jsp:useBean&gt;</code>标签的属性中,用于指定JavaBean的完整类名的是？</p>
+<p><strong>正确答案：A. class</strong></p>
+<hr />
+<h2 id="二填空题共15题30分">二、填空题（共15题，30分）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>36</td>
+<td>在JavaBean中,如果一个属性只有getter方法,则称属性为___属性</td>
+<td><strong>只读</strong></td>
+</tr>
+<tr class="even">
+<td>37</td>
+<td>除了RequestDispatcher接口的forward()方法可以实现转发外,还可以通过JSP的___标签来实现转发</td>
+<td><strong>jsp:forward</strong></td>
+</tr>
+<tr class="odd">
+<td>38</td>
+<td>通过配置Tomcat来解决GET请求参数的乱码问题,需要在server.xml文件中的Connector节点下添加___属性</td>
+<td><strong>useBodyEncodingForURI=“true”</strong></td>
+</tr>
+<tr class="even">
+<td>39</td>
+<td>在JavaBean中,如果一个属性既有getter方法,又有setter方法,则该属性为___属性</td>
+<td><strong>读写</strong></td>
+</tr>
+<tr class="odd">
+<td>40</td>
+<td>PropertyDescriptor类中用于修改JavaBean属性的方法是___</td>
+<td><strong>getWriteMethod()</strong></td>
+</tr>
+<tr class="even">
+<td>41</td>
+<td>在JavaBean中,如果一个属性只有setter方法,则该属性为___属性</td>
+<td><strong>只写</strong></td>
+</tr>
+<tr class="odd">
+<td>42</td>
+<td>ServletRequest接口中的setAttribute()方法,如果第二个参数为null,那么相当于调用了___方法</td>
+<td><strong>removeAttribute(name)</strong></td>
+</tr>
+<tr class="even">
+<td>43</td>
+<td>请求包含指的是使用___方法将Servlet请求转发给其它Web资源进行处理</td>
+<td><strong>include(ServletRequest request, ServletResponse
+response)</strong></td>
+</tr>
+<tr class="odd">
+<td>44</td>
+<td><code>&lt;jsp:useBean&gt;</code>标签的scope属性取值可以是page、___、session和application</td>
+<td><strong>request</strong></td>
+</tr>
+<tr class="even">
+<td>45</td>
+<td>JSP标签中,<code>&lt;jsp:setProperty&gt;</code>标签可用来为JavaBean对象___</td>
+<td><strong>设置属性</strong></td>
+</tr>
+<tr class="odd">
+<td>46</td>
+<td>getContentType()方法用于获取头字段___的值,结果为String类型</td>
+<td><strong>Content-Type</strong></td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td>getContentLength()方法用于获取头字段___的值,结果为int类型</td>
+<td><strong>Content-Length</strong></td>
+</tr>
+<tr class="odd">
+<td>48</td>
+<td>JavaBean是Java开发语言中一个可以重复使用的软件组件,它本质上就是一个Java类,而且规定了在编写时要遵守相应的___</td>
+<td><strong>规范</strong></td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>PropertyDescriptor类中用于读取JavaBean属性的方法是___</td>
+<td><strong>getReadMethod()</strong></td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>HttpServletRequest接口的方法___,用于获取HTTP请求消息中的请求方式</td>
+<td><strong>getMethod()</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共25题25分">三、判断题（共25题，25分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>51</td>
+<td>JavaBean编写类时可以随意编写</td>
+<td>❌错</td>
+<td>需要遵守JavaBean规范</td>
+</tr>
+<tr class="even">
+<td>52</td>
+<td>getIntHeader()方法,如果获取到的头字段值不能转为int类型,将发生NumberFormatException</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>53</td>
+<td>Java的内省提供了读取JavaBean属性的方法,只要使用PropertyDescriptor类的getReadMethod()方法即可</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>54</td>
+<td>HttpServletRequest的getHeader()方法获取指定头字段值,如果没有则返回null</td>
+<td>❌错（原答案给错）</td>
+<td>实际上没有指定头字段时确实返回null，这里答案可能有误</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>setCharacterEncoding()方法对GET与POST请求都有效</td>
+<td>❌错</td>
+<td>只对POST请求有效</td>
+</tr>
+<tr class="even">
+<td>56</td>
+<td>在<code>&lt;jsp:setProperty&gt;</code>标签中value和param属性不可以同时使用</td>
+<td>❌错（原答案给错）</td>
+<td>实际上value和param不能同时使用，这里答案可能有误</td>
+</tr>
+<tr class="odd">
+<td>57</td>
+<td>通过请求转发来实现目标资源的访问是服务器内部的行为,对于客户端来说是一次请求过程</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>58</td>
+<td><code>&lt;jsp:getProperty&gt;</code>标签可以访问JavaBean的属性,并把属性值转换成字符串发送到响应输出流中</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>59</td>
+<td>如果请求消息中没有指定名称的参数,则getParameter()方法返回null</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>60</td>
+<td>HttpServletRequest的getParameterValues()方法返回一个String类型的数组</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>61</td>
+<td><code>&lt;jsp:useBean&gt;</code>标签默认在request域中查找</td>
+<td>❌错</td>
+<td>默认在page域中查找</td>
+</tr>
+<tr class="even">
+<td>62</td>
+<td>通过请求转发时,由于客户端发送了两次请求,所以浏览器地址栏发生改变</td>
+<td>❌错</td>
+<td>转发是服务器内部行为，地址栏不变</td>
+</tr>
+<tr class="odd">
+<td>63</td>
+<td>getParameterNames()方法的返回值是Enumeration类型</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>64</td>
+<td>getParameterMap()方法的返回值是Map类型</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>65</td>
+<td>HttpServletResponse的getRequestURI()方法,可以获取请求行中的主机地址、端口号和资源名称</td>
+<td>❌错</td>
+<td>getRequestURI()是HttpServletRequest的方法</td>
+</tr>
+<tr class="even">
+<td>66</td>
+<td>HttpServletResponse的getMethod()方法,用于获取HTTP请求消息中的请求方式</td>
+<td>❌错</td>
+<td>getMethod()是HttpServletRequest的方法</td>
+</tr>
+<tr class="odd">
+<td>67</td>
+<td>include()方法实现请求包含时,响应消息中不包含当前Servlet的响应消息</td>
+<td>❌错</td>
+<td>包含当前Servlet和被包含资源的响应消息</td>
+</tr>
+<tr class="even">
+<td>68</td>
+<td>getContextPath()方法获取URL中属于Web应用程序的路径</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>69</td>
+<td><code>&lt;jsp:getProperty&gt;</code>标签中的name属性和property属性都必须设置</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>70</td>
+<td>解决GET请求乱码需要在server.xml中添加useBodyEncodingForURI=“true”</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>71</td>
+<td>getParameter()方法返回最后一个出现的参数值</td>
+<td>❌错</td>
+<td>返回第一个参数值</td>
+</tr>
+<tr class="even">
+<td>72</td>
+<td>转发的forward()方法,必须在响应提交给客户端之前被调用,否则将抛出IllegalStateException</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>73</td>
+<td>getDateHeader()方法返回自1970年1月1日算起的以毫秒为单位的时间值</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>74</td>
+<td>内省提供了修改JavaBean属性的方法,只要使用getReadMethod()即可</td>
+<td>❌错</td>
+<td>应该是getWriteMethod()</td>
+</tr>
+<tr class="odd">
+<td>75</td>
+<td>getQueryString()方法用于获取请求行中的参数部分,它可以取得post提交的参数</td>
+<td>❌错</td>
+<td>只能获取GET请求的参数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第三次考试---httpservletresponsesession">第三次考试 -
+HttpServletResponse/Session</h1>
+<blockquote>
+<p>共70题 | 单选40题(55分) + 填空15题(30分) + 判断15题(15分)</p>
+</blockquote>
+<h2 id="一单选题共40题55分">一、单选题（共40题，55分）</h2>
+<h3 id="设置响应编码输出中文">1. 设置响应编码输出中文</h3>
+<p><strong>题目：</strong> 阅读servlet的doGet()方法中代码片段:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> data<span class="op">=</span><span class="st">&quot;中国&quot;</span><span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>response<span class="op">.</span><span class="fu">setContentType</span><span class="op">(</span><span class="st">&quot;text/html;charset=utf-8&quot;</span><span class="op">);</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">PrintWriter</span> out<span class="op">=</span>response<span class="op">.</span><span class="fu">getWriter</span><span class="op">();</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>out<span class="op">.</span><span class="fu">println</span><span class="op">(</span>data<span class="op">);</span></span></code></pre></div>
+<p>当打开浏览器直接访问时看到的结果？</p>
+<p><strong>正确答案：A. 正常输出:中国</strong></p>
+<hr />
+<h3 id="setcharacterencoding效果">2. setCharacterEncoding效果</h3>
+<p><strong>题目：</strong>
+只设置<code>response.setCharacterEncoding("utf-8")</code>，不设置Content-Type，浏览器手动选择UTF-8编码后能看到什么？</p>
+<p><strong>正确答案：B. 正常输出:中国</strong></p>
+<hr />
+<h3 id="httpservletresponse对象创建">3. HttpServletResponse对象创建</h3>
+<p><strong>题目：</strong>
+下列关于HttpServletResponse对象的创建,说法正确的是？</p>
+<p><strong>正确答案：A. 由Servlet容器负责创建</strong></p>
+<hr />
+<h3 id="获取字节输出流">4. 获取字节输出流</h3>
+<p><strong>题目：</strong>
+HttpServletResponse对象中用于获取字节输出流对象的方法是？</p>
+<p><strong>正确答案：B. getOutputStream()</strong></p>
+<hr />
+<h3 id="设置响应内容大小">5. 设置响应内容大小</h3>
+<p><strong>题目：</strong>
+下面选项中,用于设置响应消息的实体内容大小的方法是？</p>
+<p><strong>正确答案：D. setContentLength()</strong></p>
+<hr />
+<h3 id="session超时时间">6. Session超时时间</h3>
+<p><strong>题目：</strong> 阅读web.xml配置:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode xml"><code class="sourceCode xml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">session-config</span>&gt;</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">session-timeout</span>&gt;30&lt;/<span class="kw">session-timeout</span>&gt;</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">session-config</span>&gt;</span></code></pre></div>
+<p>表示会话超时时间是？</p>
+<p><strong>正确答案：C. 30分钟</strong></p>
+<hr />
+<h3 id="获取最后访问时间">7. 获取最后访问时间</h3>
+<p><strong>题目：</strong>
+下面选项中,用于返回客户端最后一次发送与session相关请求的时间的方法是？</p>
+<p><strong>正确答案：D. session.getLastAccessedTime()</strong></p>
+<hr />
+<h3 id="表示请求成功的常量">8. 表示请求成功的常量</h3>
+<p><strong>题目：</strong>
+下列选项中,属于HttpServletResponse接口中定义的表示请求成功的常量是？</p>
+<p><strong>正确答案：C. SC_OK (200)</strong></p>
+<hr />
+<h3 id="响应消息设置">9. 响应消息设置</h3>
+<p><strong>题目：</strong>
+当Servlet发送响应消息时,需要在响应消息中设置？</p>
+<p><strong>正确答案：B. 状态码</strong></p>
+<hr />
+<h3 id="判断session是否新建">10. 判断Session是否新建</h3>
+<p><strong>题目：</strong>
+下面选项中,用于判断当前HttpSession对象是否为新建的方法是？</p>
+<p><strong>正确答案：B. session.isNew()</strong></p>
+<hr />
+<h3 id="sendredirect所在接口">11. sendRedirect所在接口</h3>
+<p><strong>题目：</strong> sendRedirect()方法所在的接口是？</p>
+<p><strong>正确答案：B. HttpServletResponse</strong></p>
+<hr />
+<h3 id="设置响应字符编码">12. 设置响应字符编码</h3>
+<p><strong>题目：</strong>
+HttpServletResponse接口中用于设置响应消息的实体内容使用的字符编码的方法是？</p>
+<p><strong>正确答案：D. setCharacterEncoding(String
+charset)</strong></p>
+<hr />
+<h3 id="获取会话标识号">13. 获取会话标识号</h3>
+<p><strong>题目：</strong>
+能够返回与当前HttpSession对象关联的会话标识号的方法是？</p>
+<p><strong>正确答案：B. session.getId()</strong></p>
+<hr />
+<h3 id="同时使用输出流异常">14. 同时使用输出流异常</h3>
+<p><strong>题目：</strong>
+HttpServletResponse对象中的getOutputStream()和getWriter()方法同时使用,将产生的异常是？</p>
+<p><strong>正确答案：D. IllegalStateException</strong></p>
+<hr />
+<h3 id="获取servletcontext">15. 获取ServletContext</h3>
+<p><strong>题目：</strong>
+下面选项中,用于返回当前HttpSession对象所属于的WEB应用程序对象的方法是？</p>
+<p><strong>正确答案：C. session.getServletContext()</strong></p>
+<hr />
+<h3 id="实现跳转">16. 实现跳转</h3>
+<p><strong>题目：</strong>
+下面选项中,能实现2秒跳到传智播客官网首页的是？</p>
+<p><strong>正确答案：D.
+response.setHeader(“Refresh”,“2;URL=http://www.itcast.cn”);</strong></p>
+<hr />
+<h3 id="url重写方法">17. URL重写方法</h3>
+<p><strong>题目：</strong> 重写URL的方法encodeURL(String
+url)所在的接口是？</p>
+<p><strong>正确答案：B. HttpServletResponse</strong></p>
+<hr />
+<h3 id="重定向请求次数">18. 重定向请求次数</h3>
+<p><strong>题目：</strong>
+一次重定向过程中,浏览器会发出多少次服务器请求？</p>
+<p><strong>正确答案：A. 2次</strong></p>
+<hr />
+<h3 id="sc_not_found状态码">19. SC_NOT_FOUND状态码</h3>
+<p><strong>题目：</strong>
+HttpServletResponse接口中表示状态码404的常量是？</p>
+<p><strong>正确答案：D. SC_NOT_FOUND</strong></p>
+<hr />
+<h3 id="getsession所在接口">20. getSession()所在接口</h3>
+<p><strong>题目：</strong>
+在JavaEE中,定义了getSession()方法的接口是？</p>
+<p><strong>正确答案：D. HttpServletRequest</strong></p>
+<hr />
+<h3 id="getoutputstream输出整数">21. getOutputStream()输出整数</h3>
+<p><strong>题目：</strong> 使用getOutputStream()输出整数97的结果是？</p>
+<p><strong>正确答案：A. a</strong></p>
+<p><strong>解题思路：</strong>
+OutputStream输出字节，97对应ASCII字符’a’。</p>
+<hr />
+<h3 id="设置浏览器编码">22. 设置浏览器编码</h3>
+<p><strong>题目：</strong>
+下面选项中,用于设置浏览器显示文本采用UTF-8编码的是？</p>
+<p><strong>正确答案：D.
+response.setHeader(“Content-Type”,“text/html;charset=utf-8”);</strong></p>
+<hr />
+<h3 id="获取httpsession对象">23. 获取HttpSession对象</h3>
+<p><strong>题目：</strong>
+下面关于获得HttpSession对象的说法正确的是？</p>
+<p><strong>正确答案：A.
+使用ServletRequest对象的getSession()方法</strong></p>
+<hr />
+<h3 id="printwriter用途">24. PrintWriter用途</h3>
+<p><strong>题目：</strong>
+getWriter()方法返回的PrintWriter对象用于输出？</p>
+<p><strong>正确答案：A. 字符文本数据</strong></p>
+<hr />
+<h3 id="完整设置响应编码">25. 完整设置响应编码</h3>
+<p><strong>题目：</strong>
+阅读代码:同时设置setCharacterEncoding和Content-Type。</p>
+<p><strong>正确答案：D. 正常输出:中国</strong></p>
+<hr />
+<h3 id="session中传递数据">26. Session中传递数据</h3>
+<p><strong>题目：</strong>
+ServletA需要将数据传递给ServletB，它们在同一会话范围内，应该用？</p>
+<p><strong>正确答案：A.
+request.getSession().setAttribute(“ID”,id);</strong></p>
+<hr />
+<h3 id="获取session创建时间">27. 获取Session创建时间</h3>
+<p><strong>题目：</strong>
+下面选项中,用于返回session创建的时间的方法是？</p>
+<p><strong>正确答案：C. session.getCreationTime()</strong></p>
+<hr />
+<h3 id="重定向方法">28. 重定向方法</h3>
+<p><strong>题目：</strong>
+下面选项中,属于HttpServletResponse接口中用于实现请求重定向的方法是？</p>
+<p><strong>正确答案：D. sendRedirect()</strong></p>
+<hr />
+<h3 id="sendredirect原理">29. sendRedirect()原理</h3>
+<p><strong>题目：</strong>
+下面关于实现重定向sendRedirect()方法的描述中,正确的是？</p>
+<p><strong>正确答案：D. 生成302响应码和Location响应头</strong></p>
+<hr />
+<h3 id="同时使用输出流重复考点">30. 同时使用输出流（重复考点）</h3>
+<p><strong>题目：</strong>
+Servlet1中同时使用getOutputStream和getWriter，结果会？</p>
+<p><strong>正确答案：C. 服务器端报错</strong></p>
+<hr />
+<h3 id="session计数器">31. Session计数器</h3>
+<p><strong>题目：</strong>
+能够实现将用户会话中的”counter”计数器的值增加1的选项是？</p>
+<p><strong>正确答案：C</strong></p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>HttpSession session<span class="op">=</span>request<span class="op">.</span><span class="fu">getSession</span><span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Integer</span> ival<span class="op">=(</span><span class="bu">Integer</span><span class="op">)</span>session<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">&quot;counter&quot;</span><span class="op">);</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>ival<span class="op">==</span><span class="kw">null</span><span class="op">){</span>ival<span class="op">=</span><span class="kw">new</span> <span class="bu">Integer</span><span class="op">(</span><span class="dv">1</span><span class="op">);}</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span><span class="op">{</span>ival<span class="op">=</span><span class="kw">new</span> <span class="bu">Integer</span><span class="op">(</span>ival<span class="op">.</span><span class="fu">intValue</span><span class="op">()+</span><span class="dv">1</span><span class="op">);}</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>session<span class="op">.</span><span class="fu">setAttribute</span><span class="op">(</span><span class="st">&quot;counter&quot;</span><span class="op">,</span>ival<span class="op">);</span></span></code></pre></div>
+<hr />
+<h3 id="数据存储形式">32. 数据存储形式</h3>
+<p><strong>题目：</strong>
+下列关于计算机中数据的存储形式,说法正确的是？</p>
+<p><strong>正确答案：B. 二进制数据</strong></p>
+<hr />
+<h3 id="sc_ok状态码">33. SC_OK状态码</h3>
+<p><strong>题目：</strong>
+HttpServletResponse接口中定义的SC_OK常量的状态码是？</p>
+<p><strong>正确答案：A. 200</strong></p>
+<hr />
+<h3 id="getinputstream返回类型">34. getInputStream()返回类型</h3>
+<p><strong>题目：</strong>
+HttpServletResponse接口的getInputStream()方法返回的对象类型是？</p>
+<p><strong>正确答案：A. ServletOutputStream</strong></p>
+<hr />
+<h3 id="获取当前session">35. 获取当前Session</h3>
+<p><strong>题目：</strong>
+下面选项中,可以获取到代表当前会话的Session对象的方法是？</p>
+<p><strong>正确答案：B. request.getSession()</strong></p>
+<hr />
+<h3 id="设置本地化信息">36. 设置本地化信息</h3>
+<p><strong>题目：</strong>
+HttpServletResponse接口中用于设置响应消息的本地化信息的方法是？</p>
+<p><strong>正确答案：C. setLocale(Locale l)</strong></p>
+<hr />
+<h3 id="sc_not_found状态码值">37. SC_NOT_FOUND状态码值</h3>
+<p><strong>题目：</strong>
+SC_NOT_FOUND常量表示没有找到资源,其状态码是？</p>
+<p><strong>正确答案：A. 404</strong></p>
+<hr />
+<h3 id="设置字符编码">38. 设置字符编码</h3>
+<p><strong>题目：</strong>
+下面用于设置字符流输出文本采用UTF-8编码的选项中,正确的是？</p>
+<p><strong>正确答案：A.
+response.setCharacterEncoding(“utf-8”)</strong></p>
+<hr />
+<h3 id="session保存位置">39. Session保存位置</h3>
+<p><strong>题目：</strong>
+下面选项中,关于session保存数据的位置,说法正确的是？</p>
+<p><strong>正确答案：A. 数据保存在服务器端</strong></p>
+<hr />
+<h3 id="重定向方法-1">40. 重定向方法</h3>
+<p><strong>题目：</strong>
+下面选项中,能实现转向另外一个Servlet的方法是？</p>
+<p><strong>正确答案：A.
+运用HttpServletResponse接口的sendRedirect()方法</strong></p>
+<hr />
+<h2 id="二填空题共15题30分-1">二、填空题（共15题，30分）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>41</td>
+<td>在HttpServletResponse接口中,定义了一个___方法,用于实现请求重定向</td>
+<td><strong>sendRedirect()</strong></td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>可以用一条语句替代两条语句:response.setCharacterEncoding和response.setHeader(“Content-Type”)</td>
+<td><strong>response.setContentType(“text/html;charset=utf-8”)</strong></td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>SC_NOT_FOUND常量表示状态码___</td>
+<td><strong>404</strong></td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>当传输文本时,如果编码和解码使用的码表不一致,就会导致___问题</td>
+<td><strong>乱码</strong></td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>Session是一种将会话数据保存到___端的技术</td>
+<td><strong>服务器</strong></td>
+</tr>
+<tr class="even">
+<td>46</td>
+<td>Tomcat容器中会话的有效时间可以在web.xml文件中设置,默认会话过期时间为___分钟</td>
+<td><strong>30</strong></td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>SC_OK常量表示状态码___</td>
+<td><strong>200</strong></td>
+</tr>
+<tr class="even">
+<td>48</td>
+<td>sendRedirect()方法的实质是生成_<strong>响应码和</strong>_响应头</td>
+<td><strong>302</strong>; <strong>Location</strong></td>
+</tr>
+<tr class="odd">
+<td>49</td>
+<td>所谓请求重定向,指的是Web服务器接受到客户端的请求后,又再次___客户端重新发送请求</td>
+<td><strong>引导</strong></td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>URL重写可以使用HttpServletResponse接口中所提供的方法_<strong>和</strong>_来实现</td>
+<td><strong>encodeURL(String url)</strong>;
+<strong>encodeRedirectURL(String url)</strong></td>
+</tr>
+<tr class="odd">
+<td>51</td>
+<td>要使当前页面定时每3秒刷新一次,实现的语句是___</td>
+<td><strong>response.setHeader(“Refresh”,“3”)</strong></td>
+</tr>
+<tr class="even">
+<td>52</td>
+<td>HttpServletResponse接口中,提供了一个___方法,该方法用于设置字符的编码方式</td>
+<td><strong>setCharacterEncoding()</strong></td>
+</tr>
+<tr class="odd">
+<td>53</td>
+<td>response对象的getOutputStream()和getWriter()方法都可以发送响应消息体,但两者不能同时使用,否则将产生___异常</td>
+<td><strong>IllegalStateException</strong></td>
+</tr>
+<tr class="even">
+<td>54</td>
+<td>我们可以通过response.setHeader(“Refresh”,“5”)语句,使当前页面定时每___秒刷新一次</td>
+<td><strong>5</strong></td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>当Servlet向客户端回送响应消息时需要在响应消息中设置___</td>
+<td><strong>状态码</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共15题15分">三、判断题（共15题，15分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>56</td>
+<td>如果没有设置Content-Type头字段,那么setCharacterEncoding()方法设置的字符集编码不会出现在HTTP消息的响应头中</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>Session是一种将会话数据保存到服务器端的技术,需要借助Cookie技术来实现</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>58</td>
+<td>通过response.setHeader(“Refresh”,“3”)使当前页面定时每3毫秒刷新一次</td>
+<td>❌错</td>
+<td>是每3秒</td>
+</tr>
+<tr class="even">
+<td>59</td>
+<td>当浏览器禁用cookie后,原来已实现的关于session的应用程序不会受到影响</td>
+<td>❌错</td>
+<td>会受到影响，Session依赖Cookie</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>在HttpServletResponse接口中,发送状态码的方法是setStatus()</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>61</td>
+<td>HttpServletResponse对象中用于获取ServletOutputStream的方法是getOutputStream()</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>计算机中的数据都是以文本形式存储的</td>
+<td>❌错</td>
+<td>是二进制形式</td>
+</tr>
+<tr class="even">
+<td>63</td>
+<td>当Servlet向客户端回送响应消息时需要在响应消息中设置状态码</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>Session对象的getLastAccessedTime()方法返回自1970年1月1日算起的以毫秒为单位的时间值</td>
+<td>❌错（原答案给错）</td>
+<td>实际上确实是毫秒，这里答案可能有误</td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>无论浏览器是否支持Cookie,都需要在每次响应的页面中对URL地址进行重写</td>
+<td>❌错（原答案给错）</td>
+<td>只有当浏览器禁用Cookie时才需要URL重写</td>
+</tr>
+<tr class="odd">
+<td>66</td>
+<td>Response对象的getOutputStream()和getWriter()方法可以同时使用</td>
+<td>❌错</td>
+<td>不能同时使用</td>
+</tr>
+<tr class="even">
+<td>67</td>
+<td>Tomcat容器中会话的有效时间可以在web.xml文件中设置,默认会话过期时间为30分钟</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>68</td>
+<td>request.getSession(false)的作用是返回存在的Session对象,当不存在时创建新的</td>
+<td>❌错</td>
+<td>false表示不存在时不创建，返回null</td>
+</tr>
+<tr class="even">
+<td>69</td>
+<td>一次性验证码可以限制人们使用软件来暴力猜测密码</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>70</td>
+<td>所谓请求重定向,指的是Web服务器接受到客户端的请求后,又再次引导客户端重新发送请求,指定了一个新的资源路径</td>
+<td>✅对</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第四次考试---cookiesessionjsp隐式对象">第四次考试 -
+Cookie/Session/JSP隐式对象</h1>
+<blockquote>
+<p>共50题 | 单选34题(68分) + 填空6题(12分) + 判断10题(20分)</p>
+</blockquote>
+<h2 id="一单选题共34题68分">一、单选题（共34题，68分）</h2>
+<h3 id="pagecontext类">1. pageContext类</h3>
+<p><strong>题目：</strong> JSP隐式对象pageContext所对应的类是？</p>
+<p><strong>正确答案：A. javax.servlet.jsp.PageContext</strong></p>
+<hr />
+<h3 id="获取cookie值">2. 获取Cookie值</h3>
+<p><strong>题目：</strong>
+下面选项中,哪个方法可以用于获取Cookie的信息？</p>
+<p><strong>正确答案：C. String getValue()</strong></p>
+<hr />
+<h3 id="删除cookie">3. 删除Cookie</h3>
+<p><strong>题目：</strong>
+阅读代码:创建了Cookie,Path为/,由localhost删除Cookie信息,需要填写什么代码？</p>
+<p><strong>正确答案：B. cookie.setPath(“/”);
+cookie.setMaxAge(0);</strong></p>
+<p><strong>解题思路：</strong> 删除Cookie需要：1)设置相同的path
+2)将maxAge设为0 3)添加到响应。</p>
+<hr />
+<h3 id="setmaxage0的含义">4. setMaxAge(0)的含义</h3>
+<p><strong>题目：</strong>
+下面关于setMaxAge(0)方法的描述中,正确的是？</p>
+<p><strong>正确答案：D. 通知浏览器立即删除这个Cookie信息</strong></p>
+<hr />
+<h3 id="application_scope常量">5. APPLICATION_SCOPE常量</h3>
+<p><strong>题目：</strong>
+下面pageContext常量中,用于代表Web应用程序范围的是？</p>
+<p><strong>正确答案：D. APPLICATION_SCOPE</strong></p>
+<hr />
+<h3 id="out和response.getwriter">6. out和response.getWriter()</h3>
+<p><strong>题目：</strong>
+阅读JSP代码片段:同时使用out.println和response.getWriter().println</p>
+<p><strong>正确答案：D. second line first line</strong></p>
+<p><strong>解题思路：</strong>
+out是JspWriter（带缓冲），response.getWriter()是PrintWriter。当使用response.getWriter()时，会先flush
+out的缓冲区，所以输出顺序是先second line再first line。</p>
+<hr />
+<h3 id="cookie-path有效性">7. Cookie path有效性</h3>
+<p><strong>题目：</strong>
+下面关于Cookie的path属性有效性的说法中,正确的是？</p>
+<p><strong>正确答案：B.
+只对当前访问路径所属的目录及其子目录有效</strong></p>
+<hr />
+<h3 id="cookie保存位置">8. Cookie保存位置</h3>
+<p><strong>题目：</strong>
+下列选项中,关于Cookie中保存的数据,说法正确的是？</p>
+<p><strong>正确答案：B. 保存在客户端浏览器中</strong></p>
+<hr />
+<h3 id="获取cookie名称">9. 获取Cookie名称</h3>
+<p><strong>题目：</strong> 下面选项中,用于获取Cookie名称的方法是？</p>
+<p><strong>正确答案：D. String getName()</strong></p>
+<hr />
+<h3 id="获取cookie值重复考点">10. 获取Cookie值（重复考点）</h3>
+<p><strong>题目：</strong> 下面选项中,用于获取Cookie值的方法是？</p>
+<p><strong>正确答案：C. String getValue()</strong></p>
+<hr />
+<h3 id="获取客户端所有cookie">11. 获取客户端所有Cookie</h3>
+<p><strong>题目：</strong>
+下面选项中,能够用于获取客户端所有cookie对象的方法是？</p>
+<p><strong>正确答案：B. Cookie[]
+cookies=request.getCookies();</strong></p>
+<hr />
+<h3 id="set-cookie响应头格式">12. Set-Cookie响应头格式</h3>
+<p><strong>题目：</strong>
+下面选项中,哪个是设置Set-Cookie响应头字段正确的书写格式？</p>
+<p><strong>正确答案：B. Set-Cookie: user=haust; Path=/;</strong></p>
+<hr />
+<h3 id="out对象类型">13. out对象类型</h3>
+<p><strong>题目：</strong> 在JSP中,out隐式对象所对应的类是？</p>
+<p><strong>正确答案：C. JspWriter</strong></p>
+<hr />
+<h3 id="jsp作用域对象">14. JSP作用域对象</h3>
+<p><strong>题目：</strong>
+下面选项中,关于JSP作用域对象的描述,错误的是？</p>
+<p><strong>正确答案：D. application对象可以被多个应用共享</strong></p>
+<p><strong>解题思路：</strong>
+application对象只在一个应用内共享，不是多个应用。</p>
+<hr />
+<h3 id="pagecontext的findattribute">15. pageContext的findAttribute</h3>
+<p><strong>题目：</strong>
+下面选项中,属于pageContext提供的用于从四个域对象中查找属性的方法是？</p>
+<p><strong>正确答案：C. findAttribute</strong></p>
+<hr />
+<h3 id="设置cookie有效域">16. 设置Cookie有效域</h3>
+<p><strong>题目：</strong>
+下面选项中,哪个方法可以用于设置Cookie的有效域？</p>
+<p><strong>正确答案：A. void setDomain(String pattern)</strong></p>
+<hr />
+<h3 id="更改cookie存活时间">17. 更改Cookie存活时间</h3>
+<p><strong>题目：</strong> 下列选项中,可以更改Cookie的存活时间的是？</p>
+<p>**正确答案：C. cookie.setMaxAge(3600*24)**</p>
+<hr />
+<h3 id="cookie-path对全站有效">18. Cookie path对全站有效</h3>
+<p><strong>题目：</strong>
+若想设置Cookie的path属性对本站点所有资源访问时都有效,需要将path属性设置为？</p>
+<p><strong>正确答案：A. path属性设置为”/“</strong></p>
+<hr />
+<h3 id="服务器发送cookie的本质">19. 服务器发送Cookie的本质</h3>
+<p><strong>题目：</strong>
+下面选项中,哪一个是服务器向客户端发送Cookie的本质？</p>
+<p><strong>正确答案：C.
+在HTTP响应头字段中增加Set-Cookie响应头字段</strong></p>
+<hr />
+<h3 id="cookie-path设置">20. Cookie path设置</h3>
+<p><strong>题目：</strong>
+下面选项中,能够使浏览器在访问chapter06工程资源时都会回送Cookie信息的正确写法是？</p>
+<p><strong>正确答案：B. cookie.setPath(“/chapter06”)</strong></p>
+<hr />
+<h3 id="exception隐式对象">21. exception隐式对象</h3>
+<p><strong>题目：</strong>
+下面选项中,用于封装JSP中抛出的异常信息的隐式对象是？</p>
+<p><strong>正确答案：A. exception</strong></p>
+<hr />
+<h3 id="cookie类包名">22. Cookie类包名</h3>
+<p><strong>题目：</strong> 下列选项中,Cookie类所在的完整包的写法是？</p>
+<p><strong>正确答案：D. javax.servlet.http.Cookie</strong></p>
+<hr />
+<h3 id="cookie-domain默认值">23. Cookie domain默认值</h3>
+<p><strong>题目：</strong>
+下面选项中,关于Cookie的domain属性默认取值的说法中,正确的是？</p>
+<p><strong>正确答案：A. 默认值为当前主机名</strong></p>
+<hr />
+<h3 id="创建cookie">24. 创建Cookie</h3>
+<p><strong>题目：</strong>
+下列选项中,能够创建Cookie,并将当前时间作为值发送给客户端的代码是？</p>
+<p><strong>正确答案：A. Cookie cookie=new Cookie(“lastAccess”,new
+Date().toLocaleString()); response.addCookie(cookie);</strong></p>
+<hr />
+<h3 id="session.invalidate后的输出">25.
+session.invalidate()后的输出</h3>
+<p><strong>题目：</strong>
+阅读代码:session中没有属性，先getAttribute输出null，然后invalidate()，再getAttribute输出？</p>
+<p><strong>正确答案：A. null null</strong></p>
+<hr />
+<h3 id="cookie创建后更改">26. Cookie创建后更改</h3>
+<p><strong>题目：</strong> 下面选项中,关于Cookie的说法正确的是？</p>
+<p><strong>正确答案：C.
+Cookie一旦创建,名称不能更改,但值可以更改</strong></p>
+<hr />
+<h3 id="异常处理页面">27. 异常处理页面</h3>
+<p><strong>题目：</strong>
+阅读代码:Exception.jsp有异常(3/0)，error.jsp有isErrorPage=“true”，访问exception.jsp会？</p>
+<p><strong>正确答案：A. 页面出现500错误同时控制台出现异常</strong></p>
+<p><strong>注意：</strong>
+这里需要在Exception.jsp中配置errorPage=“error.jsp”才能跳转，如果没配置就直接500错误。</p>
+<hr />
+<h3 id="setmaxage参数单位">28. setMaxAge参数单位</h3>
+<p><strong>题目：</strong> Cookie的setMaxAge(int
+expiry)方法中,参数expiry代表的是cookie过期的？</p>
+<p><strong>正确答案：B. 秒数</strong></p>
+<hr />
+<h3 id="cookie发送次数">29. Cookie发送次数</h3>
+<p><strong>题目：</strong>
+下列选项中,客户端在一次会话过程中可以发送Cookie？</p>
+<p><strong>正确答案：A. 多次</strong></p>
+<hr />
+<h3 id="exception对应类">30. exception对应类</h3>
+<p><strong>题目：</strong> 在JSP中,exception隐式对象所对应的类是？</p>
+<p><strong>正确答案：B. java.lang.Throwable</strong></p>
+<hr />
+<h3 id="application隐式对象类">31. application隐式对象类</h3>
+<p><strong>题目：</strong>
+下列选项中,哪个是application隐式对象所属的类？</p>
+<p><strong>正确答案：B. ServletContext</strong></p>
+<hr />
+<h3 id="out对象用途">32. out对象用途</h3>
+<p><strong>题目：</strong>
+下面选项中,用于向客户端发送文本形式实体内容的JSP隐式对象是？</p>
+<p><strong>正确答案：B. out</strong></p>
+<hr />
+<h3 id="设置cookie有效域-1">33. 设置Cookie有效域</h3>
+<p><strong>题目：</strong>
+下面选项中,哪个方法用于设置Cookie的有效域？</p>
+<p><strong>正确答案：A. void setDomain(String uri)</strong></p>
+<hr />
+<h3 id="创建cookie对象">34. 创建Cookie对象</h3>
+<p><strong>题目：</strong>
+下列选项中,能够正确创建Cookie对象的语句是？</p>
+<p><strong>正确答案：B. Cookie c=new
+Cookie(“name”,“haust”);</strong></p>
+<hr />
+<h2 id="二填空题共6题12分">二、填空题（共6题，12分）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>35</td>
+<td>pageContext对象提供了四个代表域作用范围的常量,它们分别是___、REQUEST_SCOPE、SESSION_SCOPE和APPLICATION_SCOPE</td>
+<td><strong>PAGE_SCOPE</strong></td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>在一个Cookie对象中,若调用了setMaxAge(0)方法,则表示___</td>
+<td><strong>通知浏览器立即删除这个Cookie信息</strong></td>
+</tr>
+<tr class="odd">
+<td>37</td>
+<td>out对象的类型为JspWriter,它相当于一种带缓存功能的___</td>
+<td><strong>PrintWriter</strong></td>
+</tr>
+<tr class="even">
+<td>38</td>
+<td>在Servlet技术中,提供了两个用于保存会话数据的对象,分别是Cookie和___</td>
+<td><strong>Session</strong></td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>out对象的类型为___</td>
+<td><strong>JspWriter</strong></td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>Web应用中的会话指的是一个客户端(浏览器)与Web服务器之间连续发生的一系列___过程</td>
+<td><strong>请求和响应</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共10题20分-1">三、判断题（共10题，20分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>41</td>
+<td>Servlet技术中提供了两个用于保存会话数据的对象,分别是Cookie和Session</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>Cookie一旦创建,名称不能更改,值可以更改</td>
+<td>❌错（原答案给错）</td>
+<td>实际上名称不能更改，值可以更改，这个描述是对的</td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>JSP隐式对象out可以通过response.getWriter()方式获取</td>
+<td>❌错</td>
+<td>out是JspWriter，不能通过response.getWriter()获取</td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>Servlet
+API中提供了javax.servlet.http.Cookie类,该类有且仅有一个构造方法</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>如果没有调用setMaxAge()方法设置过期时间,默认情况下Max-Age属性的值是-1</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>46</td>
+<td>Cookie技术用于将会话过程中的数据保存到客户端</td>
+<td>❌错（原答案给错）</td>
+<td>Cookie确实是保存在客户端，这里描述是对的</td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>Cookie的path属性设置后,只对当前访问路径所属的目录有效</td>
+<td>❌错</td>
+<td>对当前目录及其子目录有效</td>
+</tr>
+<tr class="even">
+<td>48</td>
+<td>服务器向客户端发送Cookie时,会在HTTP响应头字段中增加Set-Cookie响应头字段</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>49</td>
+<td>Cookie的domain属性设置时严格区分大小写</td>
+<td>❌错</td>
+<td>不区分大小写</td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>Cookie的domain属性设置时必须以”.”开头</td>
+<td>✅对</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第五次考试---el表达式">第五次考试 - EL表达式</h1>
+<blockquote>
+<p>共50题 | 单选20题(40分) + 填空10题(20分) + 判断20题(40分)</p>
+</blockquote>
+<h2 id="一单选题共20题40分">一、单选题（共20题，40分）</h2>
+<h3 id="读写属性判断重复考点">1. 读写属性判断（重复考点）</h3>
+<p><strong>题目：</strong>
+如果一个javaBean属性既有getter方法,又有setter方法,则该属性为？</p>
+<p><strong>正确答案：D. 读写属性</strong></p>
+<hr />
+<h3 id="pagescope隐式对象">2. pageScope隐式对象</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,获取page域中所保存数据的EL对象是？</p>
+<p><strong>正确答案：C. pageScope</strong></p>
+<hr />
+<h3
+id="pagecontext输出-题目-已知session.setattributepagecontextitcast使用pagecontext输出">3.
+<span class="math inline">${pageContext}输出 **题目：**
+已知`session.setAttribute("pageContext","itcast")`，使用`$</span>{pageContext}`输出？</h3>
+<p><strong>正确答案：A. 不出现异常,输出pageContext字符串</strong></p>
+<p><strong>解题思路：</strong>
+这里pageContext被当作普通的session属性名，不是EL隐式对象，所以输出”itcast”。但答案给的是输出”pageContext”，可能是session中设置的key就是”pageContext”，而<code>${pageContext}</code>在EL中是隐式对象，所以输出的是pageContext对象的字符串表示。</p>
+<hr />
+<h3 id="jsp和el共有的隐式对象">4. JSP和EL共有的隐式对象</h3>
+<p><strong>题目：</strong>
+下面选项中,属于JSP和EL都包含的隐式对象的是？</p>
+<p><strong>正确答案：D. pageContext</strong></p>
+<hr />
+<h3 id="获取el其它隐式对象">5. 获取EL其它隐式对象</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,可以获取EL其它10个隐式对象的是？</p>
+<p><strong>正确答案：A. pageContext</strong></p>
+<hr />
+<h3 id="合法el表达式">6. 合法EL表达式</h3>
+<p><strong>题目：</strong> 下面选项中,哪个是合法的EL表达式？</p>
+<p><strong>正确答案：D. ${header[“user-agent”]}</strong></p>
+<p><strong>解题思路：</strong>
+EL表达式用<code>${}</code>，不能用<code>$&lt;&gt;</code>、<code>$[]</code>、<code>$()</code>。方括号访问属性名包含特殊字符的情况。</p>
+<hr />
+<h3 id="param隐式对象返回类型">7. param隐式对象返回类型</h3>
+<p><strong>题目：</strong> 下面隐式对象中,返回结果为String类型的是？</p>
+<p><strong>正确答案：D. param</strong></p>
+<hr />
+<h3 id="paramvalues隐式对象">8. paramValues隐式对象</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取指定请求参数的一组值的是？</p>
+<p><strong>正确答案：C. paramValues</strong></p>
+<hr />
+<h3 id="获取初始化参数">9. 获取初始化参数</h3>
+<p><strong>题目：</strong>
+已知web.xml中配置了<code>&lt;context-param&gt;</code>，则下面选项中,可以获取初始化参数值的是？</p>
+<p><strong>正确答案：A. ${initParam.webSite}</strong></p>
+<hr />
+<h3 id="等效el表达式">10. 等效EL表达式</h3>
+<p><strong>题目：</strong>
+与<code>request.getAttribute("p")</code>等效的EL表达式是？</p>
+<p><strong>正确答案：C. ${requestScope.p}</strong></p>
+<hr />
+<h3 id="获取cookie信息">11. 获取Cookie信息</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取客户端的Cookie信息的是？</p>
+<p><strong>正确答案：C. cookie</strong></p>
+<hr />
+<h3 id="pagecontext获取jsp对象">12. pageContext获取JSP对象</h3>
+<p><strong>题目：</strong>
+使用EL的pageContext对象,可以获取到的JSP对象是？</p>
+<p><strong>正确答案：B. request</strong></p>
+<p><strong>解题思路：</strong>
+通过<code>${pageContext.request}</code>可以获取HttpServletRequest对象。</p>
+<hr />
+<h3 id="获取请求头">13. 获取请求头</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取请求头字段的某个值的是？</p>
+<p><strong>正确答案：C. header</strong></p>
+<hr />
+<h3 id="null常量">14. Null常量</h3>
+<p><strong>题目：</strong> 下面选项中,属于Null常量取值的是？</p>
+<p><strong>正确答案：C. null</strong></p>
+<hr />
+<h3 id="jsp和el共有隐式对象重复考点">15.
+JSP和EL共有隐式对象（重复考点）</h3>
+<p><strong>题目：</strong>
+下面选项中,属于JSP和EL都包含的隐式对象的是？</p>
+<p><strong>正确答案：D. pageContext</strong></p>
+<hr />
+<h3 id="获取session域中的值">16. 获取session域中的值</h3>
+<p><strong>题目：</strong>
+已知<code>session.setAttribute("itcast","itheima")</code>，下面EL中可以获取的是？</p>
+<p><strong>正确答案：C. ${sessionScope.itcast}</strong></p>
+<hr />
+<h3 id="param获取单个值">17. param获取单个值</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取指定请求参数的单个值的是？</p>
+<p><strong>正确答案：B. param</strong></p>
+<hr />
+<h3 id="访问javabean属性">18. 访问JavaBean属性</h3>
+<p><strong>题目：</strong>
+下面选项中,用于访问JavaBean的price属性的方法是？</p>
+<p><strong>正确答案：A. setPrice()</strong></p>
+<p><strong>注意：</strong>
+这个答案可能有误。EL表达式中<code>${bean.price}</code>会自动调用getPrice()。但题目问的是”方法”，setter是setPrice()。</p>
+<hr />
+<h3 id="sessionscope隐式对象">19. sessionScope隐式对象</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取session域中所保存的数据的是？</p>
+<p><strong>正确答案：C. sessionScope</strong></p>
+<hr />
+<h3 id="等效el表达式重复考点">20. 等效EL表达式（重复考点）</h3>
+<p><strong>题目：</strong>
+与<code>request.getAttribute("p")</code>等效的EL表达式是？</p>
+<p><strong>正确答案：B. ${requestScope.p}</strong></p>
+<hr />
+<h2 id="二填空题共10题20分">二、填空题（共10题，20分）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>21</td>
+<td>EL的sessionScope隐式对象,代表session域中用于保存属性的___对象</td>
+<td><strong>Map</strong></td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>在JavaBean中,如果一个属性既有getter方法,又有setter方法,则该属性为___属性</td>
+<td><strong>读写</strong></td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>EL表达式的___隐式对象用于获取客户端的Cookie信息</td>
+<td><strong>cookie</strong></td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>EL的___隐式对象,用于获取Web应用程序中所有的初始化参数</td>
+<td><strong>initParam</strong></td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>EL表达式中的___运算符,用于访问JSP页面中某些对象的属性</td>
+<td><strong>点（.）</strong></td>
+</tr>
+<tr class="even">
+<td>26</td>
+<td>获取名为userName的Cookie所对应的值,可以使用的EL表达式是___</td>
+<td><strong>${cookie.userName.value}</strong></td>
+</tr>
+<tr class="odd">
+<td>27</td>
+<td>EL的___隐式对象,代表request域中用于保存属性的Map对象</td>
+<td><strong>requestScope</strong></td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td>EL的___对象用于获取请求参数的某个值</td>
+<td><strong>param</strong></td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>在JavaBean中,如果一个属性只有setter方法,则该属性为___属性</td>
+<td><strong>只写</strong></td>
+</tr>
+<tr class="even">
+<td>30</td>
+<td>在JavaBean中,如果一个属性只有getter方法,则称属性为___属性</td>
+<td><strong>只读</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共20题40分">三、判断题（共20题，40分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>31</td>
+<td>EL的header对象用于获取请求头字段的某个值</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>32</td>
+<td>EL表达式中的变量就是一个基本的存储单元</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>33</td>
+<td>EL表达式中的变量不用事先定义就可以直接使用</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>34</td>
+<td>EL表达式中的pageContext隐式对象可以获取JSP页面的隐式对象</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>35</td>
+<td>EL的比较运算符中的”==“是两个等号,也可只写一个等号</td>
+<td>❌错</td>
+<td>只能写两个等号</td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>EL表达式中的常量又称字面量,它是不能改变的</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>37</td>
+<td>EL表达式<code>${userName}</code>没有指明在哪个域中查找,默认在page域中查找</td>
+<td>✅对</td>
+<td>实际会按page→request→session→application顺序查找</td>
+</tr>
+<tr class="even">
+<td>38</td>
+<td>EL的applicationScope隐式对象代表session域中用于保存属性的Map对象</td>
+<td>❌错</td>
+<td>代表application域</td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>EL表达式中条件运算符用于执行某种条件判断,类似于Java中的if-else</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>EL表达式的initParam隐式对象可获取web.xml文件中配置的servlet信息</td>
+<td>❌错</td>
+<td>获取的是context-param配置的初始化参数</td>
+</tr>
+<tr class="odd">
+<td>41</td>
+<td>EL表达式中的方括号运算符与点运算符的功能相同</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>EL表达式<code>${userName}</code>默认在page域中查找</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>EL表达式的cookie隐式对象用于获取客户端的Cookie信息</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>EL的param对象用于获取请求参数的某个值</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>EL的headerValues对象用于返回请求头字段的所有值组成的数组</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>46</td>
+<td>EL的”-“运算符既可以作为减号,也可以作为负号</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>使用EL的pageContext隐式对象可以获取JSP页面的隐式对象</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>48</td>
+<td>EL相关的隐式对象除了pageContext对象以外,其它的10个EL隐式对象都与JSP的隐式对象没有对应关系</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>49</td>
+<td>EL表达式中的保留字也可以被用作EL标识符</td>
+<td>❌错</td>
+<td>保留字不能用作标识符</td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>EL表达式中的变量就是一个基本的存储单元</td>
+<td>✅对</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第六次考试---jstl标签">第六次考试 - JSTL标签</h1>
+<blockquote>
+<p>共70题 | 单选30题(45分) + 填空15题(30分) + 判断25题(25分)</p>
+</blockquote>
+<h2 id="一单选题共30题45分">一、单选题（共30题，45分）</h2>
+<h3 id="cif标签输出">1. c:if标签输出</h3>
+<p><strong>题目：</strong> 阅读代码:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:if</span><span class="ot"> test</span>=<span class="dt">&quot;</span><span class="pp">${</span><span class="dv">1</span><span class="op">==</span><span class="dv">1</span><span class="pp">}</span><span class="dt">&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>hello world</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/c:if&gt;</span></span></code></pre></div>
+<p>访问该页面会什么结果？</p>
+<p><strong>正确答案：D. 浏览器显示:hello world,控制台正常</strong></p>
+<hr />
+<h3 id="合法el表达式重复考点">2. 合法EL表达式（重复考点）</h3>
+<p><strong>题目：</strong> 下面选项中,哪些是合法的EL表达式？</p>
+<p><strong>正确答案：D. ${header[“user-agent”]}</strong></p>
+<hr />
+<h3 id="cookie隐式对象重复考点">3. cookie隐式对象（重复考点）</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取客户端的Cookie信息的是？</p>
+<p><strong>正确答案：D. cookie</strong></p>
+<hr />
+<h3 id="sessionscope隐式对象重复考点">4.
+sessionScope隐式对象（重复考点）</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取session域中所保存的数据的是？</p>
+<p><strong>正确答案：A. sessionScope</strong></p>
+<hr />
+<h3 id="el中数组索引">5. EL中数组索引</h3>
+<p><strong>题目：</strong>
+下面EL表达式中,不能用于访问users数组第一个元素的是？</p>
+<p><strong>正确答案：C. ${user.0}</strong></p>
+<p><strong>解题思路：</strong>
+EL中数组索引必须用引号括起来，如<code>${user['0']}</code>、<code>${user["0"]}</code>、<code>${user[0]}</code>。</p>
+<hr />
+<h3 id="core标签库uri">6. Core标签库URI</h3>
+<p><strong>题目：</strong> 下面选项中,哪个是JSTL Core标签库的URI？</p>
+<p><strong>正确答案：A. http://java.sun.com/jsp/jstl/core</strong></p>
+<hr />
+<h3 id="empty运算符">7. empty运算符</h3>
+<p><strong>题目：</strong>
+下面EL表达式<code>${empty requestScope}</code>的返回结果是？</p>
+<p><strong>正确答案：C. null</strong></p>
+<p><strong>注意：</strong>
+empty运算符返回boolean值，这里答案可能有误。</p>
+<hr />
+<h3 id="jstl标签库描述重复考点">8. JSTL标签库描述（重复考点）</h3>
+<p><strong>题目：</strong> 下列有关JSTL标签库的描述错误的是？</p>
+<p><strong>正确答案：B.
+JSTL标签库是由许多Web应用厂商共同制定的</strong></p>
+<p><strong>解题思路：</strong> JSTL是由Sun公司制定的标准标签库。</p>
+<hr />
+<h3
+id="pagecontext输出重复考点-题目-已知session.setattributepagecontextitcast使用pagecontext输出">9.
+<span class="math inline">${pageContext}输出（重复考点） **题目：**
+已知`session.setAttribute("pageContext","itcast")`，使用`$</span>{pageContext}`输出？</h3>
+<p><strong>正确答案：B. 不出现异常,输出pageContext字符串</strong></p>
+<hr />
+<h3 id="jsp和el共有隐式对象重复考点-1">10.
+JSP和EL共有隐式对象（重复考点）</h3>
+<p><strong>题目：</strong> 属于JSP和EL都包含的隐式对象的是？</p>
+<p><strong>正确答案：D. pageContext</strong></p>
+<hr />
+<h3 id="paramvalues获取一组值">11. paramValues获取一组值</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取指定请求参数的一组值的是？</p>
+<p><strong>正确答案：C. paramValues</strong></p>
+<hr />
+<h3 id="pagecontext获取其它隐式对象">12.
+pageContext获取其它隐式对象</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,可以获取EL其它10个隐式对象的是？</p>
+<p><strong>正确答案：A. pageContext</strong></p>
+<hr />
+<h3 id="jstl标签库描述错误重复考点">13.
+JSTL标签库描述错误（重复考点）</h3>
+<p><strong>题目：</strong> 下列有关JSTL标签库的描述错误的是？</p>
+<p><strong>正确答案：B.
+JSTL标签库是由许多Web应用厂商共同制定的</strong></p>
+<hr />
+<h3 id="cchoose标签">14. c:choose标签</h3>
+<p><strong>题目：</strong> 阅读代码:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:choose&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:when</span><span class="ot"> test</span>=<span class="dt">&quot;</span><span class="pp">${</span><span class="kw">empty</span> param<span class="op">.</span><span class="fu">username</span><span class="pp">}</span><span class="dt">&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>unKnown user.</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/c:when&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:otherwise&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="pp">${</span>param<span class="op">.</span><span class="fu">username</span><span class="pp">}</span> is employee.</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/c:otherwise&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/c:choose&gt;</span></span></code></pre></div>
+<p>当访问该页面时会什么结果？</p>
+<p><strong>正确答案：C. 浏览器500错误</strong></p>
+<p><strong>注意：</strong>
+这里可能缺少<code>&lt;/c:choose&gt;</code>结束标签，导致500错误。</p>
+<hr />
+<h3 id="读写属性判断重复考点-1">15. 读写属性判断（重复考点）</h3>
+<p><strong>题目：</strong>
+如果一个javaBean属性既有getter方法,又有setter方法,则该属性为？</p>
+<p><strong>正确答案：C. 读写属性</strong></p>
+<hr />
+<h3 id="cforeach的begin属性">16. c:forEach的begin属性</h3>
+<p><strong>题目：</strong>
+以下关于<code>&lt;c:forEach&gt;</code>标签的说法错误的是？</p>
+<p><strong>正确答案：A.
+假若有begin属性时,begin必须大于等于1</strong></p>
+<p><strong>解题思路：</strong> begin从0开始，不是1。</p>
+<hr />
+<h3 id="三元运算符">17. 三元运算符</h3>
+<p><strong>题目：</strong>
+下面选项中,<code>${(1==2)?3:4}</code>的返回结果是？</p>
+<p><strong>正确答案：B. 4</strong></p>
+<hr />
+<h3 id="jsp和el共有隐式对象重复考点-2">18.
+JSP和EL共有隐式对象（重复考点）</h3>
+<p><strong>题目：</strong> 属于JSP和EL都包含的隐式对象的是？</p>
+<p><strong>正确答案：D. pageContext</strong></p>
+<hr />
+<h3 id="cchoose缺少结束标签">19. c:choose缺少结束标签</h3>
+<p><strong>题目：</strong> 阅读代码:c:choose没有结束标签</p>
+<p><strong>正确答案：C. 浏览器500错误</strong></p>
+<hr />
+<h3 id="等效el表达式重复考点-1">20. 等效EL表达式（重复考点）</h3>
+<p><strong>题目：</strong>
+与<code>request.getAttribute("p")</code>等效的EL表达式是？</p>
+<p><strong>正确答案：B. ${requestScope.p}</strong></p>
+<hr />
+<h3 id="jstl标签库描述错误重复考点-1">21.
+JSTL标签库描述错误（重复考点）</h3>
+<p><strong>题目：</strong> 下列有关JSTL标签库的描述错误的是？</p>
+<p><strong>正确答案：B.
+JSTL标签库是由许多Web应用厂商共同制定的</strong></p>
+<hr />
+<h3 id="获取session域中的值重复考点">22.
+获取session域中的值（重复考点）</h3>
+<p><strong>题目：</strong>
+<code>session.setAttribute("itcast","itheima")</code>，EL获取？</p>
+<p><strong>正确答案：B. ${sessionScope.itcast}</strong></p>
+<hr />
+<h3 id="pagescope获取page域数据">23. pageScope获取page域数据</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,获取page域中所保存数据的EL对象是？</p>
+<p><strong>正确答案：A. pageScope</strong></p>
+<hr />
+<h3 id="header获取请求头">24. header获取请求头</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取请求头字段的某个值的是？</p>
+<p><strong>正确答案：B. header</strong></p>
+<hr />
+<h3 id="null常量重复考点">25. Null常量（重复考点）</h3>
+<p><strong>题目：</strong> 下面选项中,属于Null常量取值的是？</p>
+<p><strong>正确答案：B. null</strong></p>
+<hr />
+<h3 id="cout标签">26. c:out标签</h3>
+<p><strong>题目：</strong> 阅读代码:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode jsp"><code class="sourceCode jsp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:out</span><span class="ot"> value</span>=<span class="dt">&quot;username1&quot;</span><span class="ot"> default</span>=<span class="dt">&quot;unknown&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;c:out</span><span class="ot"> value</span>=<span class="dt">&quot;username2&quot;</span><span class="kw">&gt;</span>unknown<span class="kw">&lt;/c:out&gt;</span></span></code></pre></div>
+<p>访问该页面会什么结果？</p>
+<p><strong>正确答案：C. userName1属性的值为:username1
+userName2属性的值为:username2</strong></p>
+<p><strong>解题思路：</strong>
+value属性的值不为空，所以输出value的值。</p>
+<hr />
+<h3 id="param获取单个值重复考点">27. param获取单个值（重复考点）</h3>
+<p><strong>题目：</strong>
+下面隐式对象中,用于获取指定请求参数的单个值的是？</p>
+<p><strong>正确答案：B. param</strong></p>
+<hr />
+<h3 id="访问javabean属性方法重复考点">28.
+访问JavaBean属性方法（重复考点）</h3>
+<p><strong>题目：</strong>
+下面选项中,用于访问JavaBean的price属性的方法是？</p>
+<p><strong>正确答案：A. setPrice()</strong></p>
+<hr />
+<h3 id="获取初始化参数重复考点">29. 获取初始化参数（重复考点）</h3>
+<p><strong>题目：</strong>
+已知web.xml中配置了<code>&lt;context-param&gt;</code>，获取初始化参数值？</p>
+<p><strong>正确答案：A. ${initParam.webSite}</strong></p>
+<hr />
+<h3 id="jstl安装">30. JSTL安装</h3>
+<p><strong>题目：</strong>
+下列关于JSTL的安装和测试的描述中,不正确的是？</p>
+<p><strong>正确答案：A.
+要想在JSP页面中使用JSTL不需要安装JSTL</strong></p>
+<p><strong>解题思路：</strong>
+使用JSTL需要导入jstl.jar和standard.jar包。</p>
+<hr />
+<h2 id="二填空题共15题30分-2">二、填空题（共15题，30分）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>31</td>
+<td>EL的sessionScope隐式对象,代表session域中用于保存属性的___对象</td>
+<td><strong>Map</strong></td>
+</tr>
+<tr class="even">
+<td>32</td>
+<td>EL的requestScope隐式对象,代表request域中用于保存属性的___对象</td>
+<td><strong>Map</strong></td>
+</tr>
+<tr class="odd">
+<td>33</td>
+<td>EL的___隐式对象,用于获取Web应用程序中所有的初始化参数</td>
+<td><strong>initParam</strong></td>
+</tr>
+<tr class="even">
+<td>34</td>
+<td>JSTL的全称是___</td>
+<td><strong>JavaServer Pages Standard Tag Library</strong></td>
+</tr>
+<tr class="odd">
+<td>35</td>
+<td>JSTL标签库是由___个不同功能的标签库共同组成的</td>
+<td><strong>5</strong></td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>使用servletContext对象中的属性,可以获取到request、response等对象</td>
+<td><strong>对</strong></td>
+</tr>
+<tr class="odd">
+<td>37</td>
+<td>EL的___对象用于获取请求参数的某个值</td>
+<td><strong>param</strong></td>
+</tr>
+<tr class="even">
+<td>38</td>
+<td>获取名为userName的Cookie所对应的值,EL表达式是___</td>
+<td><strong>${cookie.userName.value}</strong></td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>在JavaBean中,如果一个属性只有setter方法,则该属性为___属性</td>
+<td><strong>只写</strong></td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>在JavaBean中,如果一个属性只有getter方法,则称属性为___属性</td>
+<td><strong>只读</strong></td>
+</tr>
+<tr class="odd">
+<td>41</td>
+<td>安装JSTL时需导入_<strong>和</strong>_这两个JAR包</td>
+<td><strong>jstl.jar</strong>; <strong>standard.jar</strong></td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>EL表达式的___隐式对象用于获取客户端的Cookie信息</td>
+<td><strong>cookie</strong></td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>EL的___对象用于获取请求参数的一组值</td>
+<td><strong>paramValues</strong></td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>EL表达式中的___运算符,用于访问JSP页面中某些对象的属性</td>
+<td><strong>点（.）</strong></td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>如果要在JSP页面中导入Core标签库,使用___指令</td>
+<td><strong>taglib</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="三判断题共25题25分-1">三、判断题（共25题，25分）</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题号</th>
+<th>题目</th>
+<th>正确答案</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>46</td>
+<td>EL的”-“运算符既可以作为减号,也可以作为负号</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td>使用EL的pageContext隐式对象可以获取其它10个EL隐式对象</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>48</td>
+<td>EL表达式中的方括号运算符与点运算符的功能相同</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>EL表达式中条件运算符用于执行某种条件判断,类似于Java中的if-else</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>EL的param对象用于获取请求参数的某个值</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>51</td>
+<td>安装JSTL时需导入jstl.jar和standard.jar这两个JAR包</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>52</td>
+<td>EL表达式中的保留字也可以被用作EL标识符</td>
+<td>❌错</td>
+<td>保留字不能用作标识符</td>
+</tr>
+<tr class="even">
+<td>53</td>
+<td>EL表达式<code>${userName}</code>默认在page域中查找</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>54</td>
+<td>EL表达式中的常量又称字面量,它是不能改变的</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>55</td>
+<td>EL表达式的cookie隐式对象用于获取客户端的Cookie信息</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>56</td>
+<td>EL的param隐式对象代表application域中用于保存属性的Map对象</td>
+<td>❌错</td>
+<td>param用于获取请求参数</td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>EL的applicationScope隐式对象代表session域中用于保存属性的Map对象</td>
+<td>❌错</td>
+<td>代表application域</td>
+</tr>
+<tr class="odd">
+<td>58</td>
+<td>EL是Expression
+Language的缩写,它是一种面向简单的数据访问语言,可以简化Java类中代码的编写</td>
+<td>❌错</td>
+<td>EL简化的是JSP页面中的代码编写</td>
+</tr>
+<tr class="even">
+<td>59</td>
+<td>EL表达式中的变量不用事先定义就可以直接使用</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>EL表达式中的变量就是一个基本的存储单元</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>61</td>
+<td>EL的header对象用于获取请求头字段的某个值</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>EL的headerValues对象用于返回请求头字段的所有值组成的数组</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>63</td>
+<td>JSTL标签库中的Core标签库的URI为http://java.sun.com/jsp/jstl/core</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>EL的比较运算符中的”==“是两个等号,也可只写一个等号</td>
+<td>❌错</td>
+<td>只能写两个等号</td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>EL表达式的initParam隐式对象可获取web.xml文件中配置的servlet信息</td>
+<td>❌错</td>
+<td>获取context-param配置</td>
+</tr>
+<tr class="odd">
+<td>66</td>
+<td>JSTL标签库是由5个不同功能的标签库共同组成的</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>67</td>
+<td>使用EL表达式中的pageContext隐式对象可以获取JSP页面的隐式对象</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>68</td>
+<td>在JSP页面中使用JSTL首先需要安装JSTL</td>
+<td>❌错（原答案给对）</td>
+<td>实际上需要安装，但选项说”不需要安装”是错的</td>
+</tr>
+<tr class="even">
+<td>69</td>
+<td>Sun公司制定了一套JSTL标准标签库,全称是JavaServer Pages Standard Tag
+Library</td>
+<td>✅对</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>70</td>
+<td>EL的隐式对象与JSP中的隐式对象除了pageContext对象是它们共有的,其它10个EL隐式对象都与JSP的隐式对象没有对应关系</td>
+<td>✅对</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="高频考点统计">高频考点统计</h1>
+<h2 id="考点出现频率排名">📊 考点出现频率排名</h2>
+<table>
+<thead>
+<tr class="header">
+<th>排名</th>
+<th>考点</th>
+<th>出现次数</th>
+<th>涉及考试</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>page指令属性</strong></td>
+<td>15+次</td>
+<td>第1次、第2次</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>EL隐式对象</strong></td>
+<td>12+次</td>
+<td>第5次、第6次</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>JSP注释语法</strong></td>
+<td>8次</td>
+<td>第1次</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>JSP表达式语法</strong></td>
+<td>7次</td>
+<td>第1次</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Cookie操作</strong></td>
+<td>7次</td>
+<td>第4次</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>JavaBean规范</strong></td>
+<td>6次</td>
+<td>第2次、第5次、第6次</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><strong>HttpServletResponse方法</strong></td>
+<td>6次</td>
+<td>第3次</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><strong>Session操作</strong></td>
+<td>6次</td>
+<td>第3次、第4次</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><strong>HttpServletRequest方法</strong></td>
+<td>5次</td>
+<td>第2次</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><strong>请求转发与重定向</strong></td>
+<td>5次</td>
+<td>第2次、第3次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="必考知识点清单">🔥 必考知识点清单</h2>
+<h3 id="jsp基础第1次考试重点">1. JSP基础（第1次考试重点）</h3>
+<ul>
+<li>✅ page指令所有属性（import, contentType, errorPage, isErrorPage,
+isThreadSafe, session, buffer, autoFlush, language, extends）</li>
+<li>✅
+JSP四种语法：注释<code>&lt;%-- --%&gt;</code>、声明<code>&lt;%! %&gt;</code>、脚本片段<code>&lt;% %&gt;</code>、表达式<code>&lt;%= %&gt;</code></li>
+<li>✅ JSP运行原理：翻译→编译→执行，继承HttpJspBase</li>
+<li>✅ 实例变量vs局部变量的作用域区别</li>
+<li>✅ include指令（静态包含）vs jsp:include（动态包含）</li>
+</ul>
+<h3 id="servlet与httpservletrequest第2次考试重点">2.
+Servlet与HttpServletRequest（第2次考试重点）</h3>
+<ul>
+<li>✅ getMethod(), getQueryString(), getProtocol(),
+getContextPath()</li>
+<li>✅ getParameter() vs getParameterValues() vs getParameterMap()</li>
+<li>✅ setAttribute/getAttribute/removeAttribute作用域</li>
+<li>✅ RequestDispatcher的forward()和include()</li>
+<li>✅ GET请求中文乱码解决方案：useBodyEncodingForURI=“true”</li>
+</ul>
+<h3 id="httpservletresponse与session第3次考试重点">3.
+HttpServletResponse与Session（第3次考试重点）</h3>
+<ul>
+<li>✅ setCharacterEncoding() + setContentType()解决中文乱码</li>
+<li>✅ getOutputStream() vs getWriter()不能同时使用</li>
+<li>✅ sendRedirect()原理：302+Location</li>
+<li>✅ forward() vs sendRedirect()区别</li>
+<li>✅ Session创建、获取、销毁、超时时间</li>
+</ul>
+<h3 id="cookie与jsp隐式对象第4次考试重点">4.
+Cookie与JSP隐式对象（第4次考试重点）</h3>
+<ul>
+<li>✅ Cookie创建、设置、删除（setMaxAge(0)）</li>
+<li>✅ Cookie的path和domain属性</li>
+<li>✅ JSP九大隐式对象：pageContext, request, response, session, out,
+application, config, page, exception</li>
+<li>✅ pageContext的四个域常量和findAttribute()</li>
+</ul>
+<h3 id="el表达式第5次考试重点">5. EL表达式（第5次考试重点）</h3>
+<ul>
+<li>✅ EL语法：<code>${表达式}</code></li>
+<li>✅ 11个EL隐式对象：pageContext, pageScope, requestScope,
+sessionScope, applicationScope, param, paramValues, header,
+headerValues, cookie, initParam</li>
+<li>✅ 点运算符和方括号运算符</li>
+<li>✅ empty运算符、条件运算符</li>
+</ul>
+<h3 id="jstl标签第6次考试重点">6. JSTL标签（第6次考试重点）</h3>
+<ul>
+<li>✅
+Core标签库URI：<code>http://java.sun.com/jsp/jstl/core</code></li>
+<li>✅ <code>&lt;c:if&gt;</code>, <code>&lt;c:choose&gt;</code>,
+<code>&lt;c:forEach&gt;</code>标签</li>
+<li>✅ <code>&lt;c:out&gt;</code>标签的value和default属性</li>
+<li>✅ 安装JSTL需要jstl.jar和standard.jar</li>
+</ul>
+<h2 id="易错点总结">⚠️ 易错点总结</h2>
+<ol type="1">
+<li><strong>JSP注释</strong>：<code>&lt;%-- --%&gt;</code>不会发送到客户端，<code>&lt;!-- --&gt;</code>会发送到客户端但浏览器不显示</li>
+<li><strong>page指令</strong>：每个属性只能出现一次（import除外），放在页面开头但不是必须</li>
+<li><strong>声明vs脚本片段</strong>：声明<code>&lt;%! %&gt;</code>是类成员，脚本片段<code>&lt;% %&gt;</code>是方法内代码</li>
+<li><strong>Cookie删除</strong>：需要设置相同path + setMaxAge(0) +
+addCookie</li>
+<li><strong>Session依赖Cookie</strong>：禁用Cookie会影响Session功能</li>
+<li><strong>getOutputStream/getWriter</strong>：不能同时使用，否则IllegalStateException</li>
+<li><strong>forward vs
+redirect</strong>：forward是一次请求（地址栏不变），redirect是两次请求（地址栏改变）</li>
+<li><strong>EL隐式对象</strong>：pageContext是JSP和EL共有的，其他10个是EL特有的</li>
+<li><strong>boolean属性getter</strong>：用is前缀（如isMarried()），不是get前缀</li>
+</ol>
+<h2 id="复习建议">📝 复习建议</h2>
+<ol type="1">
+<li><strong>重点复习page指令</strong>：几乎每次考试都会考到，特别是import、contentType、errorPage、session属性</li>
+<li><strong>熟练掌握EL隐式对象</strong>：第5、6次考试大量出现，要能区分各域对象</li>
+<li><strong>理解Cookie和Session关系</strong>：这是Web会话管理的核心</li>
+<li><strong>掌握请求转发和重定向的区别</strong>：forward是一次请求，redirect是两次</li>
+<li><strong>注意方法归属</strong>：区分HttpServletRequest和HttpServletResponse的方法</li>
+<li><strong>JSP四种语法要记牢</strong>：注释、声明、脚本片段、表达式的区别</li>
+</ol>
+<hr />
+<blockquote>
+<p>💡 <strong>复习优先级</strong>：page指令 &gt; EL隐式对象 &gt;
+Cookie/Session &gt; 请求转发重定向 &gt; JSP语法 &gt; JavaBean规范</p>
+</blockquote>
+
+</div>
+</body>
+</html>
