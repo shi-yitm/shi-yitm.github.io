@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单 - CampusMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .order-page { padding: 20px 0; }
+        .order-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 13px;
+        }
+        .order-no { color: var(--text-secondary); }
+        .order-status { font-weight: 600; }
+        .order-card-body {
+            padding: 16px 20px;
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        .order-item + .order-item {
+            border-top: 1px solid var(--border-light);
+        }
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+        .order-item .info { flex: 1; }
+        .order-item .title { font-size: 14px; }
+        .order-item .spec { font-size: 12px; color: var(--text-light); }
+        .order-item .price-qty { text-align: right; }
+        .order-item .price { color: var(--danger); font-weight: 600; }
+        .order-item .qty { color: var(--text-light); font-size: 13px; }
+        .order-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-top: 1px solid var(--border-light);
+            background: #fafafa;
+        }
+        .order-total {
+            font-size: 14px;
+        }
+        .order-total .amount {
+            color: var(--danger);
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .order-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .order-time {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<header id="navbar"></header>
+
+<div class="container order-page">
+    <div class="page-header">
+        <div class="page-title">📦 我的订单</div>
+    </div>
+
+    <div class="tabs" id="statusTabs">
+        <div class="tab-item active" data-status="" onclick="switchTab(this, '')">全部</div>
+        <div class="tab-item" data-status="0" onclick="switchTab(this, 0)">待付款</div>
+        <div class="tab-item" data-status="1" onclick="switchTab(this, 1)">待发货</div>
+        <div class="tab-item" data-status="2" onclick="switchTab(this, 2)">待收货</div>
+        <div class="tab-item" data-status="3" onclick="switchTab(this, 3)">已完成</div>
+    </div>
+
+    <div id="orderList">
+        <div class="loading">加载中</div>
+    </div>
+
+    <div id="pagination"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/product-images.js"></script>
+<script src="js/app.js"></script>
+<script>
+    if (!requireLogin()) { /* redirect */ }
+
+    let currentTab = '';
+    let currentPage = 1;
+    const PAGE_SIZE = 10;
+
+    function switchTab(el, status) {
+        document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        currentTab = status;
+        currentPage = 1;
+        loadOrders();
+    }
+
+    async function loadOrders(page = 1) {
+        currentPage = page;
+        const el = document.getElementById('orderList');
+        el.innerHTML = '<div class="loading">加载中</div>';
+
+        try {
+            const result = await API.get('/order/list', {
+                status: currentTab,
+                page,
+                size: PAGE_SIZE,
+            });
+
+            const list = result.list || result || [];
+            const total = result.total || 0;
+
+            if (list.length === 0) {
+                el.innerHTML = '<div class="empty-state"><div class="icon">📦</div><p>暂无订单</p></div>';
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            el.innerHTML = list.map(order => {
+                const items = order.items || [];
+                const address = parseAddress(order.address_snapshot);
+
+                return `
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <div>
+                                <span class="order-no">订单号: ${order.order_no}</span>
+                                <div class="order-time">${Utils.formatDate(order.create_time)}</div>
+                            </div>
+                            <span class="order-status ${Utils.orderStatusClass(order.status)}">${Utils.orderStatus(order.status)}</span>
+                        </div>
+                        <div class="order-card-body">
+                            ${items.map(item => `
+                                <div class="order-item">
+                                    <img src="${getProductImageUrl(item.product_title, item.sku_image)}">>
+                                    <div class="info">
+                                        <div class="title">${item.product_title || '商品'}</div>
+                                        <div class="spec">${item.sku_spec || ''}</div>
+                                    </div>
+                                    <div class="price-qty">
+                                        <div class="price">${Utils.formatPrice(item.price)}</div>
+                                        <div class="qty">×${item.quantity}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-card-footer">
+                            <div class="order-total">
+                                共 ${items.reduce((s, i) => s + i.quantity, 0)} 件，
+                                实付: <span class="amount">${Utils.formatPrice(order.pay_amount)}</span>
+                            </div>
+                            <div class="order-actions">
+                                <a href="order-detail.html?id=${order.order_id}" class="btn btn-sm">查看详情</a>
+                                ${order.status === 0 ? `
+                                    <button class="btn btn-primary btn-sm" onclick="payOrder(${order.order_id})">立即付款</button>
+                                    <button class="btn btn-sm" onclick="cancelOrder(${order.order_id})">取消</button>
+                                ` : ''}
+                                ${order.status === 2 ? `
+                                    <button class="btn btn-success btn-sm" onclick="confirmReceive(${order.order_id})">确认收货</button>
+                                ` : ''}
+                                ${order.status === 3 ? `
+                                    <a href="review.html?order_id=${order.order_id}" class="btn btn-sm">评价</a>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('pagination').innerHTML = renderPagination(
+                currentPage, total, PAGE_SIZE, loadOrders
+            );
+        } catch (e) {
+            el.innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><p>${e.message}</p></div>`;
+        }
+    }
+
+    function parseAddress(snapshot) {
+        if (!snapshot) return {};
+        try { return JSON.parse(snapshot); } catch { return {}; }
+    }
+
+    async function payOrder(orderId) {
+        try {
+            await API.post('/payment/pay', { order_id: orderId, pay_method: 1 });
+            Toast.success('支付成功');
+            loadOrders(currentPage);
+        } catch (e) {
+            Toast.error(e.message || '支付失败');
+        }
+    }
+
+    async function cancelOrder(orderId) {
+        if (!confirm('确定取消订单？')) return;
+        try {
+            await API.put(`/order/cancel/${orderId}`);
+            Toast.success('订单已取消');
+            loadOrders(currentPage);
+        } catch (e) {
+            Toast.error(e.message || '取消失败');
+        }
+    }
+
+    async function confirmReceive(orderId) {
+        if (!confirm('确认已收到货物？')) return;
+        try {
+            await API.put(`/order/receive/${orderId}`);
+            Toast.success('已确认收货');
+            loadOrders(currentPage);
+        } catch (e) {
+            Toast.error(e.message || '确认失败');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrders);
+</script>
+
+</body>
+</html>

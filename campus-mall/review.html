@@ -1,0 +1,222 @@
+<!-- 评价页面 - qiaoshuai -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评价 - CampusMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .review-page {
+            padding: 20px 0;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .review-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        .review-card h2 {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .review-card .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+        .rating-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .rating-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .star-rating {
+            display: inline-flex;
+            gap: 8px;
+            font-size: 36px;
+        }
+        .star-rating .star {
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.15s, transform 0.15s;
+        }
+        .star-rating .star:hover {
+            transform: scale(1.2);
+        }
+        .star-rating .star.active, .star-rating .star.hover {
+            color: #faad14;
+        }
+        .rating-text {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .review-items {
+            margin-bottom: 20px;
+        }
+        .review-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            margin-bottom: 8px;
+        }
+        .review-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+        .review-item .info { flex: 1; }
+        .review-item .title { font-size: 14px; }
+        .review-item .spec { font-size: 12px; color: var(--text-light); }
+    </style>
+</head>
+<body>
+
+<header id="navbar"></header>
+
+<div class="container review-page">
+    <div class="review-card">
+        <h2>📝 评价商品</h2>
+        <div class="subtitle" id="orderInfo">加载中...</div>
+
+        <!-- 商品列表 -->
+        <div class="review-items" id="reviewItems"></div>
+
+        <!-- 星级 -->
+        <div class="rating-section">
+            <label>商品评分</label>
+            <div class="star-rating" id="starRating">
+                <span class="star" data-value="1" onclick="setRating(1)" onmouseover="hoverStar(1)" onmouseout="unhoverStar()">★</span>
+                <span class="star" data-value="2" onclick="setRating(2)" onmouseover="hoverStar(2)" onmouseout="unhoverStar()">★</span>
+                <span class="star" data-value="3" onclick="setRating(3)" onmouseover="hoverStar(3)" onmouseout="unhoverStar()">★</span>
+                <span class="star" data-value="4" onclick="setRating(4)" onmouseover="hoverStar(4)" onmouseout="unhoverStar()">★</span>
+                <span class="star" data-value="5" onclick="setRating(5)" onmouseover="hoverStar(5)" onmouseout="unhoverStar()">★</span>
+            </div>
+            <div class="rating-text" id="ratingText">请点击评分</div>
+        </div>
+
+        <!-- 评价内容 -->
+        <div class="form-group">
+            <label>评价内容</label>
+            <textarea id="reviewContent" rows="5" placeholder="请分享您的使用体验，帮助其他同学做出选择~" maxlength="500"></textarea>
+            <div style="text-align:right;font-size:12px;color:var(--text-light);margin-top:4px;">
+                <span id="charCount">0</span>/500
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" onclick="submitReview()" id="submitBtn">提交评价</button>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+    if (!requireLogin()) { /* redirect */ }
+
+    const orderId = Utils.getParam('order_id');
+    let currentRating = 0;
+
+    const ratingTexts = ['', '很差', '较差', '一般', '不错', '非常满意'];
+
+    async function init() {
+        if (!orderId) {
+            document.querySelector('.review-card').innerHTML = '<div class="empty-state"><div class="icon">❓</div><p>缺少订单参数</p></div>';
+            return;
+        }
+
+        try {
+            const result = await API.get(`/order/${orderId}`);
+            const order = result.order || result;
+            const items = result.items || [];
+
+            document.getElementById('orderInfo').textContent =
+                `订单号: ${order.order_no}`;
+
+            document.getElementById('reviewItems').innerHTML = items.map(item => `
+                <div class="review-item">
+                    <img src="${item.sku_image || 'https://via.placeholder.com/50x50?text=商品'}"
+                         onerror="this.src='https://via.placeholder.com/50x50?text=商品'">
+                    <div class="info">
+                        <div class="title">${item.product_title || '商品'}</div>
+                        <div class="spec">${item.sku_spec || ''}</div>
+                    </div>
+                </div>
+            `).join('');
+        } catch (e) {
+            document.getElementById('orderInfo').textContent = e.message;
+        }
+
+        // 字数统计
+        document.getElementById('reviewContent').addEventListener('input', function() {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+    }
+
+    function setRating(value) {
+        currentRating = value;
+        updateStars(value);
+        document.getElementById('ratingText').textContent = ratingTexts[value];
+    }
+
+    function hoverStar(value) {
+        updateStars(value);
+    }
+
+    function unhoverStar() {
+        updateStars(currentRating);
+    }
+
+    function updateStars(value) {
+        document.querySelectorAll('#starRating .star').forEach(star => {
+            const v = parseInt(star.dataset.value);
+            star.classList.toggle('active', v <= value);
+            star.classList.toggle('hover', v <= value && v > currentRating);
+        });
+    }
+
+    async function submitReview() {
+        if (!currentRating) {
+            Toast.warning('请选择评分');
+            return;
+        }
+
+        const content = document.getElementById('reviewContent').value.trim();
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = '提交中...';
+
+        try {
+            await API.post(`/order/${orderId}/review`, {
+                rating: currentRating,
+                content,
+            });
+            Toast.success('评价提交成功');
+            setTimeout(() => {
+                location.href = 'order-list.html';
+            }, 1000);
+        } catch (e) {
+            Toast.error(e.message || '提交失败');
+            btn.disabled = false;
+            btn.textContent = '提交评价';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>

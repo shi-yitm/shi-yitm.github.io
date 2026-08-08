@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>领券中心 - CampusMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .coupon-page { padding: 20px 0; }
+        .coupon-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .coupon-left {
+            width: 100px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .coupon-value-big {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--danger);
+        }
+        .coupon-value-big small { font-size: 14px; }
+        .coupon-condition-text {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .coupon-right { flex: 1; }
+        .coupon-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .coupon-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .coupon-time { font-size: 12px; color: var(--text-light); }
+        .coupon-action { flex-shrink: 0; }
+        .coupon-btn {
+            padding: 8px 24px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .coupon-btn.claim { background: var(--primary); color: white; }
+        .coupon-btn.claim:hover { background: #0066cc; }
+        .coupon-btn.claimed { background: #f0f0f0; color: var(--text-light); cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <header id="navbar"></header>
+    <div id="categoryNav" class="category-nav"></div>
+
+    <div class="container coupon-page">
+        <h2 style="margin-bottom:20px;">🎫 领券中心</h2>
+        <div id="couponList">
+            <div class="loading">加载中</div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/product-images.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let allCoupons = [];
+        let myCouponIds = new Set();
+
+        async function loadCoupons() {
+            const el = document.getElementById('couponList');
+            try {
+                // 并行加载可领取的优惠券和我的优惠券
+                const [available, myCoupons] = await Promise.all([
+                    API.get('/coupon/available').catch(() => []),
+                    API.get('/user-coupon/my').catch(() => []),
+                ]);
+
+                allCoupons = Array.isArray(available) ? available : [];
+                const my = Array.isArray(myCoupons) ? myCoupons : [];
+                myCouponIds = new Set(my.map(uc => uc.coupon_id));
+
+                if (allCoupons.length === 0) {
+                    el.innerHTML = '<div class="empty-state"><div class="icon">🎫</div><p>暂无可领取的优惠券</p></div>';
+                    return;
+                }
+
+                renderCoupons();
+            } catch (e) {
+                el.innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><p>${e.message}</p></div>`;
+            }
+        }
+
+        function renderCoupons() {
+            const el = document.getElementById('couponList');
+            el.innerHTML = allCoupons.map(c => {
+                const claimed = myCouponIds.has(c.coupon_id);
+                const isExpired = new Date(c.end_time) < new Date();
+                const isFull = c.used_count >= c.total_count;
+
+                let valueText = '';
+                let condText = '';
+                if (c.type === 1) {
+                    valueText = `<span class="coupon-value-big"><small>¥</small>${c.discount_value}</span>`;
+                    condText = `满${c.min_amount}元可用`;
+                } else if (c.type === 2) {
+                    valueText = `<span class="coupon-value-big">${c.discount_value}<small>折</small></span>`;
+                    condText = c.min_amount > 0 ? `满${c.min_amount}元可用` : '无门槛';
+                } else {
+                    valueText = `<span class="coupon-value-big"><small>¥</small>${c.discount_value}</span>`;
+                    condText = '无门槛';
+                }
+
+                let btnHtml = '';
+                if (claimed) {
+                    btnHtml = '<button class="coupon-btn claimed" disabled>已领取</button>';
+                } else if (isExpired) {
+                    btnHtml = '<button class="coupon-btn claimed" disabled>已过期</button>';
+                } else if (isFull) {
+                    btnHtml = '<button class="coupon-btn claimed" disabled>已领完</button>';
+                } else {
+                    btnHtml = `<button class="coupon-btn claim" onclick="claimCoupon(${c.coupon_id})">立即领取</button>`;
+                }
+
+                return `
+                    <div class="coupon-card">
+                        <div class="coupon-left">
+                            ${valueText}
+                            <div class="coupon-condition-text">${condText}</div>
+                        </div>
+                        <div class="coupon-right">
+                            <div class="coupon-name">${c.name}</div>
+                            <div class="coupon-desc">${c.type === 1 ? '满减券' : c.type === 2 ? '折扣券' : '无门槛券'} · 共${c.total_count}张 · 已领${c.used_count}张</div>
+                            <div class="coupon-time">有效期：${Utils.formatDate(c.start_time)} ~ ${Utils.formatDate(c.end_time)}</div>
+                        </div>
+                        <div class="coupon-action">${btnHtml}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function claimCoupon(couponId) {
+            if (!requireLogin()) return;
+            try {
+                await API.post(`/user-coupon/claim/${couponId}`);
+                myCouponIds.add(couponId);
+                Toast.success('领取成功！');
+                renderCoupons();
+            } catch (e) {
+                Toast.error(e.message || '领取失败');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCoupons);
+    </script>
+</body>
+</html>

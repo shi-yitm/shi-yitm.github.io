@@ -1,58 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 Node.js 从零搭建个人博客后台管理系统 · 十一</title><link rel="stylesheet" href="style.css"></head>
-<body><nav class="navbar"><div class="container nav-inner"><a href="index.html" class="logo">十一</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="blog.html">博客</a></li><li><a href="projects.html">项目</a></li><li><a href="about.html">关于</a></li></ul></div></nav>
-<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">用 Node.js 从零搭建个人博客后台管理系统</h1><div class="article-meta"><span>📅 2026-06-07</span><span>👁 0 次阅读</span></div></header><div class="article-content"><h2>为什么自己搭后台</h2>
+<body class="theme-light"><nav class="navbar"><div class="container nav-inner"><a href="/" class="logo">十一</a><ul class="nav-links"><li><a href="/">首页</a></li><li><a href="/projects-page/">项目</a></li><li><a href="/tools.html">工具</a></li><li><a href="/blog-page/" class="active">博客</a></li><li><a href="/about-page/">关于</a></li></ul><button class="menu-toggle" aria-label="菜单" aria-expanded="false">☰</button></div></nav>
+<section class="section post-article"><div class="container"><a href="index.html" class="back-link">← 返回首页</a><header class="article-header"><div class="post-tag tag-dev">技术</div><h1 class="article-title">用 Node.js 从零搭建个人博客后台管理系统</h1><div class="article-meta"><span>📅 2026-06-07</span><span>👁 0 次阅读</span> <span>#Node.js</span> <span>#博客</span> <span>#后端</span></div></header><div class="article-content"><h2>为什么自己搭后台</h2>
 <p>GitHub Pages 托管静态博客很方便，但每次写文章都要手动创建 HTML 文件，太麻烦了。于是决定用 Node.js 搭一个后台管理系统。</p>
 <h2>技术栈</h2>
 <ul>
 <li><strong>Express</strong>：轻量级 Node.js Web 框架</li>
-<li><strong>sql.js</strong>：基于 WASM 的 SQLite，零配置嵌入式数据库</li>
+<li><strong>SQLite</strong>：零配置的嵌入式数据库</li>
 <li><strong>marked.js</strong>：Markdown 渲染</li>
-<li><strong>Nginx</strong>：反向代理，前端静态页面 + 后台 API 转发</li>
-<li><strong>systemd</strong>：进程守护，开机自启</li>
-</ul>
-<h2>架构演进</h2>
-<h3>第一版：本地 CMS + 远程部署</h3>
-<p>最初的设计是 CMS 跑在本地 Windows 电脑上，文章存在本地 SQLite 数据库里。每次写完文章，<code>deploy.js</code> 读取本地数据库，生成静态 HTML，通过 SCP 上传到腾讯云服务器。</p>
-<p>这个方案的问题很明显：文章只存在本地电脑上，服务器只是静态文件的&quot;副本&quot;。一旦本地数据库损坏或不同步，服务器上的内容就会出问题。</p>
-<h3>第二版：服务器端 CMS（当前版本）</h3>
-<p>把 CMS 直接部署到腾讯云服务器上：</p>
-<pre><code>浏览器 → Nginx (80端口)
-  ├── / → /var/www/blog/ (前台静态页面)
-  ├── /admin → 127.0.0.1:3000 (后台管理)
-  └── /api → 127.0.0.1:3000 (文章/项目 API)
-</code></pre>
-<ul>
-<li><strong>文章数据</strong>直接存在服务器的 SQLite 数据库里</li>
-<li><strong>后台管理</strong>通过 <code>/admin</code> 路径访问，有密码保护</li>
-<li><strong>前台博客</strong>仍然是静态 HTML，性能好</li>
-<li><strong>systemd</strong> 管理 Node.js 进程，崩溃自动重启</li>
+<li><strong>PM2</strong>：进程守护</li>
 </ul>
 <h2>核心功能</h2>
 <ol>
-<li><strong>文章管理</strong>：新增、编辑、删除、拖拽排序、隐藏/显示</li>
-<li><strong>项目管理</strong>：维护个人项目展示</li>
+<li><strong>文章管理</strong>：新增、编辑、删除文章，支持 Markdown 写作</li>
 <li><strong>分类与标签</strong>：文章分类管理</li>
 <li><strong>阅读量统计</strong></li>
-<li><strong>Markdown 编辑器</strong>：实时预览</li>
-<li><strong>密码保护</strong>：后台登录验证</li>
+<li><strong>静态部署</strong>：一键生成静态 HTML 并部署</li>
 </ol>
-<h2>安全设计</h2>
-<ul>
-<li>后台管理需要密码登录，API 也必须带认证头</li>
-<li>前台博客是纯静态文件，不暴露任何 API</li>
-<li>Nginx 屏蔽隐藏文件访问</li>
-</ul>
-<h2>部署方式</h2>
-<pre><code class="language-bash"># systemd 服务
-/etc/systemd/system/blog-cms.service
-# 开机自启
-systemctl enable blog-cms
-# 查看状态
-systemctl status blog-cms
-</code></pre>
+<h2>架构设计</h2>
+<p>后台本地运行（localhost:3000），写文章后自动生成静态 HTML 推送到服务器。后台不暴露在公网上，安全可靠。</p>
 <h2>总结</h2>
-<p>从本地部署到服务器端 CMS，这个过程让我理解了 Web 应用的完整生命周期：开发、部署、运维、版本控制。特别是从&quot;本地+远程&quot;架构迁移到&quot;纯服务器&quot;架构的经验，对理解前后端分离和部署很有帮助。</p>
+<p>自己动手搭后台管理系统，让我对 Web 全栈开发有了更深的理解。</p>
 </div><div class="article-footer"><p>感谢阅读，欢迎留言交流！</p><a href="blog.html" class="back-link">← 返回文章列表</a></div></div></section>
 <footer class="footer"><div class="container"><p>© 2026 十一 · 用 ❤️ 和代码构建</p></div></footer>
 <script src="script.js"></script></body></html>

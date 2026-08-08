@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结算 - CampusMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-page {
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 16px;
+        }
+        .checkout-section {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .checkout-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .address-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+        }
+        .address-card:hover { border-color: var(--primary); }
+        .address-card.active {
+            border-color: var(--primary);
+            background: #e6f7ff;
+        }
+        .address-card .receiver {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .address-card .detail {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .address-card .default-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 11px;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .order-item:last-child { border-bottom: none; }
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+        .order-item .info { flex: 1; }
+        .order-item .title { font-size: 14px; }
+        .order-item .spec { font-size: 12px; color: var(--text-light); }
+        .order-item .price { color: var(--danger); font-weight: 600; }
+        .order-item .qty { color: var(--text-light); font-size: 13px; }
+
+        .coupon-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .coupon-item:hover { border-color: var(--primary); }
+        .coupon-item.active { border-color: var(--primary); background: #e6f7ff; }
+        .coupon-item .coupon-info { flex: 1; }
+        .coupon-item .coupon-name { font-weight: 600; font-size: 14px; }
+        .coupon-item .coupon-condition { font-size: 12px; color: var(--text-light); }
+        .coupon-item .coupon-value { color: var(--danger); font-weight: 600; font-size: 16px; }
+
+        .checkout-summary {
+            position: sticky;
+            top: 80px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .summary-row.total {
+            border-top: 1px solid var(--border-light);
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+        .summary-row.total .value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-page {
+                grid-template-columns: 1fr;
+            }
+            .checkout-summary {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="navbar"></header>
+
+<div class="container checkout-page">
+    <div class="checkout-main">
+        <!-- 收货地址 -->
+        <div class="checkout-section">
+            <h3>📍 收货地址</h3>
+            <div id="addressList"><div class="loading">加载中</div></div>
+            <button class="btn btn-sm mt-8" onclick="showAddressModal()">+ 新增收货地址</button>
+        </div>
+
+        <!-- 商品清单 -->
+        <div class="checkout-section">
+            <h3>📦 商品清单</h3>
+            <div id="orderItems"></div>
+        </div>
+
+        <!-- 优惠券 -->
+        <div class="checkout-section">
+            <h3>🎫 优惠券</h3>
+            <div id="couponList">
+                <p class="text-light" style="font-size:13px;">加载中...</p>
+            </div>
+        </div>
+
+        <!-- 备注 -->
+        <div class="checkout-section">
+            <h3>📝 买家留言</h3>
+            <textarea id="remark" rows="2" placeholder="选填，如有特殊要求请留言" style="width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px;outline:none;"></textarea>
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div>
+        <div class="checkout-section checkout-summary">
+            <h3>💰 金额明细</h3>
+            <div class="summary-row">
+                <span>商品总额</span>
+                <span id="totalAmount">¥0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>优惠金额</span>
+                <span id="discountAmount" class="text-success">-¥0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>实付金额</span>
+                <span class="value" id="payAmount">¥0.00</span>
+            </div>
+            <button class="btn btn-primary btn-block btn-lg mt-16" onclick="submitOrder()" id="submitBtn">提交订单</button>
+        </div>
+    </div>
+</div>
+
+<!-- 新增地址弹窗 -->
+<div class="modal-overlay" id="addressModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>新增收货地址</h3>
+            <button class="modal-close" onclick="closeModal('addressModal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>收货人</label>
+                <input type="text" id="addrName" placeholder="请输入收货人姓名">
+            </div>
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="tel" id="addrPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>省</label>
+                <input type="text" id="addrProvince" placeholder="省">
+            </div>
+            <div class="form-group">
+                <label>市</label>
+                <input type="text" id="addrCity" placeholder="市">
+            </div>
+            <div class="form-group">
+                <label>区</label>
+                <input type="text" id="addrDistrict" placeholder="区/县">
+            </div>
+            <div class="form-group">
+                <label>详细地址</label>
+                <input type="text" id="addrDetail" placeholder="街道、门牌号等">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('addressModal')">取消</button>
+            <button class="btn btn-primary" onclick="saveAddress()">保存</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/product-images.js"></script>
+<script src="js/app.js"></script>
+<script>
+    if (!requireLogin()) { /* redirect */ }
+
+    let addresses = [];
+    let selectedAddressId = null;
+    let cartItems = [];
+    let userCoupons = [];  // 用户已领取的优惠券
+    let availableCoupons = [];  // 优惠券详情
+    let selectedCouponId = null;  // user_coupon.id
+    let totalAmount = 0;
+
+    /**
+     * 初始化
+     */
+    async function init() {
+        try {
+            // 并行加载
+            const [addrList, cartList, myCoupons] = await Promise.all([
+                API.get('/address/list').catch(() => []),
+                API.get('/cart/list').catch(() => []),
+                API.get('/user-coupon/my').catch(() => []),
+            ]);
+
+            addresses = Array.isArray(addrList) ? addrList : [];
+            cartItems = (Array.isArray(cartList) ? cartList : []).filter(i => i.checked);
+            userCoupons = (Array.isArray(myCoupons) ? myCoupons : []).filter(c => c.status === 0);  // 只取未使用的
+
+            // 加载优惠券详情
+            const couponIds = [...new Set(userCoupons.map(uc => uc.coupon_id))];
+            const couponDetails = await Promise.all(
+                couponIds.map(id => API.get(`/coupon/${id}`).catch(() => null))
+            );
+            availableCoupons = couponDetails.filter(Boolean);
+
+            renderAddresses();
+            renderOrderItems();
+            renderCoupons();
+            updateSummary();
+
+            // 选中默认地址
+            const defaultAddr = addresses.find(a => a.is_default);
+            if (defaultAddr) selectAddress(defaultAddr.address_id);
+        } catch (e) {
+            Toast.error('加载失败: ' + e.message);
+        }
+    }
+
+    function renderAddresses() {
+        const el = document.getElementById('addressList');
+        if (addresses.length === 0) {
+            el.innerHTML = '<p class="text-light" style="font-size:13px;">暂无收货地址，请新增</p>';
+            return;
+        }
+        el.innerHTML = addresses.map(addr => `
+            <div class="address-card ${addr.address_id === selectedAddressId ? 'active' : ''}"
+                 onclick="selectAddress(${addr.address_id})">
+                <div class="receiver">
+                    ${addr.receiver_name} ${addr.phone}
+                    ${addr.is_default ? '<span class="default-tag">默认</span>' : ''}
+                </div>
+                <div class="detail">${addr.province} ${addr.city} ${addr.district} ${addr.detail}</div>
+            </div>
+        `).join('');
+    }
+
+    function selectAddress(id) {
+        selectedAddressId = id;
+        renderAddresses();
+    }
+
+    function renderOrderItems() {
+        const el = document.getElementById('orderItems');
+        if (cartItems.length === 0) {
+            el.innerHTML = '<p class="text-light" style="font-size:13px;">无选中商品</p>';
+            return;
+        }
+
+        totalAmount = 0;
+        el.innerHTML = cartItems.map(item => {
+            const sku = item.sku || {};
+            const product = item.product || {};
+            const spec = sku.spec_json ? (() => {
+                try { return Object.values(JSON.parse(sku.spec_json)).join(' / '); } catch { return ''; }
+            })() : '';
+            const subtotal = Number(sku.price || 0) * item.quantity;
+            totalAmount += subtotal;
+
+            return `
+                <div class="order-item">
+                    <img src="${getProductImageUrl(product.title, sku.sku_image || product.main_image)}">
+                    <div class="info">
+                        <div class="title">${product.title || '商品'}</div>
+                        <div class="spec">${spec}</div>
+                    </div>
+                    <div>
+                        <div class="price">${Utils.formatPrice(sku.price || 0)}</div>
+                        <div class="qty">×${item.quantity}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderCoupons() {
+        const el = document.getElementById('couponList');
+        if (availableCoupons.length === 0) {
+            el.innerHTML = '<p class="text-light" style="font-size:13px;">暂无可用优惠券</p>';
+            return;
+        }
+
+        // 构建 user_coupon_id → coupon 的映射
+        const userCouponMap = {};
+        userCoupons.forEach(uc => { userCouponMap[uc.coupon_id] = uc; });
+
+        el.innerHTML = `
+            <div class="coupon-item ${!selectedCouponId ? 'active' : ''}" onclick="selectCoupon(null)">
+                <div class="coupon-info">
+                    <div class="coupon-name">不使用优惠券</div>
+                </div>
+            </div>
+            ${availableCoupons.map(c => {
+                const uc = userCouponMap[c.coupon_id];
+                if (!uc) return '';
+                return `
+                    <div class="coupon-item ${selectedCouponId === uc.id ? 'active' : ''}"
+                         onclick="selectCoupon(${uc.id})">
+                        <div class="coupon-info">
+                            <div class="coupon-name">${c.name}</div>
+                            <div class="coupon-condition">
+                                ${c.type === 1 ? `满${c.min_amount}减${c.discount_value}` :
+                                  c.type === 2 ? `${c.discount_value}折` :
+                                  `无门槛减${c.discount_value}`}
+                            </div>
+                        </div>
+                        <div class="coupon-value">${c.type === 2 ? c.discount_value + '折' : '-' + Utils.formatPrice(c.discount_value)}</div>
+                    </div>
+                `;
+            }).join('')}
+        `;
+    }
+
+    function selectCoupon(id) {
+        selectedCouponId = id;
+        renderCoupons();
+        updateSummary();
+    }
+
+    function calcDiscount() {
+        if (!selectedCouponId) return 0;
+        // selectedCouponId 是 user_coupon.id，需要找到对应的 coupon
+        const uc = userCoupons.find(u => u.id === selectedCouponId);
+        if (!uc) return 0;
+        const coupon = availableCoupons.find(c => c.coupon_id === uc.coupon_id);
+        if (!coupon) return 0;
+        if (coupon.type === 1) {
+            return totalAmount >= coupon.min_amount ? Number(coupon.discount_value) : 0;
+        } else if (coupon.type === 2) {
+            return totalAmount * (1 - Number(coupon.discount_value) / 10);
+        } else {
+            return Number(coupon.discount_value);
+        }
+    }
+
+    function updateSummary() {
+        const discount = calcDiscount();
+        const payAmount = Math.max(0, totalAmount - discount);
+
+        document.getElementById('totalAmount').textContent = Utils.formatPrice(totalAmount);
+        document.getElementById('discountAmount').textContent = '-' + Utils.formatPrice(discount);
+        document.getElementById('payAmount').textContent = Utils.formatPrice(payAmount);
+    }
+
+    /**
+     * 提交订单
+     */
+    async function submitOrder() {
+        if (!selectedAddressId) {
+            Toast.warning('请选择收货地址');
+            return;
+        }
+        if (cartItems.length === 0) {
+            Toast.warning('无选中商品');
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = '提交中...';
+
+        try {
+            const result = await API.post('/order/create', {
+                addressId: selectedAddressId,
+                cartIds: cartItems.map(i => i.cart_id),
+                userCouponId: selectedCouponId,
+                remark: document.getElementById('remark').value.trim(),
+            });
+
+            Toast.success('订单创建成功');
+            setTimeout(() => {
+                location.href = `order-detail.html?id=${result.order_id || result}`;
+            }, 500);
+        } catch (e) {
+            Toast.error(e.message || '创建订单失败');
+            btn.disabled = false;
+            btn.textContent = '提交订单';
+        }
+    }
+
+    function showAddressModal() {
+        document.getElementById('addressModal').classList.add('show');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+
+    async function saveAddress() {
+        const data = {
+            receiver_name: document.getElementById('addrName').value.trim(),
+            phone: document.getElementById('addrPhone').value.trim(),
+            province: document.getElementById('addrProvince').value.trim(),
+            city: document.getElementById('addrCity').value.trim(),
+            district: document.getElementById('addrDistrict').value.trim(),
+            detail: document.getElementById('addrDetail').value.trim(),
+        };
+
+        if (!data.receiver_name || !data.phone || !data.detail) {
+            Toast.warning('请填写完整地址信息');
+            return;
+        }
+
+        try {
+            const result = await API.post('/address/add', data);
+            Toast.success('地址已保存');
+            closeModal('addressModal');
+            // 重新加载地址
+            addresses = await API.get('/address/list');
+            renderAddresses();
+            // 选中新地址
+            if (result && result.address_id) {
+                selectAddress(result.address_id);
+            }
+        } catch (e) {
+            Toast.error(e.message || '保存失败');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>

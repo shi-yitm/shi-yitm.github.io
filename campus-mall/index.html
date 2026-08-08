@@ -1,0 +1,118 @@
+<!-- 页面基础框架 - qiaoshuai -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusMall - 校园购物商城</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 导航栏 -->
+<header id="navbar"></header>
+
+<!-- 分类导航 -->
+<div id="categoryNav" class="category-nav"></div>
+
+<!-- 主内容 -->
+<div class="container">
+    <!-- 搜索结果提示 -->
+    <div id="searchHint" style="display:none; padding: 12px 0; color: var(--text-secondary); font-size: 14px;"></div>
+
+    <!-- 商品列表 -->
+    <div id="productList" class="product-grid">
+        <div class="loading">加载中</div>
+    </div>
+
+    <!-- 分页 -->
+    <div id="pagination"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/product-images.js"></script>
+<script src="js/app.js"></script>
+<script>
+    // 状态
+    let currentPage = 1;
+    const PAGE_SIZE = 12;
+    let totalProducts = 0;
+
+    /**
+     * 加载商品列表
+     */
+    async function loadProducts(page = 1) {
+        currentPage = page;
+        const keyword = Utils.getParam('keyword') || '';
+        const categoryId = Utils.getParam('category_id') || '';
+
+        // 显示搜索提示
+        const hint = document.getElementById('searchHint');
+        if (keyword) {
+            hint.textContent = `搜索 "${keyword}" 的结果`;
+            hint.style.display = 'block';
+        } else {
+            hint.style.display = 'none';
+        }
+
+        const listEl = document.getElementById('productList');
+        listEl.innerHTML = '<div class="loading">加载中</div>';
+
+        try {
+            const result = await API.get('/product/list', {
+                keyword,
+                category_id: categoryId,
+                page,
+                size: PAGE_SIZE,
+            });
+
+            const list = result.list || result || [];
+            totalProducts = result.total || 0;
+
+            if (list.length === 0) {
+                listEl.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="icon">📦</div>
+                        <p>暂无商品</p>
+                    </div>
+                `;
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            listEl.innerHTML = list.map(p => `
+                <a href="product.html?id=${p.product_id}" class="product-card">
+                    <img class="product-card-img" src="${getProductImageUrl(p.title)}"
+                         alt="${p.title}" onerror="this.style.background='#f0f0f0';this.alt='${p.title}'">
+                    <div class="product-card-info">
+                        <div class="product-card-title">${p.title}</div>
+                        <div class="product-card-price"><small>¥</small>${Number(p.price || 0).toFixed(2)}</div>
+                        <div class="product-card-sales">已售 ${p.sales || 0} 件</div>
+                    </div>
+                </a>
+            `).join('');
+
+            // 渲染分页
+            document.getElementById('pagination').innerHTML = renderPagination(
+                currentPage, totalProducts, PAGE_SIZE, loadProducts
+            );
+        } catch (e) {
+            listEl.innerHTML = `
+                <div class="empty-state" style="grid-column: 1/-1;">
+                    <div class="icon">⚠️</div>
+                    <p>${e.message}</p>
+                </div>
+            `;
+        }
+    }
+
+    // 页面加载
+    document.addEventListener('DOMContentLoaded', () => {
+        const categoryId = Utils.getParam('category_id');
+        renderCategoryNav(categoryId);
+        loadProducts(1);
+    });
+</script>
+
+</body>
+</html>

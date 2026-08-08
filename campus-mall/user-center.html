@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - CampusMall</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .user-page {
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 16px;
+        }
+        .user-sidebar {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+        .user-avatar {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .user-avatar .avatar-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+        .user-avatar .name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .sidebar-nav {
+            margin-top: 16px;
+        }
+        .sidebar-nav-item {
+            padding: 10px 16px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 4px;
+            transition: all 0.2s;
+        }
+        .sidebar-nav-item:hover { background: var(--bg); }
+        .sidebar-nav-item.active {
+            background: #e6f7ff;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .user-main {
+            min-width: 0;
+        }
+        .user-section {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .user-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .addr-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .addr-card .addr-info {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .addr-card .addr-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .addr-card .default-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 11px;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+
+        .fav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .fav-item {
+            text-align: center;
+        }
+        .fav-item img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 8px;
+        }
+        .fav-item .title {
+            font-size: 13px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .coupon-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .coupon-item .coupon-value { color: var(--danger); font-weight: 700; font-size: 20px; }
+        .coupon-item .coupon-name { font-weight: 600; font-size: 14px; }
+        .coupon-item .coupon-condition { font-size: 12px; color: var(--text-light); }
+        .coupon-item .coupon-status { font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .user-page {
+                grid-template-columns: 1fr;
+            }
+            .user-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="navbar"></header>
+
+<div class="container user-page">
+    <div class="user-sidebar" id="sidebar">
+        <div class="user-avatar">
+            <div class="avatar-circle" id="avatarCircle">👤</div>
+            <div class="name" id="userName">用户</div>
+        </div>
+        <div class="sidebar-nav">
+            <div class="sidebar-nav-item active" onclick="showSection('profile')">👤 个人信息</div>
+            <div class="sidebar-nav-item" onclick="showSection('address')">📍 收货地址</div>
+            <div class="sidebar-nav-item" onclick="showSection('favorite')">❤ 我的收藏</div>
+            <div class="sidebar-nav-item" onclick="showSection('coupon')">🎫 我的优惠券</div>
+        </div>
+    </div>
+
+    <div class="user-main">
+        <!-- 个人信息 -->
+        <div class="user-section" id="sectionProfile">
+            <h3>👤 个人信息</h3>
+            <form onsubmit="return saveProfile(event)">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" id="profUsername" disabled style="background:#f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label>昵称</label>
+                    <input type="text" id="profNickname" placeholder="请输入昵称">
+                </div>
+                <div class="form-group">
+                    <label>手机号</label>
+                    <input type="tel" id="profPhone" placeholder="请输入手机号">
+                </div>
+                <div class="form-group">
+                    <label>邮箱</label>
+                    <input type="email" id="profEmail" placeholder="请输入邮箱">
+                </div>
+                <div class="form-group">
+                    <label>余额</label>
+                    <div style="padding:8px 0;font-size:18px;font-weight:700;color:var(--danger);">¥<span id="profBalance">0.00</span></div>
+                </div>
+                <button type="submit" class="btn btn-primary">保存修改</button>
+            </form>
+        </div>
+
+        <!-- 收货地址 -->
+        <div class="user-section" id="sectionAddress" style="display:none;">
+            <h3>📍 收货地址</h3>
+            <div id="addrList"><div class="loading">加载中</div></div>
+            <button class="btn btn-sm mt-8" onclick="showAddrModal()">+ 新增地址</button>
+        </div>
+
+        <!-- 我的收藏 -->
+        <div class="user-section" id="sectionFavorite" style="display:none;">
+            <h3>❤ 我的收藏</h3>
+            <div id="favList"><div class="loading">加载中</div></div>
+        </div>
+
+        <!-- 我的优惠券 -->
+        <div class="user-section" id="sectionCoupon" style="display:none;">
+            <h3>🎫 我的优惠券</h3>
+            <div id="couponList"><div class="loading">加载中</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增地址弹窗 -->
+<div class="modal-overlay" id="addrModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>新增收货地址</h3>
+            <button class="modal-close" onclick="closeModal('addrModal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>收货人</label>
+                <input type="text" id="aName" placeholder="收货人姓名">
+            </div>
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="tel" id="aPhone" placeholder="手机号">
+            </div>
+            <div class="form-group">
+                <label>省 / 市 / 区</label>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="aProvince" placeholder="省" style="flex:1;">
+                    <input type="text" id="aCity" placeholder="市" style="flex:1;">
+                    <input type="text" id="aDistrict" placeholder="区" style="flex:1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>详细地址</label>
+                <input type="text" id="aDetail" placeholder="街道、门牌号等">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('addrModal')">取消</button>
+            <button class="btn btn-primary" onclick="saveAddr()">保存</button>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑地址弹窗 -->
+<div class="modal-overlay" id="addrEditModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>编辑收货地址</h3>
+            <button class="modal-close" onclick="closeModal('addrEditModal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>收货人</label>
+                <input type="text" id="aeName" placeholder="收货人姓名">
+            </div>
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="tel" id="aePhone" placeholder="手机号">
+            </div>
+            <div class="form-group">
+                <label>省 / 市 / 区</label>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="aeProvince" placeholder="省" style="flex:1;">
+                    <input type="text" id="aeCity" placeholder="市" style="flex:1;">
+                    <input type="text" id="aeDistrict" placeholder="区" style="flex:1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>详细地址</label>
+                <input type="text" id="aeDetail" placeholder="街道、门牌号等">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" id="aeDefault"> 设为默认地址</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('addrEditModal')">取消</button>
+            <button class="btn btn-primary" onclick="updateAddr()">保存</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/product-images.js"></script>
+<script src="js/app.js"></script>
+<script>
+    if (!requireLogin()) { /* redirect */ }
+
+    let editingAddrId = null;
+    const sections = ['Profile', 'Address', 'Favorite', 'Coupon'];
+
+    function showSection(name) {
+        sections.forEach(s => {
+            const el = document.getElementById('section' + s);
+            if (el) el.style.display = s.toLowerCase() === name.toLowerCase() ? '' : 'none';
+        });
+        document.querySelectorAll('.sidebar-nav-item').forEach((el, i) => {
+            el.classList.toggle('active', sections[i].toLowerCase() === name.toLowerCase());
+        });
+
+        // 懒加载
+        if (name === 'address') loadAddresses();
+        if (name === 'favorite') loadFavorites();
+        if (name === 'coupon') loadCoupons();
+    }
+
+    /**
+     * 个人信息
+     */
+    async function loadProfile() {
+        try {
+            const user = await API.get('/user/info');
+            const info = user || UserInfo.get() || {};
+            document.getElementById('profUsername').value = info.username || '';
+            document.getElementById('profNickname').value = info.nickname || '';
+            document.getElementById('profPhone').value = info.phone || '';
+            document.getElementById('profEmail').value = info.email || '';
+            document.getElementById('profBalance').textContent = Number(info.balance || 0).toFixed(2);
+            document.getElementById('userName').textContent = info.nickname || info.username || '用户';
+            document.getElementById('avatarCircle').textContent = (info.nickname || info.username || '用')[0];
+            UserInfo.set(info);
+        } catch {}
+    }
+
+    async function saveProfile(e) {
+        e.preventDefault();
+        try {
+            await API.put('/user/update', {
+                nickname: document.getElementById('profNickname').value.trim(),
+                phone: document.getElementById('profPhone').value.trim(),
+                email: document.getElementById('profEmail').value.trim(),
+            });
+            Toast.success('保存成功');
+            loadProfile();
+        } catch (e) {
+            Toast.error(e.message || '保存失败');
+        }
+        return false;
+    }
+
+    /**
+     * 收货地址
+     */
+    async function loadAddresses() {
+        try {
+            const list = await API.get('/address/list');
+            const el = document.getElementById('addrList');
+            if (!Array.isArray(list) || list.length === 0) {
+                el.innerHTML = '<p class="text-light" style="font-size:13px;">暂无收货地址</p>';
+                return;
+            }
+            el.innerHTML = list.map(a => `
+                <div class="addr-card">
+                    <div class="addr-info">
+                        <strong>${a.receiver_name}</strong> ${a.phone}
+                        ${a.is_default ? '<span class="default-tag">默认</span>' : ''}<br>
+                        ${a.province} ${a.city} ${a.district} ${a.detail}
+                    </div>
+                    <div class="addr-actions">
+                        <button class="btn btn-sm" onclick="editAddr(${a.address_id})">编辑</button>
+                        <button class="btn btn-sm" style="color:var(--danger)" onclick="deleteAddr(${a.address_id})">删除</button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (e) {
+            document.getElementById('addrList').innerHTML = `<p class="text-light">${e.message}</p>`;
+        }
+    }
+
+    function showAddrModal() {
+        document.getElementById('aName').value = '';
+        document.getElementById('aPhone').value = '';
+        document.getElementById('aProvince').value = '';
+        document.getElementById('aCity').value = '';
+        document.getElementById('aDistrict').value = '';
+        document.getElementById('aDetail').value = '';
+        document.getElementById('addrModal').classList.add('show');
+    }
+
+    async function saveAddr() {
+        const data = {
+            receiver_name: document.getElementById('aName').value.trim(),
+            phone: document.getElementById('aPhone').value.trim(),
+            province: document.getElementById('aProvince').value.trim(),
+            city: document.getElementById('aCity').value.trim(),
+            district: document.getElementById('aDistrict').value.trim(),
+            detail: document.getElementById('aDetail').value.trim(),
+        };
+        if (!data.receiver_name || !data.phone || !data.detail) {
+            Toast.warning('请填写完整信息');
+            return;
+        }
+        try {
+            await API.post('/address/add', data);
+            Toast.success('地址已添加');
+            closeModal('addrModal');
+            loadAddresses();
+        } catch (e) {
+            Toast.error(e.message || '添加失败');
+        }
+    }
+
+    async function editAddr(id) {
+        editingAddrId = id;
+        try {
+            const list = await API.get('/address/list');
+            const addr = (list || []).find(a => a.address_id === id);
+            if (!addr) { Toast.error('地址不存在'); return; }
+
+            document.getElementById('aeName').value = addr.receiver_name || '';
+            document.getElementById('aePhone').value = addr.phone || '';
+            document.getElementById('aeProvince').value = addr.province || '';
+            document.getElementById('aeCity').value = addr.city || '';
+            document.getElementById('aeDistrict').value = addr.district || '';
+            document.getElementById('aeDetail').value = addr.detail || '';
+            document.getElementById('aeDefault').checked = !!addr.is_default;
+            document.getElementById('addrEditModal').classList.add('show');
+        } catch (e) {
+            Toast.error(e.message);
+        }
+    }
+
+    async function updateAddr() {
+        const data = {
+            address_id: editingAddrId,
+            receiver_name: document.getElementById('aeName').value.trim(),
+            phone: document.getElementById('aePhone').value.trim(),
+            province: document.getElementById('aeProvince').value.trim(),
+            city: document.getElementById('aeCity').value.trim(),
+            district: document.getElementById('aeDistrict').value.trim(),
+            detail: document.getElementById('aeDetail').value.trim(),
+            is_default: document.getElementById('aeDefault').checked ? 1 : 0,
+        };
+        try {
+            await API.put('/address/update', data);
+            Toast.success('地址已更新');
+            closeModal('addrEditModal');
+            loadAddresses();
+        } catch (e) {
+            Toast.error(e.message || '更新失败');
+        }
+    }
+
+    async function deleteAddr(id) {
+        if (!confirm('确定删除该地址？')) return;
+        try {
+            await API.delete(`/address/${id}`);
+            Toast.success('地址已删除');
+            loadAddresses();
+        } catch (e) {
+            Toast.error(e.message || '删除失败');
+        }
+    }
+
+    /**
+     * 我的收藏
+     */
+    async function loadFavorites() {
+        try {
+            const list = await API.get('/favorite/list');
+            const el = document.getElementById('favList');
+            if (!Array.isArray(list) || list.length === 0) {
+                el.innerHTML = '<div class="empty-state"><div class="icon">♡</div><p>暂无收藏</p></div>';
+                return;
+            }
+            el.innerHTML = `<div class="fav-grid">${list.map(f => `
+                <a href="product.html?id=${f.product_id}" class="fav-item card" style="padding:12px;">
+                    <img src="${getProductImageUrl(f.title, f.main_image)}"
+                         alt="${f.title || ''}">
+                    <div class="title">${f.title || '商品'}</div>
+                    ${f.price ? `<div style="color:var(--danger);font-weight:600;margin-top:4px;">¥${Number(f.price).toFixed(2)}</div>` : ''}
+                </a>
+            `).join('')}</div>`;
+        } catch (e) {
+            document.getElementById('favList').innerHTML = `<p class="text-light">${e.message}</p>`;
+        }
+    }
+
+    /**
+     * 我的优惠券（通过 available 接口展示可领取的）
+     */
+    async function loadCoupons() {
+        try {
+            const el = document.getElementById('couponList');
+            const myCoupons = await API.get('/user-coupon/my').catch(() => []);
+            const list = Array.isArray(myCoupons) ? myCoupons : [];
+            if (list.length === 0) {
+                el.innerHTML = '<div class="empty-state"><div class="icon">🎫</div><p>暂无优惠券，去<a href="coupon.html">领券中心</a>领取</p></div>';
+                return;
+            }
+            // 加载优惠券详情
+            const couponIds = [...new Set(list.map(uc => uc.coupon_id))];
+            const details = await Promise.all(couponIds.map(id => API.get(`/coupon/${id}`).catch(() => null)));
+            const detailMap = {};
+            details.filter(Boolean).forEach(c => { detailMap[c.coupon_id] = c; });
+
+            el.innerHTML = list.map(uc => {
+                const c = detailMap[uc.coupon_id] || {};
+                const isUsed = uc.status === 1;
+                const isExpired = c.end_time && new Date(c.end_time) < new Date();
+                let statusText = '未使用';
+                let statusClass = '';
+                if (isUsed) { statusText = '已使用'; statusClass = 'color:var(--text-light);text-decoration:line-through;'; }
+                else if (isExpired) { statusText = '已过期'; statusClass = 'color:var(--text-light);'; }
+                return `
+                    <div class="coupon-item" style="${statusClass}">
+                        <div>
+                            <div class="coupon-name">${c.name || '优惠券'}</div>
+                            <div class="coupon-condition">
+                                ${c.type === 1 ? `满${c.min_amount}减${c.discount_value}` :
+                                  c.type === 2 ? `${c.discount_value}折` :
+                                  `无门槛减${c.discount_value}`}
+                                | 有效期至 ${Utils.formatDate(c.end_time)}
+                            </div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="coupon-value" style="${isUsed || isExpired ? 'color:var(--text-light)' : ''}">
+                                ${c.type === 2 ? c.discount_value + '折' : '-' + Utils.formatPrice(c.discount_value)}
+                            </div>
+                            <div style="font-size:12px;margin-top:2px;">${statusText}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } catch (e) {
+            document.getElementById('couponList').innerHTML = `<p class="text-light">${e.message}</p>`;
+        }
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProfile);
+</script>
+
+</body>
+</html>
