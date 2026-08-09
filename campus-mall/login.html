@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - CampusMall</title>
     <style>
-        .role-tabs, #userLink, .admin-hint { display: none !important; }
         .demo-account { margin: 12px 0; color: #475569; text-align: center; }
     </style>
     <link rel="stylesheet" href="css/style.css">
@@ -119,35 +118,6 @@
             color: var(--text-light);
             margin-bottom: 32px;
         }
-        /* 角色切换 */
-        .role-tabs {
-            display: flex;
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 4px;
-            margin-bottom: 28px;
-        }
-        .role-tab {
-            flex: 1;
-            padding: 10px 0;
-            text-align: center;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.25s;
-            border: none;
-            background: none;
-        }
-        .role-tab.active {
-            background: #fff;
-            color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .role-tab:hover:not(.active) {
-            color: var(--text);
-        }
         .form-group { margin-bottom: 20px; }
         .form-group label {
             display: block;
@@ -198,17 +168,6 @@
             font-weight: 500;
         }
         .login-link a:hover { text-decoration: underline; }
-        .admin-hint {
-            margin-top: 20px;
-            padding: 12px;
-            background: #fff7e6;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #ad6800;
-            line-height: 1.6;
-            display: none;
-        }
-        .admin-hint.show { display: block; }
         @media (max-width: 768px) {
             .login-brand { display: none; }
             .login-form-side { width: 100%; }
@@ -244,12 +203,6 @@
                 <div class="login-form-title">欢迎回来</div>
                 <div class="login-form-subtitle">请登录你的账号</div>
 
-                <!-- 角色切换 -->
-                <div class="role-tabs">
-                    <button class="role-tab active" onclick="switchRole('user')">👤 用户登录</button>
-                    <button class="role-tab" onclick="switchRole('admin')">⚙️ 管理员</button>
-                </div>
-
                 <div class="demo-account">Demo account: demo / CampusMall2026!</div>
                 <form id="loginForm" onsubmit="return handleLogin(event)">
                     <div class="form-group">
@@ -263,11 +216,7 @@
                     <button type="submit" class="login-btn" id="loginBtn">登 录</button>
                 </form>
 
-                <div class="admin-hint" id="adminHint">
-                    Administrator access is disabled in the public demo.
-                </div>
-
-                <div class="login-link" id="userLink">
+                <div class="login-link">
                     Public registration is disabled in the demo.
                 </div>
             </div>
@@ -278,34 +227,7 @@
 <script>
     // 如果已登录，跳转
     if (Token.get()) {
-        const user = UserInfo.get();
-        if (user && user.username === 'admin') {
-            location.href = 'admin.html';
-        } else {
-            location.href = 'index.html';
-        }
-    }
-
-    let currentRole = 'user';
-
-    function switchRole(role) {
-        currentRole = role;
-        document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-
-        const adminHint = document.getElementById('adminHint');
-        const userLink = document.getElementById('userLink');
-        const usernameInput = document.getElementById('username');
-
-        if (role === 'admin') {
-            adminHint.classList.add('show');
-            userLink.style.display = 'none';
-            usernameInput.placeholder = '请输入管理员账号';
-        } else {
-            adminHint.classList.remove('show');
-            userLink.style.display = '';
-            usernameInput.placeholder = '请输入用户名';
-        }
+        location.href = 'index.html';
     }
 
     async function handleLogin(e) {
@@ -316,12 +238,6 @@
 
         if (!username || !password) {
             Toast.warning('请填写用户名和密码');
-            return false;
-        }
-
-        // 管理员模式下校验
-        if (currentRole === 'admin' && username !== 'admin') {
-            Toast.warning('管理员账号为 admin');
             return false;
         }
 
@@ -341,12 +257,8 @@
 
             Toast.success('登录成功');
 
-            // 管理员跳后台，用户跳首页
-            const target = (currentRole === 'admin' || username === 'admin') ? 'admin.html' : 'index.html';
-
             setTimeout(() => {
-                const redirect = Utils.getParam('redirect') || target;
-                location.href = redirect;
+                location.href = 'index.html';
             }, 500);
         } catch (e) {
             Toast.error(e.message || '登录失败');

@@ -35,13 +35,7 @@ function renderNavbar() {
 
     let userSection = '';
     if (isLoggedIn() && user) {
-        // 管理员入口（用户名为 admin 的用户显示）
-        let adminLink = '';
-        if (user.username === 'admin') {
-            adminLink = '<a href="admin.html" title="管理后台">⚙️ <span class="nav-text">管理后台</span></a>';
-        }
         userSection = `
-            ${adminLink}
             <a href="user-center.html" title="个人中心">
                 👤 <span class="nav-text">${user.nickname || user.username}</span>
             </a>
